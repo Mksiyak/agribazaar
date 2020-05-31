@@ -13,7 +13,7 @@ con.connect(function(err) {
     {
         return console.error("MySQL",err);
     }
-    console.log("MySQL","Connected!");
+    console.log("MySQL Connected!".help);
 });
 
 module.exports=con;

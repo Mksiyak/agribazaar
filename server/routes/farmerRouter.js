@@ -3,15 +3,15 @@ var router = express.Router();
 
 router.route('/:farmerId/last-sales')
 .get((req,res,next)=>{
-    console.log(sql);
     var sql="CALL Seller_getLastSales("+req.session.userId+");"
+    console.log("QUERY".query,sql);
     db.query(sql,function(err,results){
         if(err)
         {
-            throw console.error("SQL Error",err);
+            throw console.error("ERROR".error,err);
         }
         var sales=JSON.parse(JSON.stringify(results[0]))
-        console.log(sales);
+        console.log("RESULT".success,sales);
         res.end(sales);
     });
 });

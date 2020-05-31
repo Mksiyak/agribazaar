@@ -9,23 +9,22 @@ router.route('/login')
     var pass= post.user_password;
     var sql="CALL Users_verify('"+email_username+"',SHA2('"+pass+"',256));";
 //var sql="select id,email,fullname,username,role from `Users` where (`email`='"+email_username+"' OR `username`='"+email_username+"') AND password='"+pass+"'";
-    console.log("QUERY",sql);
+    console.log(require('./common').FgBlue,"QUERY",sql);
     db.query(sql, function(err, results){ 
         if (err) {
             return console.error("SQL Error",err);
         }
         var json=JSON.stringify(results[0]);
-        console.log("JSON Response Value",json[0]!=null,json.length,results[0]!=null,results.length)
         if(json.length>2){
-            console.log("RESULT",json);
-            console.log("Login Accepted!",req.body.user_email)
+            console.log("RESULT".success,json);
+            console.log("Login Accepted!".help,req.body.user_email)
             res.end(json);
         }
         else
         {
             var sess = req.session; 
             res.statusCode=401
-            console.warn("auth","Incorrect Username "+email_username+" /Password "+pass);
+            console.warn("AUTH".error,"Incorrect Username "+email_username+" /Password "+pass);
             res.end("Unauthorized- Incorrect")
         }
     })
@@ -40,12 +39,13 @@ router.route('/signup')
     var address= post.Raddress;
     var email=post.Remail;
     var role=post.Rrole;
-    console.log("Role "+role);
     var sql = "call Users_register('"+name+"',sha('"+pass+"'),'"+fname+"','"+email+"','"+role+"','"+address+"');call Users_getDetailsByUsername('"+name+"');";
+    console.log("QUERY".query,sql)
     var query = db.query(sql, function(err, result) {
         if (err) {
-            return console.error(err);
+            return console.error("ERROR".error,err);
         }
+        console.log("RESULT".success,JSON.stringify(result[2]))
         res.send(JSON.stringify(result[2]))
     });
 })
