@@ -47,8 +47,8 @@ class Login extends Component {
                 <h3>Sign In</h3>
 
                 <div className="form-group">
-                    <label>Email address</label>
-                    <input required onChange={(ev) => this.handleChangeField('user_email', ev)} value={user_email} type="text" className="form-control" placeholder="Enter email" />
+                    <label>Username</label>
+                    <input required onChange={(ev) => this.handleChangeField('user_email', ev)} value={user_email} type="text" className="form-control" placeholder="email / username" />
                 </div>
 
                 <div className="form-group">
