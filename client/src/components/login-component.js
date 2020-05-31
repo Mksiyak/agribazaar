@@ -8,7 +8,8 @@ class Login extends Component {
         super(props);
         this.state = {
           user_email:'',
-          user_password:''
+          user_password:'',
+          user_remember: true
         }
         this.handleChangeField = this.handleChangeField.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);

@@ -4,12 +4,11 @@ var router = express.Router();
 router.route('/login')
 .post((req,res,next)=>{
     var post  = req.body;
-    console.log("Cache Values",post.remember)
     var email_username= post.user_email;
     var pass= post.user_password;
     var sql="CALL Users_verify('"+email_username+"',SHA2('"+pass+"',256));";
 //var sql="select id,email,fullname,username,role from `Users` where (`email`='"+email_username+"' OR `username`='"+email_username+"') AND password='"+pass+"'";
-    console.log(require('./common').FgBlue,"QUERY",sql);
+    console.log("QUERY".query,sql);
     db.query(sql, function(err, results){ 
         if (err) {
             return console.error("SQL Error",err);
