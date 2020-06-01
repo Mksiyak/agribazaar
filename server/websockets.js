@@ -8,13 +8,13 @@ let interval;
 const getApiAndEmit = async socket => {
     userId = 2
     let sql="call Cart_getItems("+userId+")";
-    console.log("QUERY".query,sql)
+    // console.log("QUERY".query,sql)
     db.query(sql,function(err,ans){
         if(err)
         {
             throw console.error("ERROR".error,err);
         }
-        console.log("WEBSOCKET".websock, JSON.stringify(ans[0]));
+        // console.log("WEBSOCKET".websock, JSON.stringify(ans[0]));
         socket.emit("FromAPI",JSON.stringify(ans[0]));
     });
 };

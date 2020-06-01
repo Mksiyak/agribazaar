@@ -5,11 +5,11 @@ router.route('/login')
 .post((req,res,next)=>{
     var post  = req.body;
     console.log("Cache Values",post.remember)
-    var email_username= post.user_email;
+    var email_username = post.user_email;
     var pass= post.user_password;
     var sql="CALL Users_verify('"+email_username+"',SHA2('"+pass+"',256));";
-//var sql="select id,email,fullname,username,role from `Users` where (`email`='"+email_username+"' OR `username`='"+email_username+"') AND password='"+pass+"'";
-    console.log(require('./common').FgBlue,"QUERY",sql);
+// var sql="select id,email,fullname,username,role from `Users` where (`email`='"+email_username+"' OR `username`='"+email_username+"') AND password='"+pass+"'";
+    console.log(require('common').FgBlue,"QUERY",sql);
     db.query(sql, function(err, results){ 
         if (err) {
             return console.error("SQL Error",err);
@@ -23,7 +23,7 @@ router.route('/login')
         else
         {
             var sess = req.session; 
-            res.statusCode=401
+            res.statusCode=401;
             console.warn("AUTH".error,"Incorrect Username "+email_username+" /Password "+pass);
             res.end("Unauthorized- Incorrect")
         }
