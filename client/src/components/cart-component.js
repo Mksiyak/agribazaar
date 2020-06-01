@@ -7,13 +7,24 @@ const Cart = () => {
 
     useEffect(() => {
       const socket = SIOC(websocketUrl);
-      socket.on("FromAPI", data => {
-        setResponse(data);
-      });
+      socket.emit('send userid', { userId: '2' });
+      socket.on('get cart',(data)=>{
+        setResponse(data)
+      })
     }, []);
+
     return (
         <div style={{marginTop:"56px"}}>
           {response}
+          <table>
+            <tr>
+              <th>Item Name</th>
+              <th>Buying From</th>
+              <th>Quantity (in kg)</th>
+              <th>Price</th>
+            </tr>
+            {table}
+          </table>
         </div>
     );
 }
