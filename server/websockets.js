@@ -20,17 +20,14 @@ const getApiAndEmit = async socket => {
 };
 if(common.websockStatus){
   io.on("connection", socket => {
-    console.log("New client connected".websock);
-
-    socket.on('get cart',(userId)=>{
-      if (interval) {
-        clearInterval(interval);
-      }
-      interval = setInterval(() => getApiAndEmit(socket), common.websockTime);
-    })
-
+    console.log("New client connected");
+    if (interval) {
+      clearInterval(interval);
+    }
+    interval = setInterval(() => getApiAndEmit(socket), 1000);
     socket.on("disconnect", () => {
-      console.log("Client disconnected".websock);
+      console.log("Client disconnected");
+      clearInterval(interval);
     });
   });
   server.listen(port, function (err) {

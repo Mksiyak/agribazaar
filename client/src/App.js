@@ -12,8 +12,7 @@ import Error from "./components/error-component"
 import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
-import SIOC from 'socket.io-client'
-import { websocketUrl } from './shared/baseUrl';
+
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -46,10 +45,7 @@ export default class App extends Component {
 
     }
   }
-  componentDidMount(){
-    const socket = SIOC(websocketUrl)
-    socket.emit('get cart',2)
-  }
+
   render(){
       const DefaultContainer = ({match,location}) =>(
         <>
