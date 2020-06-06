@@ -12,33 +12,38 @@ class Cart extends Component{
       }
     }
     ajaxGoBrr = ans =>{
-      ans = JSON.parse(ans);
+      
       console.log(typeof this.state.cart,this.state.cart)
       console.log(typeof ans,ans)
       this.setState({
-        cart: ans
+        cart: JSON.parse(ans)
       })
     }
     componentDidMount(){
-      socket.emit('send userid', { userId: '2' });
+      socket.emit('send userid', { username: this.props.user.username });
       socket.on('get cart',this.ajaxGoBrr);
     }
     render(){
       return (
         <div style={{marginTop:"56px"}}>
+          
           <table>
             <tr>
               <th>Item Name</th>
-              <th>Buying From</th>
-              <th>Quantity (in kg)</th>
+              <th>Item Description</th>
+              <th>Category</th>
+              <th>Quantity</th>
               <th>Price</th>
+              <th>Seller Name</th>
             </tr>
             {this.state.cart.map(item=>
-              <tr key="1">
-                <td>{item.ItemName}</td>
-                <td>{item.SellerName}</td>
-                <td>{item.ItemPrice}</td>
-                <td>{item.Quantity}</td>
+              <tr key={item.id}>
+                <td>{item.name}</td>
+                <td>{item.description}</td>
+                <td>{item.category}</td>
+                <td>{item.quantity}</td>
+                <td>{item.pricePerItem} {item.unit}</td>
+                <td>{item.fullname}</td>
               </tr>
             )}
           </table>

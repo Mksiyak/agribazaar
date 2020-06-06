@@ -50,7 +50,7 @@ export default class App extends Component {
       const DefaultContainer = ({match,location}) =>(
         <>
         <div className='navbar'><Navbar location={location} user={this.state} handleAccount={this.handleAccount}/></div>
-        <Route exact path="/cart" component={Cart} />
+        <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
         <Route path="/product/:id" component={Product}/>
         <Route path="/search" component={Search}/>
         <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />

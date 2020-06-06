@@ -9,3 +9,19 @@ html, body {
     min-height: 400px;
     width: auto;
 }
+footer li:before {
+    content: '\1F9C5';
+    margin-left: -20px;
+    margin-right: 10px;
+}
+footer ul{
+    list-style: none;
+}
+footer li:before {
+    content: '\1F9C5'!important;
+    margin-left: -20px;
+    margin-right: 10px;
+}
+footer {
+    flex-shrink: 0;
+}

@@ -15,14 +15,7 @@ footer {
     padding: 2em;
     width: 100%;
 }
-footer li:before {
-    content: '\1F9C5';
-    margin-left: -20px;
-    margin-right: 10px;
-}
-footer {
-    flex-shrink: 0;
-}
+
 #special{
     text-align: right;
 }
