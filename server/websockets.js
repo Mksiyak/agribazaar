@@ -17,8 +17,7 @@ if(common.websockStatus){
     });
     socket.emit('news', { hello: 'world' });
     socket.on('send userid', (data) => {
-      console.log(data);
-      let sql="call Cart_getItems("+data.userId+")";
+      let sql="call Cart_getItems('"+data.username+"')";
       console.log("QUERY".query,sql)
       db.query(sql,function(err,ans){
           if(err)
@@ -27,6 +26,7 @@ if(common.websockStatus){
           } 
           console.log("WEBSOCKET".websock,JSON.stringify(ans[0]));
           socket.emit("get cart",JSON.stringify(ans[0]));
+          
       });
     });
   });

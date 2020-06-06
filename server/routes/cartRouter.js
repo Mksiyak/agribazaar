@@ -14,6 +14,7 @@ const getCart = (userId) =>{
     });
 };
 
+
 router.route('/')
 .get((req,res,next)=>{
     var userId =  req.query.userId;

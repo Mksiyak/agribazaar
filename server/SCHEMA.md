@@ -29,15 +29,16 @@ Tables
 +-------------+--------------+------+-----+---------+----------------+
 
 ## ItemSeller
-+--------------+-------------+------+-----+---------+-------+
-| Field        | Type        | Null | Key | Default | Extra |
-+--------------+-------------+------+-----+---------+-------+
-| sellerId     | int         | YES  |     | NULL    |       |
-| itemId       | int         | YES  |     | NULL    |       |
-| pricePerItem | float(10,2) | YES  |     | NULL    |       |
-| unit         | varchar(10) | YES  |     | NULL    |       |
-| quantity     | int         | YES  |     | NULL    |       |
-+--------------+-------------+------+-----+---------+-------+
++--------------+-------------+------+-----+---------+----------------+
+| Field        | Type        | Null | Key | Default | Extra          |
++--------------+-------------+------+-----+---------+----------------+
+| sellerId     | int         | YES  | MUL | NULL    |                |
+| itemId       | int         | YES  | MUL | NULL    |                |
+| pricePerItem | float(10,2) | YES  |     | NULL    |                |
+| unit         | varchar(10) | YES  |     | NULL    |                |
+| quantity     | int         | YES  |     | NULL    |                |
+| id           | int         | NO   | PRI | NULL    | auto_increment |
++--------------+-------------+------+-----+---------+----------------+
 
 ## Cart
 +--------------+-------------+------+-----+---------+----------------+
@@ -71,3 +72,19 @@ Tables
 | SellerCount | bigint       | YES  |     | NULL    |       |
 | SellerNames | text         | YES  |     | NULL    |       |
 +-------------+--------------+------+-----+---------+-------+
+
+
+### CartView (View)
++----+----------+----------+---------------------+----------+----------+------------+--------------+-----------+----------------+
+| id | username | name     | description         | category | quantity | itemStatus | pricePerItem | unit      | fullname       |
++----+----------+----------+---------------------+----------+----------+------------+--------------+-----------+----------------+
+|  1 | mukesh   | Rice     | Basmati Indian Rice | Cereals  |       10 | buying     |         5.00 | Rupees/Kg | Nirmal Khedkar |
+|  2 | mukesh   | Urad Dal | Skinned Urad Dal    | Lentils  |        5 | buying     |        10.00 | Rupees/Kg | Nirmal Khedkar |
+|  4 | yash     | Rice     | Basmati Indian Rice | Cereals  |       20 | bought     |         5.00 | Rupees/Kg | Nirmal Khedkar |
+|  5 | mukesh   | Rice     | Basmati Indian Rice | Cereals  |        1 | buying     |         5.00 | Rupees/Kg | Nirmal Khedkar |
+|  6 | mukesh   | Rice     | Basmati Indian Rice | Cereals  |       20 | bought     |         5.00 | Rupees/Kg | Nirmal Khedkar |
+|  7 | mukesh   | Urad Dal | Skinned Urad Dal    | Lentils  |       20 | bought     |        10.00 | Rupees/Kg | Nirmal Khedkar |
+|  8 | yash     | Urad Dal | Skinned Urad Dal    | Lentils  |       20 | buying     |        10.00 | Rupees/Kg | Nirmal Khedkar |
+|  9 | dummy    | Urad Dal | Skinned Urad Dal    | Lentils  |       20 | buying     |        10.00 | Rupees/Kg | Nirmal Khedkar |
+| 10 | dummy    | Rice     | Basmati Indian Rice | Cereals  |       20 | buying     |         5.00 | Rupees/Kg | Nirmal Khedkar |
++----+----------+----------+---------------------+----------+----------+------------+--------------+-----------+----------------+
