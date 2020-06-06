@@ -256,8 +256,10 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `Cart_getItems`(in usrid integer)
-begin select Items.name as "ItemName", Users.fullname as "SellerName", Cart.quantity as "Quantity",Cart.itemstatus as "ItemStatus",Cart.price as "ItemPrice" from Cart JOIN Items ON Items.id=Cart.itemno JOIN Users ON Cart.itemSellerId=Users.id where userId=usrid AND ItemStatus="buying" ; end ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Cart_getItems`(in user_username varchar(10))
+begin
+select * from CartView where username=user_username;
+end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -519,4 +521,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-06 22:16:03
+-- Dump completed on 2020-06-06 22:41:22
