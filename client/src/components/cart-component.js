@@ -2,20 +2,30 @@ import React, { Component, useState,useEffect } from "react";
 import '../App.css';
 import SIOC from 'socket.io-client'
 import { websocketUrl } from './../shared/baseUrl';
-const Cart = () => {
-    const [response, setResponse] = useState("");
+const socket = SIOC(websocketUrl);
 
-    useEffect(() => {
-      const socket = SIOC(websocketUrl);
-      socket.emit('send userid', { userId: '2' });
-      socket.on('get cart',(data)=>{
-        setResponse(data)
+class Cart extends Component{
+    constructor(props){
+      super(props);
+      this.state = {
+        cart: []
+      }
+    }
+    ajaxGoBrr = ans =>{
+      ans = JSON.parse(ans);
+      console.log(typeof this.state.cart,this.state.cart)
+      console.log(typeof ans,ans)
+      this.setState({
+        cart: ans
       })
-    }, []);
-
-    return (
+    }
+    componentDidMount(){
+      socket.emit('send userid', { userId: '2' });
+      socket.on('get cart',this.ajaxGoBrr);
+    }
+    render(){
+      return (
         <div style={{marginTop:"56px"}}>
-          {response}
           <table>
             <tr>
               <th>Item Name</th>
@@ -23,9 +33,18 @@ const Cart = () => {
               <th>Quantity (in kg)</th>
               <th>Price</th>
             </tr>
-            {table}
+            {this.state.cart.map(item=>
+              <tr key="1">
+                <td>{item.ItemName}</td>
+                <td>{item.SellerName}</td>
+                <td>{item.ItemPrice}</td>
+                <td>{item.Quantity}</td>
+              </tr>
+            )}
           </table>
         </div>
     );
+    }
+
 }
 export default Cart;
