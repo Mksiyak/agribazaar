@@ -1,7 +1,8 @@
 .desc-img{
-    width : 80% !important;
+    width : 95% !important;
+    height: 100% !important;
     height : auto;
-    margin-left: 10px;
+    margin-left: 20px;
 }
 body{margin-top:20px;}
 
@@ -18,7 +19,6 @@ body{margin-top:20px;}
 
 .comment-wrapper .media-list .media {
     border-bottom:1px dashed #efefef;
-    margin-bottom:25px;
 }
 .snippets {
     background-color: wheat;
@@ -31,4 +31,19 @@ body{margin-top:20px;}
 .desc-wrapper{
     background-color: white;
     margin-top: 0px;
+    padding-bottom: 230px;
+}
+.content-desc{
+    background-color: #efefdf;
+    border: #abcdea solid 2px;
+    border-radius: 20px;
+}
+.content-desc p{
+    border-bottom: #abcdea solid 2px;
+    border-radius: 10px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+.content-desc *{
+    padding : 20px;
 }

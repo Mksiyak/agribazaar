@@ -48,11 +48,13 @@ export default class App extends Component {
   render(){
       const DefaultContainer = ({location}) =>(
         <>
+        <div className = 'nofooter'>
         <div className='navbar'><Navbar location={location} user={this.state} handleAccount={this.handleAccount}/></div>
         <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
         <Route path="/product/:id" component={Product}/>
         <Route path="/search" component={Search}/>
         <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
+        </div>
         <div className="footer"><Footer/></div>
         </>
       )

@@ -14,22 +14,18 @@ class Footer extends Component
     render()
     {
         return(
-            <footer className="container-fliud">
+            <footer className="container-fliud bottom-fixed">
                 <div style={{textAlign:'center'}}><i className="fa fa-facebook social"></i><i className="fa fa-twitter social"></i><i className="fa fa-instagram social"></i><i className="fa fa-envelope social"></i></div>
                 <div className="container-fluid">
                     <div className="row">
                         <div className="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                             <ul>
-                                <li>Some Stupid Things.</li>
-                                <li>Some Stupid Things.</li>
-                                <li>Some Stupid Things.</li>
+                                <li>call - 1234567890</li>
                             </ul>
                         </div>
                         <div className="col-lg-3 col-md-4 col-sm-12 col-xs-12">
                             <ul>
-                                <li>Some Stupid Things.</li>
-                                <li>Some Stupid Things.</li>
-                                <li>Some Stupid Things.</li>
+                                
                             </ul>
                         </div>
                         <div className="div col-lg-6 col-md-4 col-sm-12 col-xs-12" id = "special">Project <br/>by Nirmal Khedkar (181IT230),<br/>Mukesh Kumar (181IT228) and<br/>Yash Parakh (181IT253)</div>

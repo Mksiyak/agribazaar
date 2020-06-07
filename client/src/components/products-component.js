@@ -1,5 +1,6 @@
 import React , {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
+import '../shared/stylesheets/products-style.css'
 import productsdata from "../shared/data/products-data";
 import { Link } from 'react-router-dom';
 class Products extends Component
@@ -34,7 +35,7 @@ class Products extends Component
         }
 
         return(
-            <div>
+            <div className = "products-wrapper">
                 {Products()}
             </div>
         );

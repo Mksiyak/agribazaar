@@ -11,7 +11,7 @@ class Cart extends Component{
     constructor(props){
       super(props);
       this.state = {
-        cart: [],
+        cart: Items.cart,
       }
     }
     ajaxGoBrr = ans =>{
@@ -24,11 +24,11 @@ class Cart extends Component{
     }
     componentDidMount(){
       this.getCart();
+      console.log(this.state.cart);
       socket.emit('send userid', { username: this.props.user.username });
       socket.on('get cart',this.ajaxGoBrr);
     }
     getCart = () =>{
-      console.log(Items)
       Items.cart.map(Item=>
         {
           const newItem = {};
@@ -56,15 +56,6 @@ class Cart extends Component{
               <label className="product-removal">Remove</label>
               <label className="product-line-price">Total</label>
             </div>
-            {this.state.cart.map = (Item=>
-                  <div>
-                    <div class="product">
-                      <div className="product-image">
-                        <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" alt = ""></img>
-                      </div>
-                    </div>
-                  </div>
-              )}
              <div class="product">
               <div className="product-image">
                 <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg"></img>
@@ -84,7 +75,18 @@ class Cart extends Component{
               </div>
               <div className="product-line-price">25.98</div>
             </div>
-
+            {
+              Items.cart.map = (Item=>
+                  <div>
+                    <div class="product">
+                      <div className="product-image">
+                        <p>{Item.quantity}</p>
+                        <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" alt = ""></img>
+                      </div>
+                    </div>
+                  </div>
+              )
+              }
             <div className="totals">
               <div className="totals-item">
                 <label>Subtotal</label>
