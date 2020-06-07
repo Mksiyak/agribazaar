@@ -88,3 +88,12 @@ Tables
 |  9 | dummy    | Urad Dal | Skinned Urad Dal    | Lentils  |       20 | buying     |        10.00 | Rupees/Kg | Nirmal Khedkar |
 | 10 | dummy    | Rice     | Basmati Indian Rice | Cereals  |       20 | buying     |         5.00 | Rupees/Kg | Nirmal Khedkar |
 +----+----------+----------+---------------------+----------+----------+------------+--------------+-----------+----------------+
+
+### ItemComments
++--------------+--------------+------+-----+---------+-------+
+| Field        | Type         | Null | Key | Default | Extra |
++--------------+--------------+------+-----+---------+-------+
+| review       | varchar(100) | YES  |     | NULL    |       |
+| userid       | int          | NO   | MUL | NULL    |       |
+| itemsellerid | int          | NO   | MUL | NULL    |       |
++--------------+--------------+------+-----+---------+-------+

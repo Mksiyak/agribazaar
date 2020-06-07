@@ -28,7 +28,7 @@ class Login extends Component {
             user_password
         }).then(res => {
 
-            this.props.handleAccount(res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],document.getElementById("customCheck1").checked);  
+            this.props.handleAccount(res.data[0]["id"],res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],document.getElementById("customCheck1").checked);  
         })        
         .then(()=>{
             this.props.history.push('/')

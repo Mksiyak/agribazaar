@@ -73,6 +73,7 @@ class Navbar extends Component{
                                     {userdetails.username}
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
                                 </div>
                             </li>
@@ -89,6 +90,7 @@ class Navbar extends Component{
                                     {userdetails.username}
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
+                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
                                 </div>
                             </li>
