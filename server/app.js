@@ -30,6 +30,7 @@ var cartRouter = require('./routes/cartRouter').cart;
 var userRouter = require('./routes/userRouter');
 var farmerRouter = require('./routes/farmerRouter');
 var mysqlRouter = require('./config');
+var orderHistoryRouter = require('./routes/orderHistoryRouter');
 var cli_color = require('./common').cli_color;
 
 global.db=mysqlRouter;
@@ -43,6 +44,7 @@ app.use('/auth',authRouter);
 app.use('/cart',cartRouter);
 app.use('/users',userRouter);
 app.use('/farmers',farmerRouter);
+app.use('/prev',orderHistoryRouter);
 // catch 404 and forward to error handler
 
 

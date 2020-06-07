@@ -12,6 +12,7 @@ import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
 import Profile from './components/profile-component';
+import OrderHistory from './components/order-history-component';
 
 export default class App extends Component {
   constructor(props){
@@ -58,7 +59,9 @@ export default class App extends Component {
         <Route path="/product/:id" component={Product}/>
         <Route path="/search" component={Search}/>
         <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+        <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/>
         <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount}/>} />
+
         <div className="footer"><Footer/></div>
         </>
       )
