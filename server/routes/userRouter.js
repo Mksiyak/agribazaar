@@ -19,13 +19,19 @@ router.route('/:userid')
         }
     });
 })
-.put((req,res,next)=>{
-    var sql="CALL Users_updateDetails("+req.params.user_name+",SHA2("+req.params.password+"),"+req.params.full_name+","+req.params.user_email+","+req.params.user_address+");";
+.post((req,res,next)=>{
+    if(!req.body.password || req.body.password=="")
+    {
+        var sql="CALL Users_Edit_NP('"+req.body.fullname+"','"+req.body.email+"','"+req.body.address+"','"+req.body.username+"');";
+    }
+    else{
+        var sql="CALL Users_Edit('"+req.body.fullname+"',SHA2('"+req.body.password+"',256),'"+req.body.email+"','"+req.body.address+"','"+req.body.username+"');";
+    }
     console.log("QUERY",sql);
     db.query(sql,(err,ans)=>{
         if(err){
             console.error("ERROR",err);
-            res.statusCode=404;
+            res.statusCode=500;
         }
         else{
             console.log("RESULT",JSON.stringify(ans[0]));

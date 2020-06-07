@@ -12,11 +12,13 @@ import Error from "./components/error-component"
 import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
+import Profile from './components/profile-component';
 
 export default class App extends Component {
   constructor(props){
     super(props);
     this.state = {
+      id: Cookies.get('user_id'),
       email: Cookies.get('user_email'),
       username: Cookies.get('user_username'),
       role: Cookies.get('user_role'),
@@ -25,8 +27,9 @@ export default class App extends Component {
 
     this.handleAccount=this.handleAccount.bind(this)
   }
-  handleAccount = (user_email,user_name,user_role,user_remember) =>{
+  handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
     this.setState({
+      id: user_id,
       email: user_email,
       username: user_name,
       role: user_role,
@@ -36,11 +39,13 @@ export default class App extends Component {
       //Cache data
       Cookies.set('user_email', this.state.email, { expires: 7 })
       Cookies.set('user_role', this.state.role, { expires: 7 })
+      Cookies.set('user_id',this.state.id,{expires: 7})
       Cookies.set('user_username', this.state.username, { expires: 7 })
     }
     else{
       Cookies.remove('user_email');
       Cookies.remove('user_role');
+      Cookies.remove('user_id');
       Cookies.remove('user_username');
 
     }
@@ -53,7 +58,8 @@ export default class App extends Component {
         <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
         <Route path="/product/:id" component={Product}/>
         <Route path="/search" component={Search}/>
-        <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
+        <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+        <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount}/>} />
         <div className="footer"><Footer/></div>
         </>
       )
