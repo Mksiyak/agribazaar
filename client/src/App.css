@@ -3,6 +3,7 @@ a, a:active, a:focus{
 }
 html, body {
     height: 100%;
+    margin: 0;
 }
 .each-slide > div {
     height: 100%;
@@ -24,4 +25,7 @@ footer li:before {
 }
 footer {
     flex-shrink: 0;
+}
+.nofooter {
+    min-height: 100%;
 }

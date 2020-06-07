@@ -22,7 +22,7 @@ class Products extends Component
                 <div className = "col-lg-6 col-sm-12" >
                     <img className = "desc-img" src = {this.state.product.images[0]} alt = {this.state.product.name}></img>
                 </div>
-                <div className = "col-lg-6 col-sm-12">
+                <div className = "col-lg-6 col-sm-12 content-desc">
                     <h3>{this.state.product.name.toUpperCase()}</h3>
                     <p>catageory : {this.state.product.tags}</p>
                     <p>price : {this.state.product.price} Rs/Kg</p>

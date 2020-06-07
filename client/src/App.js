@@ -54,14 +54,15 @@ export default class App extends Component {
   render(){
       const DefaultContainer = ({location}) =>(
         <>
-        <div className='navbar'><Navbar location={location} user={this.state} handleAccount={this.handleAccount}/></div>
-        <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
-        <Route path="/product/:id" component={Product}/>
-        <Route path="/search" component={Search}/>
-        <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
-        <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/>
-        <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount}/>} />
-
+        <div className = 'nofooter'>
+          <div className='navbar'><Navbar location={location} user={this.state} handleAccount={this.handleAccount}/></div>
+          <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
+          <Route path="/product/:id" component={Product}/>
+          <Route path="/search" component={Search}/>
+          <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
+          <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+          <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/>
+        </div>
         <div className="footer"><Footer/></div>
         </>
       )

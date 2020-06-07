@@ -9,7 +9,9 @@ Side note: I know that this style of nesting in SASS doesn't result in the most 
     float: left;
     width: 20%;
   }
-  
+.cart-wrapper {
+  margin-top: 20px;
+}
   .product-details {
     float: left;
     width: 37%;
