@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import '../App.css';
-import Footer from './footer-component'
 import "../shared/stylesheets/error-style.css"
 class Error extends Component {
     constructor(props) {

@@ -4,9 +4,9 @@ import "../shared/stylesheets/slider-style.css"
 import slides from '../shared/data/slider-images'
 class Slider extends Component
 {
-    constructor(props){
-        super(props);
-    }
+    // constructor(props){
+    //     super(props);
+    // }
     render()
     {
         const Slideshow = () => {

@@ -47,7 +47,7 @@ class Navbar extends Component{
 
         const navbarHandler = (userdetails) =>{
             let searchBar = (userdetails) =>{
-                if(userdetails.role == "farmer"){
+                if(userdetails.role === "farmer"){
                     return <div id="farmer"></div>
                 }
                 else{
@@ -67,11 +67,11 @@ class Navbar extends Component{
                 if(userdetails.role === "shopper"){
                     return(
                         <>
-                            <li className="nav-item"><a className="nav-link" href="/cart">Cart</a></li>
+                            <li className="nav-item"><Link className="nav-link" to="/cart">Cart</Link></li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {userdetails.username}
-                                </a>
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
@@ -83,12 +83,12 @@ class Navbar extends Component{
                 else if(userdetails.role === "farmer"){
                     return(
                         <>
-                            <li className="nav-item"><a className="nav-link" href="/cart">Add Items</a></li>
-                            <li className="nav-item"><a className="nav-link" href="/cart">Analytics</a></li>
+                            <li className="nav-item"><Link className="nav-link" to="/cart">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/cart">Analytics</Link></li>
                             <li className="nav-item dropdown">
-                                <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {userdetails.username}
-                                </a>
+                                </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
@@ -100,9 +100,9 @@ class Navbar extends Component{
                 else{
                     return(
                         <li className="nav-item dropdown">
-                            <a className="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Login/Signup
-                            </a>
+                            </Link>
                             <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                 <Link className="dropdown-item" to="/sign-in">Login</Link>
                                 <Link className="dropdown-item" to="/sign-up">Sign Up</Link>
@@ -122,11 +122,11 @@ class Navbar extends Component{
         }
 
         return(
-            <>
+            <div>
             <nav className="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-                <a className="navbar-brand" href="/"> 
+                <Link className="navbar-brand" to="/"> 
                 <b>Agri</b>Bazaar
-                </a>
+                </Link>
                 <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
@@ -137,7 +137,7 @@ class Navbar extends Component{
                 </div>
             </nav>
             
-            </>
+            </div>
         );
     }
 }
