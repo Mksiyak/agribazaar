@@ -1,12 +1,9 @@
 import React , {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import productsdata from "../shared/data/products-data";
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 class Products extends Component
 {
-    constructor(props){
-        super(props);
-    }
     render()
     {
         const Products = () => {

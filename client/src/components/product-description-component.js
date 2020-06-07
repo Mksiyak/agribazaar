@@ -1,14 +1,14 @@
 import React , {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/product-description-style.css'
-import { BrowserRouter, Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import productsdata from '../shared/data/products-data'
 class Products extends Component
 {
     constructor(props){
         super(props);
         this.state = {
-            product : productsdata.products.find(x=> x._id== this.props.match.params.id ),
+            product : productsdata.products.find(x=> x._id=== this.props.match.params.id ),
         };
         console.log(this.state.product.comments);
     }
@@ -57,7 +57,7 @@ class Products extends Component
                                                     </span>
                                                     <strong className="text-success">@{comment.person}</strong>
                                                     <p>
-                                                        {comment.comment}, <a href="#">#consecteturadipiscing </a>.
+                                                        {comment.comment}, <Link to="#">#consecteturadipiscing </Link>.
                                                     </p>
                                                 </div>
                                                 </li>

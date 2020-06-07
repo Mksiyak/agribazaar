@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import axios from "axios"; 
 import  "../shared/stylesheets/login-style.css";
 import { serverUrl } from "../shared/baseUrl";
-import { withRouter } from "react-router-dom";
+import { withRouter, Link } from "react-router-dom";
 class Login extends Component {
     constructor(props){
         super(props);
@@ -54,7 +54,7 @@ class Login extends Component {
 
                 <div className="form-group">
                     <label>Password</label>
-                    <input required onChange={(ev) => this.handleChangeField('user_password', ev)} type="password" value={user_password} type="password" className="form-control" placeholder="Enter password" />
+                    <input required onChange={(ev) => this.handleChangeField('user_password', ev)} type="password" value={user_password} className="form-control" placeholder="Enter password" />
                 </div>
 
                 <div className="form-group">
@@ -66,7 +66,7 @@ class Login extends Component {
 
                 <button onClick={this.handleSubmit} type="submit" className="btn btn-primary btn-block">Submit</button>
                 <p className="forgot-password text-right">
-                    Forgot <a href="#">password?</a>
+                    Forgot <Link to="#">password?</Link>
                 </p>
             </form>
             </div>
