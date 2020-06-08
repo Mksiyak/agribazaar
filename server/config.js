@@ -1,5 +1,4 @@
 var mysql = require('mysql')
-console.log(process.env,"MySQL")
 var con = mysql.createConnection({
     host: "localhost",
     database: "agribazaar",
