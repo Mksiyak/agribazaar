@@ -28,31 +28,33 @@ class ProductDetails extends Component
         Axios.get(`${serverUrl}item/`+this.props.match.params.id)
         .then(ans=>{
             ans = JSON.parse(ans.data)
+            console.log("RESPONSE",ans,ans[5])
             this.setState({
                 product: ans[0][0],
                 sellers: ans[1],
-                comments: ans[3]
+                comments: ans[3],
+                avgrating: ans[5][0]["avg"]
             })
         })
         .catch(err=>{
             console.log(err);
         });
-
-        let asx = 0;
-        this.state.comments.map(comm=>{
-            asx+=comm.rating;
-        })
-        const average = asx / this.state.comments.length;
-        console.log("AVG",average,asx)
-        this.setState({
-            avgrating: average
-        })
+        this.state.sellers.map((seller,index)=>{
+            document.getElementById(`exampleSelect${index}`).innerHTML="";
+            console.log("SELET")
+        });
     }
     render()
     {
 
+        const getDropdown = (num) => {
+            let items = [];         
+            for (let i = 1; i <= num; i++) {             
+                items.push(<option key={i} value={i}>{i}</option>);   
+            }
+            return items;
+        }
         const getProductSellers = () => {
-        
             return(
                 <>
                 <h6>Sellers</h6>
@@ -61,16 +63,12 @@ class ProductDetails extends Component
                         <div class="col-lg-8 col-sm-12">
                             {seller.sellerName}
                             <br/>
-                            {seller.pricePerItem} {seller.unit} {seller["quantity"]}
+                            {seller.pricePerItem} {seller.unit}
                         </div>
                         <div class="col-lg-4 col-sm-12">
                             <div class="input-group mb-3">
-                                <select class="form-control form-control-sm" id="exampleFormControlSelect1">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
+                                <select class="form-control form-control-sm" id={"exampleSelect"+index}>
+                                    {getDropdown(seller.quantity)}
                                 </select>
                                 <div class="input-group-append">
                                     <button class="btn btn-success btn-sm" type="button">Add to Cart</button>
@@ -96,7 +94,7 @@ class ProductDetails extends Component
                                 <h3>{this.state.product.AvgPrice}/-</h3>
                             </div>
                         </div>
-                        <p><strong>Rating :</strong> {this.state.avgrating} Out of 5 ({this.state.comments.length} reviews)</p>
+                        <p><strong>Rating :</strong> {this.state.avgrating}/5 ({this.state.comments.length} reviews)</p>
                         <p>{this.state.product.description}</p>
                         <hr/>
                         {getProductSellers()}
