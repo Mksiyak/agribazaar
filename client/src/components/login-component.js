@@ -15,7 +15,6 @@ class Login extends Component {
         this.handleSubmit = this.handleSubmit.bind(this);
     }
     handleChangeField(key, event) {
-     //   console.log(key,event.target.value)
         this.setState({
           [key]: event.target.value,
         });
