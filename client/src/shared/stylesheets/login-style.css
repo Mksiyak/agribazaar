@@ -15,12 +15,12 @@ h1,h2,h3,h4,h5,h6,label,span {
   font-family: 'Fira Sans', sans-serif;
 }
 
-body, html, .App, #root, .wrapper {
+body, html, .App, #root, .login-wrapper {
   width: 100%;
   height: 100%;
 }
 
-.wrapper {
+.login-wrapper {
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -37,12 +37,12 @@ body, html, .App, #root, .wrapper {
   transition: all .3s;
 }
 
-.wrapper .form-control:focus {
+.login-wrapper .form-control:focus {
   border-color: #167bff;
   box-shadow: none;
 }
 
-.wrapper h3 {
+.login-wrapper h3 {
   text-align: center;
   margin: 0;
   line-height: 1;

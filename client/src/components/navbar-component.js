@@ -4,7 +4,7 @@ import "../shared/stylesheets/navbar-style.css"
 import { Link } from 'react-router-dom';
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
-import OrderHistory from './order-history-component';
+// import OrderHistory from './order-history-component';
 class Navbar extends Component{
     constructor(props){
         super(props);
