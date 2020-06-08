@@ -7,7 +7,6 @@ router.route('/login')
     var email_username= post.user_email;
     var pass= post.user_password;
     var sql="CALL Users_verify('"+email_username+"',SHA2('"+pass+"',256));";
-//var sql="select id,email,fullname,username,role from `Users` where (`email`='"+email_username+"' OR `username`='"+email_username+"') AND password='"+pass+"'";
     console.log("QUERY".query,sql);
     db.query(sql, function(err, results){ 
         if (err) {
@@ -32,20 +31,26 @@ router.route('/login')
 router.route('/signup')
 .post((req,res,next)=>{
     var post  = req.body;
-    var name= post.Rusername;
-    var pass= post.Rpassword;
-    var fname= post.Rfullname;
-    var address= post.Raddress;
-    var email=post.Remail;
-    var role=post.Rrole;
-    var sql = "call Users_register('"+name+"',sha('"+pass+"'),'"+fname+"','"+email+"','"+role+"','"+address+"');call Users_getDetailsByUsername('"+name+"');";
+    var user_username= post.user_username;
+    var user_pass= post.user_pass;
+    var user_first_name= post.user_first_name;
+    var user_last_name= post.user_last_name;
+    var user_mail=post.user_mail;
+    var user_role=post.user_role;
+    var user_pin_code=post.user_pin_code;
+    var user_house_no=post.user_house_no;
+    var user_street=post.user_street;
+    var user_city=post.user_city;
+    var user_state=post.user_state;
+    var user_country=post.user_country;
+    var sql = "call Users_register('"+user_username+"',sha('"+user_pass+"'),'"+user_mail+"','"+user_role+"','"+user_first_name+"','"+user_last_name+"','"+user_pin_code+"','"+user_house_no+"','"+user_city+"','"+user_street+"','"+user_state+"','"+user_country+"');call Users_getDetailsByUsername('"+user_username+"');";
     console.log("QUERY".query,sql)
     var query = db.query(sql, function(err, result) {
         if (err) {
             return console.error("ERROR".error,err);
         }
-        console.log("RESULT".success,JSON.stringify(result[2]))
-        res.send(JSON.stringify(result[2]))
+        console.log("RESULT".success,JSON.stringify(result[1]))
+        res.send(JSON.stringify(result[1]))
     });
 })
 
