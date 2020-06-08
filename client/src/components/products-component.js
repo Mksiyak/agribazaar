@@ -1,7 +1,6 @@
 import React , {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/products-style.css'
-import productsdata from "../shared/data/products-data";
 import { Link } from 'react-router-dom';
 const setImage = (product) =>{
     if(product.images)
@@ -34,7 +33,6 @@ const Products = (props) => {
                                     <li className="list-group-item">{product.description}</li>
                                     <li className="list-group-item">{product.category}</li>
                                     <li className="list-group-item">{product.AvgPrice} Rs/Kg</li>
-                                    <li className="list-group-item"><a className="btn btn-primary" href="http://localhost:3000">Vendors</a></li>
                                 </ul>
                             </div>
                         </div>

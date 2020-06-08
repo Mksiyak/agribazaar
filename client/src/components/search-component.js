@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
+import Products from "./products-component";
 
 export default class Search extends Component {
     constructor(props){
@@ -23,24 +24,12 @@ export default class Search extends Component {
     render(){
         return (
             <p style={{paddingTop:"50px"}}>
-            <table>
-                <tr>
-                    <th>Name</th>
-                    <th>Description</th>
-                    <th>Category</th>
-                    <th>Seller Count</th>
-                </tr>
-                {this.state.data.map(el=>
-                    <tr key={el.id}>
-                        <td>{el.name}</td>
-                        <td>{el.description}</td>
-                        <td>{el.category}</td>
-                        <td>{el.sellerCount}</td>
-                        <td><a href={"item/"+el.name}>See Sellers</a></td>
-                    </tr>
-                )}
-             </table>
+            <div class="container">
+                <div className='products'>
+                    <Products items={this.state.data}/>
+                </div>
+            </div>
             </p>
-          );
+        );
     }
 }
