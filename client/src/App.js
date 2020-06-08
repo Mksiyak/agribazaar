@@ -12,7 +12,7 @@ import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
 import Profile from './components/profile-component';
-import OrderHistory from './components/order-history-component';
+// import OrderHistory from './components/order-history-component';
 
 export default class App extends Component {
   constructor(props){
@@ -22,10 +22,10 @@ export default class App extends Component {
       email: Cookies.get('user_email'),
       username: Cookies.get('user_username'),
       role: Cookies.get('user_role'),
-      remember: false
+      remember: false,
     }
-
-    this.handleAccount=this.handleAccount.bind(this)
+    this.handleAccount=this.handleAccount.bind(this);
+    
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
     this.setState({
@@ -54,28 +54,25 @@ export default class App extends Component {
   render(){
       const DefaultContainer = ({location}) =>(
         <>
-        <div className = 'nofooter'>
-          <div className='navbar'><Navbar location={location} user={this.state} handleAccount={this.handleAccount}/></div>
+          <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
           <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
-          <Route path="/product/:id" component={Product}/>
+          <Route exact path="/product/:id" component={Product}/>
           <Route path="/search" component={Search}/>
           <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
           <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
-          <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/>
-        </div>
-        <div className="footer"><Footer/></div>
+          {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}
         </>
       )
       return (
       <BrowserRouter>
-
           <Switch>
             <div className="App">
-              
-              <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
-              <Route exact path="/sign-up" component={SignUp} />
-              {/* <Route strict component={Error} /> */}
-              <Route component={DefaultContainer}/>
+              <div className = 'nofooter'>
+                <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
+                <Route exact path="/sign-up" component={SignUp} />
+                <Route component={DefaultContainer}/>
+              </div>
+              <Footer/>
             </div>
           </Switch>
       </BrowserRouter>

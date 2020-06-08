@@ -14,7 +14,7 @@ class Footer extends Component
     render()
     {
         return(
-            <footer className="container-fliud bottom-fixed">
+            <footer className="container-fliud">
                 <div style={{textAlign:'center'}}><i className="fa fa-facebook social"></i><i className="fa fa-twitter social"></i><i className="fa fa-instagram social"></i><i className="fa fa-envelope social"></i></div>
                 <div className="container-fluid">
                     <div className="row">
