@@ -11,4 +11,14 @@
 }
 #search-form{
     width: 100%;
+    border: none;
+}
+
+.form-control{
+    width: 100%;
+}
+
+.form-control ul{
+    list-style-type: none;
+    text-align: left;
 }
