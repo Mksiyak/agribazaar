@@ -56,6 +56,7 @@ class Navbar extends Component{
                         <form role="form" method="GET" action="/search" id = "search-form">
                             <div className="input-group">
                                 <input onChange={(ev) => this.handleChangeField('search_query', ev)}
+                                onClick="this.setSelectionRange(0, this.value.length)"
                                 className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here" 
                                 aria-label="Recipient's username" aria-describedby="button-addon2" />
                                 <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
