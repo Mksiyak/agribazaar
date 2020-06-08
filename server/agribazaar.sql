@@ -79,10 +79,12 @@ CREATE TABLE `ItemComments` (
   `review` varchar(100) DEFAULT NULL,
   `userid` int NOT NULL,
   `itemsellerid` int NOT NULL,
+  `rating` int DEFAULT '5',
   KEY `userid` (`userid`),
   KEY `itemsellerid` (`itemsellerid`),
   CONSTRAINT `ItemComments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
-  CONSTRAINT `ItemComments_ibfk_2` FOREIGN KEY (`itemsellerid`) REFERENCES `ItemSeller` (`id`)
+  CONSTRAINT `ItemComments_ibfk_2` FOREIGN KEY (`itemsellerid`) REFERENCES `ItemSeller` (`id`),
+  CONSTRAINT `ItemComments_chk_1` CHECK (((`rating` > 0) and (`rating` <= 5)))
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -92,7 +94,7 @@ CREATE TABLE `ItemComments` (
 
 LOCK TABLES `ItemComments` WRITE;
 /*!40000 ALTER TABLE `ItemComments` DISABLE KEYS */;
-INSERT INTO `ItemComments` VALUES ('Very good this!',2,3);
+INSERT INTO `ItemComments` VALUES ('Very good this!',2,3,5),('Not grate',3,2,1);
 /*!40000 ALTER TABLE `ItemComments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -325,6 +327,23 @@ CREATE DEFINER=`root`@`localhost` PROCEDURE `Items_getRandomN`(in count int)
 begin
 select * from SearchView ORDER BY RAND() LIMIT count;
 end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `Item_getComments` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `Item_getComments`(in item_id int)
+begin select review,rating,Buyer.username as "buyerusername",Seller.fullname as "sellerfullname",itemid from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id JOIN Users as Buyer ON ItemComments.userid=Buyer.id JOIN Users as Seller ON ItemSeller.sellerid=Seller.id WHERE itemid=item_id ORDER BY rating DESC; end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -603,4 +622,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08 15:05:26
+-- Dump completed on 2020-06-08 16:26:20
