@@ -1,10 +1,10 @@
 var mysql = require('mysql')
-
+console.log(process.env,"MySQL")
 var con = mysql.createConnection({
     host: "localhost",
     database: "agribazaar",
     user: "root",
-    password: "nirmalkhedkar",
+    password: process.env.MYSQL_PSWD,
     multipleStatements : true
 });
 
