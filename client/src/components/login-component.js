@@ -42,7 +42,7 @@ class Login extends Component {
     render() {
         const { user_email,user_password } = this.state;
         return (
-        <div className="login-wrapper">
+        <div className="login-wrapper" style={{background:"url('/assets/images/image1.jpg')"}}>
         <div className="inner">
             <form>
                 <h3>Sign In</h3>
