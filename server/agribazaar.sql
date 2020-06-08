@@ -92,6 +92,7 @@ CREATE TABLE `ItemComments` (
 
 LOCK TABLES `ItemComments` WRITE;
 /*!40000 ALTER TABLE `ItemComments` DISABLE KEYS */;
+INSERT INTO `ItemComments` VALUES ('Very good this!',2,3);
 /*!40000 ALTER TABLE `ItemComments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -602,4 +603,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-08 12:23:53
+-- Dump completed on 2020-06-08 15:04:42
