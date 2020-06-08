@@ -54,7 +54,7 @@ class Navbar extends Component{
         }, () => {
             if (this.state.search_query && this.state.search_query.length > 1) {
                 if (this.state.search_query.length % 2 === 0) {
-                    this.getSuggestions()
+                    this.renderSuggestions()
                 }
             } 
         })
@@ -76,16 +76,10 @@ class Navbar extends Component{
                     return(
                         <form role="form" method="GET" action="/search" id = "search-form">
                             <div className="input-group">
-<<<<<<< HEAD
-                                <input value={text} onChange={this.onTextChanged}
-                                className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here"/>
-                                {this.renderSuggestions()}
-=======
                                 <input onChange={(ev) => this.handleChangeField('search_query', ev)}
                                 onClick="this.setSelectionRange(0, this.value.length)"
                                 className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here" 
                                 aria-label="Recipient's username" aria-describedby="button-addon2" />
->>>>>>> 0c903a05aed6401a3dac4f72828000e102ca0fad
                                 <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
                         </form>
