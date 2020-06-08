@@ -3,7 +3,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/product-description-style.css'
 import { Link } from 'react-router-dom';
 import productsdata from '../shared/data/products-data'
-class Products extends Component
+class ProductDetails extends Component
 {
     constructor(props){
         super(props);
@@ -11,6 +11,9 @@ class Products extends Component
             product : productsdata.products.find(x=> x._id=== this.props.match.params.id ),
         };
         console.log(this.state.product.comments);
+    }
+    componentDidMount(){
+
     }
     render()
     {
@@ -81,4 +84,4 @@ class Products extends Component
         );
     }
 }
-export default Products;
+export default ProductDetails;
