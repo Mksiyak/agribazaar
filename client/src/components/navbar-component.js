@@ -8,25 +8,46 @@ import { serverUrl } from '../shared/baseUrl';
 class Navbar extends Component{
     constructor(props){
         super(props);
+        this.items = [
+            'David',
+            'Danien',
+            'Sara',
+            'Jane'
+        ];
         this.state = {
-            search_query: "",
-            autocomplete_res: []
+            suggestions: [],
+            text: '',
+        };
+    }
+    onTextChanged = (e) => {
+        const value = e.target.value;
+        let suggestions = [];
+        if (value.length > 0) {
+            const regex = new RegExp(`^${value}`, 'i');
+            suggestions = this.items.sort().filter(v => regex.test(v));
         }
-        this.handleChangeField=this.handleChangeField.bind(this);
+        this.setState(() => ({ suggestions, text: value }));
     }
-    getSuggestions = () =>{
-        const squery = this.state.search_query;
 
-        Axios.get(serverUrl+`search?squery=${squery}`)
-        .then(res =>{
-            this.setState({
-                autocomplete_res: res.data
-            })
-        })
-        .catch(err=>{
-            console.log("Error ",err)
-        });
+    suggestionSelected (value) {
+        this.setState(() => ({
+            text: value,
+            suggestions: [],
+        }))
     }
+
+    renderSuggestions () {
+        const { suggestions } = this.state;
+        if (suggestions.length === 0) {
+            return null;
+        }
+        return(
+            <ul>
+                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
+            </ul>
+        );
+    } 
+
     handleChangeField(key, event) {
         this.setState({
             [key]: event.target.value
@@ -45,7 +66,7 @@ class Navbar extends Component{
         }
     }
     render(){
-
+        const  { text } = this.state;
         const navbarHandler = (userdetails) =>{
             let searchBar = (userdetails) =>{
                 if(userdetails.role === "farmer"){
@@ -55,9 +76,9 @@ class Navbar extends Component{
                     return(
                         <form role="form" method="GET" action="/search" id = "search-form">
                             <div className="input-group">
-                                <input onChange={(ev) => this.handleChangeField('search_query', ev)}
-                                className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here" 
-                                aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                <input value={text} onChange={this.onTextChanged}
+                                className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here"/>
+                                {this.renderSuggestions()}
                                 <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
                         </form>
