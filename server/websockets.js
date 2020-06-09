@@ -17,15 +17,16 @@ if(common.websockStatus){
     });
     socket.emit('news', { hello: 'world' });
     socket.on('send userid', (data) => {
-      let sql="call Cart_getItems('"+data.username+"')";
+      let sql="call Cart_getItems('"+data.username+"');";
+      sql += "select ItemSeller.id,Items.name,pricePerItem,unit,CONCAT(Users.first_name,' ',Users.last_name) AS fullname,Items.category from ItemSeller JOIN Items ON itemId=Items.id JOIN Users on sellerId=Users.id WHERE CONCAT(Users.first_name,' ',Users.last_name) IN (select fullname from CartView where itemStatus='buying' AND username='"+data.username+"' group by fullname) LIMIT 3;"
       console.log("QUERY".query,sql)
       db.query(sql,function(err,ans){
           if(err)
           {
               throw console.error("ERROR".error,err);
           } 
-          console.log("WEBSOCKET".websock,JSON.stringify(ans[0]));
-          socket.emit("get cart",JSON.stringify(ans[0]));
+          console.log("WEBSOCKET".websock,"...output...");
+          socket.emit("get cart",JSON.stringify(ans));
           
       });
     });

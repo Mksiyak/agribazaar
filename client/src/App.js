@@ -19,12 +19,16 @@ import Profile from './components/profile-component';
 
 export const createNotification = (type,title,body,delay) => {
   console.log("NOTIF",type,body,title)
+  if(!delay)
+  {
+    delay=1000
+  }
   switch (type) {
     case 'info':
       NotificationManager.info(title);
       break;
     case 'success':
-      NotificationManager.success(body,title);
+      NotificationManager.success(body,title,delay);
       break;
     case 'warning':
       NotificationManager.warning(title,body, delay);
@@ -49,6 +53,10 @@ export default class App extends Component {
     this.handleAccount=this.handleAccount.bind(this);
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
+    if(!user_email && user_email!=this.state.email)
+    {
+      createNotification(`success`,`Successful Logout!`,`Sorry to see you go!`);
+    }
     this.setState({
       id: user_id,
       email: user_email,

@@ -13,21 +13,23 @@ class Cart extends Component{
       this.state = {
         cart: [],
         buying_count: 0,
-        buying_total: 0
+        buying_total: 0,
+        suggestions: []
       }
     }
     ajaxGoBrr = ans =>{
-      let cartval = JSON.parse(ans).filter((d)=>{return d.itemStatus === "buying"});
+      console.log("ANSWER",JSON.parse(ans)[0],JSON.parse(ans)[2])
+      let cartval = JSON.parse(ans)[0].filter((d)=>{return d.itemStatus === "buying"});
       this.setState({
         cart: cartval,
         buying_count: cartval.length,
-        buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem;},0)
-      });
+        buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem;},0),
+        suggestions: JSON.parse(ans)[2]
+      }); 
     }
     componentDidMount(){
       socket.emit('send userid', { username: this.props.user.username });
       socket.on('get cart',this.ajaxGoBrr);
-
     }
 
     render(){
@@ -41,7 +43,29 @@ class Cart extends Component{
         }
       }
 
+      const renderSuggestions = () => {
+        return(
+          <div className="card w-100" style={{marginTop:"2em"}}>
+            <div className="card-body">
+              <h5 className="card-title">Recommended Products</h5>
+              <p className="card-text">
+                {this.state.suggestions.map((item,index)=>
+                <div class="row" style={{paddingTop:"1em"}} key={index}>
+                  <div class="col-lg-9 col-md-6 col-sm-12">
+                    <h6><Link to="/">{item.name}</Link></h6>
+                    <small>{item.category} sold by {item.fullname}</small>
 
+                  </div>
+                  <div class="col-lg-3 col-md-6 col-sm-12">
+                    {item.pricePerItem}&nbsp;{item.unit == "Rupees/Kg" ? "Rs/Kg": ""}
+                  </div>
+                </div>
+                )}
+              </p>
+            </div>
+          </div>
+        );
+      }
       return (
         <div className="container-fluid" style={{paddingTop:"2em",paddingBottom:"2em"}}>
           <div className="row">
@@ -84,14 +108,7 @@ class Cart extends Component{
                   <Link to="#" className="btn btn-warning btn-md w-100">Proceed to Buy</Link>
                 </div>
               </div>
-              <div className="card w-100" style={{marginTop:"2em"}}>
-                <div className="card-body">
-                  <h5 className="card-title">Suggestions</h5>
-                  <p className="card-text">
-                    Display suggestions here.
-                  </p>
-                </div>
-              </div>
+              {renderSuggestions()}
             </div>
             <br/>
           </div>
