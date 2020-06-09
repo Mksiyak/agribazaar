@@ -74,7 +74,7 @@ export default class App extends Component {
                 <BrowserRouter>
                   <Switch>
                     <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
-                    <Route exact path="/sign-up" component={SignUp} />
+                    <Route exact path="/sign-up" component={() => <SignUp handleAccount={this.handleAccount}/>} />
                     <Route component={DefaultContainer}/>
                   </Switch>
                 </BrowserRouter>
