@@ -108,7 +108,7 @@ class Navbar extends Component{
                 else if(userdetails.role === "farmer"){
                     return(
                         <>
-                            <li className="nav-item"><Link className="nav-link" to="/cart">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/additem">Add Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/cart">Analytics</Link></li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
