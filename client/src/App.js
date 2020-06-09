@@ -11,9 +11,31 @@ import Footer from "./components/footer-component";
 import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
+import 'react-notifications/lib/notifications.css';
 import Profile from './components/profile-component';
+
 // import OrderHistory from './components/order-history-component';
 
+export const createNotification = (type,title,body,delay) => {
+  console.log("NOTIF",type,body,title)
+  switch (type) {
+    case 'info':
+      NotificationManager.info(title);
+      break;
+    case 'success':
+      NotificationManager.success(body,title);
+      break;
+    case 'warning':
+      NotificationManager.warning(title,body, delay);
+      break;
+    case 'error':
+      NotificationManager.error(title, body, delay, () => {
+        console.log(title,body)
+      });
+      break;
+  }
+}
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -25,7 +47,6 @@ export default class App extends Component {
       remember: false,
     }
     this.handleAccount=this.handleAccount.bind(this);
-    
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
     this.setState({
@@ -51,12 +72,11 @@ export default class App extends Component {
     }
     
   }
-
   render(){
       const DefaultContainer = ({location}) =>(
         <>
           <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
-            <div style={{marginTop:"60px"}}>
+            <div style={{marginTop:"40px"}}>
             <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
             <Route exact path="/product/:id" component={Product}/>
             <Route path="/search" component={Search}/>
@@ -78,6 +98,7 @@ export default class App extends Component {
                     <Route component={DefaultContainer}/>
                   </Switch>
                 </BrowserRouter>
+                <NotificationContainer/>
               </div>
             </div>
 

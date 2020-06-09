@@ -3,6 +3,7 @@ import axios from "axios";
 import  "../shared/stylesheets/login-style.css";
 import { serverUrl } from "../shared/baseUrl";
 import { withRouter, Link } from "react-router-dom";
+import { createNotification } from "../App";
 class Login extends Component {
     constructor(props){
         super(props);
@@ -27,13 +28,14 @@ class Login extends Component {
             user_password
         }).then(res => {
 
-            this.props.handleAccount(res.data[0]["id"],res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],document.getElementById("customCheck1").checked);  
+            this.props.handleAccount(res.data[0]["id"],res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],document.getElementById("customCheck1").checked);
+            createNotification("success",`Welcome ${res.data[0]["username"]}`);  
         })        
         .then(()=>{
             this.props.history.push('/')
         })
         .catch(err=>{
-            console.log("Error ",err)
+            createNotification("error",`Incorrect username or password`);
         });
         
 
