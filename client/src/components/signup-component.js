@@ -14,7 +14,7 @@ class SignUp extends Component {
             user_username : '',
             user_first_name: '',
             user_last_name: '',
-            user_role : '',
+            user_role : 'farmer',
             user_pin_code : '',
             user_house_no : '',
             user_street : '',

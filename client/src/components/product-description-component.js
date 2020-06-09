@@ -1,9 +1,7 @@
 import React , {Component} from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/product-description-style.css'
-import { Link } from 'react-router-dom';
 import StarRatings from 'react-star-ratings';
-import productsdata from '../shared/data/products-data'
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
 
@@ -31,7 +29,7 @@ class ProductDetails extends Component
         };
         this.changeRating = this.changeRating.bind(this);
     }
-    changeRating( newRating, name ) {
+    changeRating( newRating ) {
         this.setState({
             rating: newRating
         });
@@ -53,7 +51,6 @@ class ProductDetails extends Component
         });
         this.state.sellers.map((seller,index)=>{
             document.getElementById(`exampleSelect${index}`).innerHTML="";
-            console.log("SELET")
         });
     }
     render()

@@ -36,7 +36,7 @@ export default class Profile extends Component{
         this.setState({
             [key]: event.target.value
         });
-        this.state.hasChanged=true;
+        this.setState({hasChanged:true});
         document.getElementById("button-submit").classList.remove('btn-primary');
         document.getElementById("button-submit").classList.add('btn-success');
         document.getElementById("button-submit").innerHTML="Save";
@@ -70,7 +70,7 @@ export default class Profile extends Component{
                 <div className="container"  style={{marginTop:"2em",marginBottom:"2em"}}>
                     <h2 style={{marginTop:"2em",marginBottom:"1em"}}>My Profile</h2>
                     
-                    <form role="form">
+                    <form>
                     <div className="form-group row">
                         <label for="ag_username" className="col-sm-2 col-form-label">Username</label>
                         <div className="col-sm-10">

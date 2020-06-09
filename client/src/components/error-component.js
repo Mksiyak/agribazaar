@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React from "react";
 import '../App.css';
 import "../shared/stylesheets/error-style.css"
 const ErrorComponent = () => {
