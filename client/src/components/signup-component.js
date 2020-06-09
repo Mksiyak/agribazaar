@@ -48,7 +48,7 @@ class SignUp extends Component {
             user_state,
             user_country
         }).then(res => {
-            this.props.handleAccount(res.data[0]["id"],res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],false);  
+            this.props.handleAccount(res.data[0]["id"],res.data[0]["email"],res.data[0]["username"],res.data[0]["role"],true);  
         })        
         .then(()=>{
             this.props.history.push('/');
@@ -63,7 +63,7 @@ class SignUp extends Component {
     render() {
         const { user_mail,user_pass,user_username,user_first_name,user_last_name,user_role,user_pin_code,user_house_no,user_street,user_city,user_state,user_country} = this.state;
         return (
-        <div className="wrapper">
+        <div className="wrapper" style={{}}>
         <div className="inner">
             <form>
                 <h3>Sign Up</h3>

@@ -40,6 +40,8 @@ h1,h2,h3,h4,h5,h6,label,span {
 }
 
 .login-wrapper h3 {
+  background-image :url('/assets/images/image1.jpg');
+  background-attachment: fixed;
   text-align: center;
   margin: 0;
   line-height: 1;
