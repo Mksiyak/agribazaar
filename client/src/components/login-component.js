@@ -3,6 +3,7 @@ import axios from "axios";
 import  "../shared/stylesheets/login-style.css";
 import { serverUrl } from "../shared/baseUrl";
 import { withRouter, Link } from "react-router-dom";
+import { createNotification } from "../App";
 class Login extends Component {
     constructor(props){
         super(props);
@@ -37,6 +38,9 @@ class Login extends Component {
         });
         
 
+    }
+    componentDidMount(){
+        createNotification("info","hi");
     }
     render() {
         const { user_email,user_password } = this.state;
