@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Switch, Route, BrowserRouter, useHistory } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import  Index from "./components/index"
 import Login from "./components/login-component";
 import SignUp from "./components/signup-component";
@@ -13,7 +13,6 @@ import Product from "./components/product-description-component"
 import Search from './components/search-component';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Profile from './components/profile-component';
-import errorComponent from './components/error-component';
 // import OrderHistory from './components/order-history-component';
 
 export const createNotification = (type,title,body,delay) => {

@@ -1,4 +1,4 @@
-import React , {Component} from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/products-style.css'
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ const setImage = (product) =>{
     if(product.images)
     {
         return(
-            <img className="card-img-top" src={product.images[0]} onError={(e)=>{e.target.onerror=null}}/>                                    
+            <img className="card-img-top" src={product.images[0]} onError={(e)=>{e.target.onerror=null}} alt=""/>                                    
         );
     }
     else{

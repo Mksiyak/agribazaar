@@ -2,8 +2,6 @@ import React, { Component } from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import "../shared/stylesheets/navbar-style.css"
 import { Link } from 'react-router-dom';
-import Axios from 'axios';
-import { serverUrl } from '../shared/baseUrl';
 // import OrderHistory from './order-history-component';
 class Navbar extends Component{
     constructor(props){
@@ -66,7 +64,6 @@ class Navbar extends Component{
         }
     }
     render(){
-        const  { text } = this.state;
         const navbarHandler = (userdetails) =>{
             let searchBar = (userdetails) =>{
                 if(userdetails.role === "farmer"){
@@ -74,7 +71,7 @@ class Navbar extends Component{
                 }
                 else{
                     return(
-                        <form role="form" method="GET" action="/search" id = "search-form">
+                        <form method="GET" action="/search" id = "search-form">
                             <div className="input-group">
                                 <input onChange={(ev) => this.handleChangeField('search_query', ev)}
                                 onClick="this.setSelectionRange(0, this.value.length)"

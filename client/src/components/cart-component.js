@@ -1,9 +1,8 @@
-import React, { Component, useState,useEffect } from "react";
+import React, { Component } from "react";
 import '../App.css';
 import SIOC from 'socket.io-client'
 import { websocketUrl } from './../shared/baseUrl';
 import '../shared/stylesheets/cart-style.css'
-import productsdata from "../shared/data/products-data";
 import { Link } from "react-router-dom";
 import { getDropdown } from "./product-description-component";
 const socket = SIOC(websocketUrl);
@@ -18,7 +17,7 @@ class Cart extends Component{
       }
     }
     ajaxGoBrr = ans =>{
-      let cartval = JSON.parse(ans).filter((d)=>{return d.itemStatus == "buying"});
+      let cartval = JSON.parse(ans).filter((d)=>{return d.itemStatus === "buying"});
       this.setState({
         cart: cartval,
         buying_count: cartval.length,
@@ -35,10 +34,10 @@ class Cart extends Component{
       const getCartItemImage = () => {
         if(this.state.cart.image)
         {
-          return <img src={this.state.cart.image} className="img-fluid img-thumbnail"/>
+          return <img src={this.state.cart.image} className="img-fluid img-thumbnail" alt=""/>
         }
         else{
-          return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail"/>
+          return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
         }
       }
 
@@ -82,7 +81,7 @@ class Cart extends Component{
                 <div className="card-body">
                   <h5 className="card-title text-danger">Subtotal ({this.state.buying_count} Items): {this.state.buying_total}/-</h5>
                   <p className="card-text"></p>
-                  <a href="#" className="btn btn-warning btn-md w-100">Proceed to Buy</a>
+                  <Link to="#" className="btn btn-warning btn-md w-100">Proceed to Buy</Link>
                 </div>
               </div>
               <div className="card w-100" style={{marginTop:"2em"}}>
