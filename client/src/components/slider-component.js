@@ -15,19 +15,19 @@ class Slider extends Component
               <div className="carousel slide" id="carouselExampleIndicators" data-ride="carousel">
                 <ol className="carousel-indicators">
                     {
-                        slides.images.map(slide =>
-                        <li className="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
+                        slides.images.map((slide,key) =>
+                        <li key={key} className="active" data-target="#carouselExampleIndicators" data-slide-to="0"></li>
                     )
                     }
                 </ol>
                 <div className="carousel-inner">
                 {
-                        this.props.images.map(slide =>
+                        this.props.images.map((slide,key) =>
                             {
                                 return slide.id === 0 ?
-                                <div className="carousel-item active"><img className="d-block w-100" src={slide.image} alt="Carousel 1" /></div>
+                                <div key={key} className="carousel-item active"><img className="d-block w-100" src={slide.image} alt="Carousel 1" /></div>
                                 :
-                                <div className="carousel-item"><img className="d-block w-100" src={slide.image} alt="Carousel 2" /></div>            
+                                <div key={key} className="carousel-item"><img className="d-block w-100" src={slide.image} alt="Carousel 2" /></div>            
                             }
                     )
                 }

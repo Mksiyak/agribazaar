@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Switch, Route, BrowserRouter, useHistory } from "react-router-dom";
+import { Switch, Route, BrowserRouter } from "react-router-dom";
 import  Index from "./components/index"
 import Login from "./components/login-component";
 import SignUp from "./components/signup-component";
@@ -11,10 +11,32 @@ import Footer from "./components/footer-component";
 import Cookies from "js-cookie";
 import Product from "./components/product-description-component"
 import Search from './components/search-component';
+import {NotificationContainer, NotificationManager} from 'react-notifications';
 import Profile from './components/profile-component';
-import errorComponent from './components/error-component';
 // import OrderHistory from './components/order-history-component';
 
+export const createNotification = (type,title,body,delay) => {
+  switch (type) {
+    case 'info':
+      alert(type)
+      NotificationManager.info(title);
+      break;
+    case 'success':
+      alert(type)
+      NotificationManager.success(title, body);
+      break;
+    case 'warning':
+      alert(type)
+      NotificationManager.warning(title,body, delay);
+      break;
+    case 'error':
+      alert(type)
+      NotificationManager.error(title, body, delay, () => {
+        console.log(title,body)
+      });
+      break;
+  }
+}
 export default class App extends Component {
   constructor(props){
     super(props);
@@ -26,7 +48,29 @@ export default class App extends Component {
       remember: false,
     }
     this.handleAccount=this.handleAccount.bind(this);
+    this.createNotification2 = this.createNotification2.bind(this);
     
+  }
+  createNotification2 =(type,title,body,delay) => {
+    return () => {
+      switch (type) {
+        case 'info':
+          NotificationManager.info(title);
+          break;
+        case 'success':
+
+          NotificationManager.success(title, body);
+          break;
+        case 'warning':
+          NotificationManager.warning(title,body, delay);
+          break;
+        case 'error':
+          NotificationManager.error(title, body, delay, () => {
+            console.log(title,body)
+          });
+          break;
+      }
+    }
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
     this.setState({
@@ -36,6 +80,10 @@ export default class App extends Component {
       role: user_role,
       remember: user_remember
     });
+    if(this.state.username)
+    {
+      
+    }
     if(user_remember){
       //Cache data
       Cookies.set('user_email', this.state.email, { expires: 7 })
@@ -51,11 +99,15 @@ export default class App extends Component {
     }
     
   }
-
+  componentDidMount(){
+ //   createNotification('info','Title','body');
+    this.createNotification2('info','title','body');
+  }
   render(){
       const DefaultContainer = ({location}) =>(
         <>
           <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
+          <NotificationContainer/>
             <div style={{marginTop:"60px"}}>
             <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
             <Route exact path="/product/:id" component={Product}/>
@@ -70,6 +122,7 @@ export default class App extends Component {
       return (
 
             <div className="App">
+              
               <div className = 'nofooter'>
                 <BrowserRouter>
                   <Switch>

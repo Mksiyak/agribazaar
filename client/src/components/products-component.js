@@ -1,4 +1,4 @@
-import React , {Component} from 'react'
+import React from 'react'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/products-style.css'
 import { Link } from 'react-router-dom';
@@ -6,7 +6,7 @@ const setImage = (product) =>{
     if(product.images)
     {
         return(
-            <img className="card-img-top" src={product.images[0]} onError={(e)=>{e.target.onerror=null}}/>                                    
+            <img className="card-img-top" src={product.images[0]} onError={(e)=>{e.target.onerror=null}} alt=""/>                                    
         );
     }
     else{
@@ -20,8 +20,8 @@ const Products = (props) => {
         <div className = "products-wrapper">
             <div className="row">
                 {
-                    props.items.map(product=>
-                        <div className="col-lg-3 col-md-4 col-sm-6 col-xs-12" style={{paddingBottom:"1em"}}>
+                    props.items.map((product,index)=>
+                        <div key={index} className="col-lg-3 col-md-4 col-sm-6 col-xs-12" style={{paddingBottom:"1em"}}>
                             <div className="card crop" >
                                 <Link to = {{pathname:'/product/'+product.id,items:{props}}}>
                                     {setImage(product)}
