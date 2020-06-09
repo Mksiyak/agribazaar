@@ -66,8 +66,9 @@ class Cart extends Component{
                     <input type="number" className="form-control" min="1"/>
                 </div>
                 <label>Add Description</label><br/>
-                <textarea class="form-control" rows="3"></textarea><br/><br/>
-                <button type="submit" className="btn btn-secondary">Upload Pictures</button><br/>
+                <textarea class="form-control" rows="3"></textarea>Upload Pictures
+                <br/>
+                <input type="file" id="img" accept="image/*"/><br/>
                 <button type="submit" className="btn btn-primary">Update</button>
               </form>
             </div>
