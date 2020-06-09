@@ -6,6 +6,7 @@ import slides from '../shared/data/slider-images'
 import offerdata  from '../shared/data/offer-data'
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
+import { createNotification } from "../App";
 
 const Offers = () => {
     return (
@@ -44,7 +45,7 @@ class Index extends Component{
         })
         .catch(err=>{
             console.log(err);
-        })
+        });
     }
     render(){
         return (
