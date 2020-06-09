@@ -1,7 +1,7 @@
 import React,{Component} from 'react';
 import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
 import './App.css';
-import { Switch, Route, BrowserRouter } from "react-router-dom";
+import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import  Index from "./components/index"
 import Login from "./components/login-component";
 import SignUp from "./components/signup-component";
@@ -47,6 +47,7 @@ export default class App extends Component {
       Cookies.remove('user_role');
       Cookies.remove('user_id');
       Cookies.remove('user_username');
+      return <Redirect to="/"/>
     }
     
   }
