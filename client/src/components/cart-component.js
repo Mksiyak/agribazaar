@@ -3,113 +3,101 @@ import '../App.css';
 import SIOC from 'socket.io-client'
 import { websocketUrl } from './../shared/baseUrl';
 import '../shared/stylesheets/cart-style.css'
-import Items from '../shared/data/cart-data'
 import productsdata from "../shared/data/products-data";
+import { Link } from "react-router-dom";
+import { getDropdown } from "./product-description-component";
 const socket = SIOC(websocketUrl);
 
 class Cart extends Component{
     constructor(props){
       super(props);
       this.state = {
-        cart: Items.cart,
+        cart: [],
+        buying_count: 0,
+        buying_total: 0
       }
     }
     ajaxGoBrr = ans =>{
-      
-      console.log(typeof this.state.cart,this.state.cart)
-      console.log(typeof ans,ans)
+      let cartval = JSON.parse(ans).filter((d)=>{return d.itemStatus == "buying"});
       this.setState({
-        cart: JSON.parse(ans)
-      })
+        cart: cartval,
+        buying_count: cartval.length,
+        buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem;},0)
+      });
     }
     componentDidMount(){
-      this.getCart();
-      console.log(this.state.cart);
       socket.emit('send userid', { username: this.props.user.username });
       socket.on('get cart',this.ajaxGoBrr);
+
     }
-    getCart = () =>{
-      Items.cart.map(Item=>
-        {
-          const newItem = {};
-          newItem['quantity'] = Item.quantity;
-          newItem['product'] = this.getProductById(Item.id);
-          this.state.cart.push(newItem);
-        }
-        )
-    }
-    getProductById = (id) =>
-    {
-       return productsdata.products.find(x=> x._id === id);
-    }
+
     render(){
+      const getCartItemImage = () => {
+        if(this.state.cart.image)
+        {
+          return <img src={this.state.cart.image} className="img-fluid img-thumbnail"/>
+        }
+        else{
+          return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail"/>
+        }
+      }
+
+
       return (
-        <div className = "cart-wrapper">
-                    <h1>Shopping Cart</h1>
-          <div className="shopping-cart">
-
-            <div className="column-labels">
-              <label className="product-image">Image</label>
-              <label className="product-details">Product</label>
-              <label className="product-price">Price</label>
-              <label className="product-quantity">Quantity</label>
-              <label className="product-removal">Remove</label>
-              <label className="product-line-price">Total</label>
-            </div>
-             <div class="product">
-              <div className="product-image">
-                <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg"></img>
-              </div>
-              <div className="product-details">
-                <div className="product-title">Dingo Dog Bones</div>
-                <p className="product-description">The best dog bones of all time. Holy crap. Your dog will be begging for these things! I got curious once and ate one myself. I'm a fan.</p>
-              </div>
-              <div className="product-price">12.99</div>
-              <div className="product-quantity">
-                <input type="number" value="2" min="1"></input>
-              </div>
-              <div className="product-removal">
-                <button className="remove-product">
-                  Remove
-                </button>
-              </div>
-              <div className="product-line-price">25.98</div>
-            </div>
-            {
-              Items.cart.map = (Item=>
-                  <div>
-                    <div class="product">
-                      <div className="product-image">
-                        <p>{Item.quantity}</p>
-                        <img src="https://s.cdpn.io/3/dingo-dog-bones.jpg" alt = ""></img>
+        <div className="container-fluid" style={{paddingTop:"2em",paddingBottom:"2em"}}>
+          <div className="row">
+            <div className="col-lg-8 col-md-6 col-sm-12">
+              <div className="card w-100">
+                <div className="card-body">
+                  <h3 style={{margin:"0px"}}>Your Cart</h3>
+                  <hr/>
+                  {this.state.cart.map((item,index)=>
+                        <div className="row" style={{paddingBottom:"1em"}} key={index}>
+                        <div className="col-lg-2 col-md-0 col-sm-0">
+                          {getCartItemImage()}
+                        </div>
+                        <div className="col-lg-10 col-sm-12">
+                          <div className="row">
+                            <div className="col-lg-10 col-sm-12">
+                              <small>{item.category} Department</small>
+                              <h4><Link to="/">{item.name}</Link></h4>
+                              Seller: <Link to="/">{item.fullname}</Link>
+                              <p>{item.description}</p>
+                            </div>
+                            <div className="col-lg-2 col-sm-12" style={{textAlign:"right",color:"green"}}>
+                              <small>{item.pricePerItem} {item.unit}</small>
+                              <h5>{item.pricePerItem*item.quantity} Rs</h5>
+                              {getDropdown(item.quantity,index)}
+                            </div>
+                          </div>
+                        </div>
                       </div>
-                    </div>
-                  </div>
-              )
-              }
-            <div className="totals">
-              <div className="totals-item">
-                <label>Subtotal</label>
-                <div className="totals-value" id="cart-subtotal">71.97</div>
+                  )}
+                </div>
               </div>
-              <div className="totals-item">
-                <label>Tax (5%)</label>
-                <div className="totals-value" id="cart-tax">3.60</div>
+
+            </div>
+            <div className="col-lg-4 col-md-6 col-sm-12">
+              <div className="card w-100">
+                <div className="card-body">
+                  <h5 className="card-title text-danger">Subtotal ({this.state.buying_count} Items): {this.state.buying_total}/-</h5>
+                  <p className="card-text"></p>
+                  <a href="#" className="btn btn-warning btn-md w-100">Proceed to Buy</a>
+                </div>
               </div>
-              <div className="totals-item">
-                <label>Shipping</label>
-                <div className="totals-value" id="cart-shipping">15.00</div>
-              </div>
-              <div className="totals-item totals-item-total">
-                <label>Grand Total</label>
-                <div className="totals-value" id="cart-total">90.57</div>
+              <div className="card w-100" style={{marginTop:"2em"}}>
+                <div className="card-body">
+                  <h5 className="card-title">Suggestions</h5>
+                  <p className="card-text">
+                    Display suggestions here.
+                  </p>
+                </div>
               </div>
             </div>
-
-                <button className="checkout">Checkout</button>
-          </div> 
-                  </div>
-    );
+            <br/>
+          </div>
+        </div>
+      );
     }
 
 }

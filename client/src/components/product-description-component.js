@@ -6,6 +6,18 @@ import StarRatings from 'react-star-ratings';
 import productsdata from '../shared/data/products-data'
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
+
+export const getDropdown = (num,index) => {
+    let items = [];         
+    for (let i = 1; i <= num; i++) {             
+        items.push(<option key={i} value={i}>{i}</option>);   
+    }
+    return(
+        <select class="form-control form-control-sm" id={"exampleSelect"+index}>
+            {items}
+        </select>
+    );
+}
 class ProductDetails extends Component
 {
     constructor(props){
@@ -47,29 +59,21 @@ class ProductDetails extends Component
     render()
     {
 
-        const getDropdown = (num) => {
-            let items = [];         
-            for (let i = 1; i <= num; i++) {             
-                items.push(<option key={i} value={i}>{i}</option>);   
-            }
-            return items;
-        }
+
         const getProductSellers = () => {
             return(
                 <>
                 <h6>Sellers</h6>
                 {this.state.sellers.map((seller,index)=>
                     <div class="row sellerlist" style={{fontSize:"12px"}} key={index}>
-                        <div class="col-lg-8 col-sm-12">
+                        <div class="col-lg-9 col-lg-9 col-sm-12">
                             {seller.sellerName}
                             <br/>
                             {seller.pricePerItem} {seller.unit}
                         </div>
-                        <div class="col-lg-4 col-sm-12">
+                        <div class="col-lg-3 col-md-3 col-sm-12">
                             <div class="input-group mb-3">
-                                <select class="form-control form-control-sm" id={"exampleSelect"+index}>
-                                    {getDropdown(seller.quantity)}
-                                </select>
+                                {getDropdown(seller.quantity,index)}
                                 <div class="input-group-append">
                                     <button class="btn btn-success btn-sm" type="button">Add to Cart</button>
                                 </div>
