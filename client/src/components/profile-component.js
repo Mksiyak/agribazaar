@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios"; 
 import { serverUrl } from "../shared/baseUrl";
+import { createNotification } from "../App";
 
 export default class Profile extends Component{
     constructor(props){
@@ -52,6 +53,20 @@ export default class Profile extends Component{
         document.getElementById("button-submit").classList.remove('btn-primary');
         document.getElementById("button-submit").classList.add('btn-success');
         document.getElementById("button-submit").innerHTML="Save";
+    }
+    deleteAcc(event){
+        event.preventDefault();
+        alert(event.target.id);
+        let userId=event.target.id.split('##')[1];
+        Axios.delete(`${serverUrl}users/${event.target.id.split('##')[1]}`,{
+            userId
+        }).then(res=>{
+            this.handleSubmit();
+            createNotification(`danger`,"Sorry to see you go!")
+        })
+        .catch(err=>{
+            console.log("Error",err)
+        })
     }
     handleSubmit(event){
         event.preventDefault();
@@ -154,6 +169,7 @@ export default class Profile extends Component{
                         </div>
                     </div>
                     <button type="submit" id="button-submit" className="btn btn-primary" style={{marginTop:"1.5em"}} onClick={this.handleSubmit}>Submit</button>
+                    <button className="btn btn-danger" id={`deleteAccount##${this.props.user.id}`} onClick={this.deleteAcc} style={{marginTop:"1.5em"}}><i className="fa fa-trash"></i>&nbsp;&nbsp;Delete Account</button>
                     </form>
                 </div>
 

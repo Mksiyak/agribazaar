@@ -34,4 +34,18 @@ router.route('/:farmerId/add')
     }
 });
 
+router.route('/open')
+.get((req,res,next)=>{
+    var sql="SELECT CartView.itemStatus,itemid,Buyer.username,name,category,BuyerQty,pricePerItem,unit,CONCAT(Buyer.house_no,', ',Buyer.street,', ',Buyer.city,', ',Buyer.state,', ',Buyer.state,', ',Buyer.country,', ',Buyer.pin_code) AS 'address' FROM CartView JOIN Users as Buyer ON Buyer.username=CartView.username JOIN Users as Sellers ON CONCAT(Sellers.first_name,' ',Sellers.last_name)=CartView.fullname WHERE Sellers.id="+req.query.userid+" AND CartView.itemStatus='bought';";
+    console.log("QUERY".query,sql);
+    db.query(sql,function(err,results){
+        if(err)
+        {
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(results));
+        res.end(JSON.stringify(results));
+    });
+
+})
 module.exports = router
