@@ -12,8 +12,10 @@ router.route('/')
         if(err){
             throw console.error("ERROR".error,err);
         }
-        console.log("RESULT".success,JSON.stringify(ans));
+        else{
+            console.log("RESULT".success,JSON.stringify(ans));
         res.end(JSON.stringify(ans));
+        }
     });
 })
 .post((req,res,next)=>{

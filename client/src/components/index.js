@@ -6,7 +6,6 @@ import slides from '../shared/data/slider-images'
 import offerdata  from '../shared/data/offer-data'
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
-import { createNotification } from "../App";
 
 const Offers = () => {
     return (

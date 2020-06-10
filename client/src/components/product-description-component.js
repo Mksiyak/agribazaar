@@ -12,7 +12,7 @@ export const getDropdown = (num,index) => {
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index}>
+        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange={console.log('changed')}>
             {items}
         </select>
     );

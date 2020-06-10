@@ -1,15 +1,13 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { listProducts } from "../actions.js/productActions";
 import { useDispatch , useSelector } from 'react-redux';
 import { useState } from "react";
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
 import { createNotification } from "../App";
-import { Redirect, withRouter } from "react-router-dom";
 
-const Addproduct = (props)=> {
+const Addproduct = ()=> {
     const productlist = useSelector(state => state.productList).products;
-    const { products, loading, error } = productlist;
     const dispatch = useDispatch();
     const [productid, setproductid] = useState('');
     const [price, setprice] = useState('');
@@ -19,7 +17,7 @@ const Addproduct = (props)=> {
     const [quantity, setquantity] = useState('')
     useEffect(() => {
         dispatch(listProducts());
-    }, []);
+    },[]);
     useEffect(()=>{ 
         console.log(image);    
     },[image]
@@ -49,7 +47,7 @@ const Addproduct = (props)=> {
         };
         Axios.post(serverUrl+"item",formData,config).then(res => {
                     console.log(res);
-                    if(res.status/100==2)
+                    if(res.status/100===2)
                     {
                         createNotification("success",`Product added successfully`);
                     }
@@ -73,7 +71,6 @@ const Addproduct = (props)=> {
                     <select style={{width:'100%'}} onChange={(e) => setproductid(e.target.value)} value={productid}>
                         <option value = "">select</option>
                         {
-                            console.log(loading),
                             productlist.map((product)=>
                                 <option value = { product.id }>{ product.name }</option>
                             )

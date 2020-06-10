@@ -39,6 +39,9 @@ export const createNotification = (type,title,body,delay) => {
         console.log(title,body)
       });
       break;
+    default :
+      NotificationManager.warning('invalid notification type',body, delay);
+      break;
   }
 }
 export default class App extends Component {
@@ -54,7 +57,7 @@ export default class App extends Component {
     this.handleAccount=this.handleAccount.bind(this);
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
-    if(!user_email && user_email!=this.state.email)
+    if(!user_email && user_email!==this.state.email)
     {
       createNotification(`success`,`Successful Logout!`,`Sorry to see you go!`);
     }

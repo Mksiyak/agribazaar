@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, { Component ,useEffect} from "react";
 import '../App.css';
 import SIOC from 'socket.io-client'
 import { websocketUrl } from './../shared/baseUrl';
@@ -19,6 +19,7 @@ class Cart extends Component{
       }
       this.handleBuyCart=this.handleBuyCart.bind(this);
     }
+    
     ajaxGoBrr = ans =>{
       console.log("ANSWER",JSON.parse(ans)[0],JSON.parse(ans)[2])
       let cartval = JSON.parse(ans)[0].filter((d)=>{return d.itemStatus === "buying"});
@@ -41,20 +42,21 @@ class Cart extends Component{
         buying_count: count
       })
     }
+    componentWillReceiveProps = (nextProps) =>
+    {
+      if(nextProps.cart!==this.props.cart)
+      {
+        console.log("something changed",nextProps.cart);
+      }
+    }
     handleBuyCart(event){
       event.preventDefault();
       createNotification('warning',`You have bought ${this.state.buying_count} items!`)
     }
     render(){
 
-      const getCartItemImage = () => {
-        if(this.state.cart.image)
-        {
-          return <img src={this.state.cart.image} className="img-fluid img-thumbnail" alt=""/>
-        }
-        else{
-          return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
-        }
+      const getCartItemImage = (item) => {
+          return <img src={`/assets/uploads/${item.itemImage}`} className="img-fluid img-thumbnail" alt="Image not provided by seller"/>
       }
 
       const renderSuggestions = () => {
@@ -71,7 +73,7 @@ class Cart extends Component{
 
                   </div>
                   <div class="col-lg-3 col-md-6 col-sm-12">
-                    {item.pricePerItem}&nbsp;{item.unit == "Rupees/Kg" ? "Rs/Kg": ""}
+                    {item.pricePerItem}&nbsp;{item.unit === "Rupees/Kg" ? "Rs/Kg": ""}
                   </div>
                 </div>
                 )}
@@ -91,7 +93,7 @@ class Cart extends Component{
                   {this.state.cart.map((item,index)=>
                         <div className="row" style={{paddingBottom:"1em"}} key={index}>
                         <div className="col-lg-2 col-md-0 col-sm-0">
-                          {getCartItemImage()}
+                          {getCartItemImage(item)}
                         </div>
                         <div className="col-lg-10 col-sm-12">
                           <div className="row">
@@ -102,7 +104,7 @@ class Cart extends Component{
                               <p>{item.description}</p>
                             </div>
                             <div className="col-lg-2 col-sm-12" style={{textAlign:"right",color:"green"}}>
-                              <small>{item.pricePerItem} {item.unit == "Rupees/Kg" ? "Rs/Kg": ""}</small>
+                              <small>{item.pricePerItem} {item.unit === "Rupees/Kg" ? "Rs/Kg": ""}</small>
                               <h5>{item.pricePerItem*item.BuyerQty} Rs</h5>
                               {getDropdown(item.SellerQty,index)}
                             </div>

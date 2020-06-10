@@ -35,7 +35,7 @@ router.route('/')
     })
 });
 
-const DIR = '../uploads';
+const DIR = '../client/public/assets/uploads';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {

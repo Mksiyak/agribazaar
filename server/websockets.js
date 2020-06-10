@@ -26,6 +26,7 @@ if(common.websockStatus){
               throw console.error("ERROR".error,err);
           } 
           console.log("WEBSOCKET".websock,"...output...");
+          console.log(JSON.stringify(ans));
           socket.emit("get cart",JSON.stringify(ans));
           
       });
