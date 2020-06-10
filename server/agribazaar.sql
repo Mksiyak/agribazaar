@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'buying',9,1);
+INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'bought',5,4),(15,13,20,'buying',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'buying',9,1);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -284,6 +284,25 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cart_AddItems`(in user_userid int,in item_itemno int,in item_quantity int,in item_price int,in item_itemSellerId int)
 begin insert into Cart(userid,itemno,quantity,itemStatus,price,itemSellerId) values(user_userid,item_itemno,item_quantity,"buying",item_price,item_itemSellerId); end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `cart_BuyItems` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cart_BuyItems`(in user_id int)
+begin
+UPDATE Cart SET itemStatus="bought" WHERE userid=user_id;
+end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -650,4 +669,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 22:16:38
+-- Dump completed on 2020-06-10 22:46:30
