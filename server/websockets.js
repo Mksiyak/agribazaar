@@ -17,8 +17,8 @@ if(common.websockStatus){
     });
     socket.emit('news', { hello: 'world' });
     socket.on('send userid', (data) => {
-      let sql="call Cart_getItems('"+data.username+"');";
-      sql += "select ItemSeller.id,Items.name,pricePerItem,unit,CONCAT(Users.first_name,' ',Users.last_name) AS fullname,Items.category from ItemSeller JOIN Items ON itemId=Items.id JOIN Users on sellerId=Users.id WHERE CONCAT(Users.first_name,' ',Users.last_name) IN (select fullname from CartView where itemStatus='buying' AND username='"+data.username+"' group by fullname) LIMIT 3;"
+      let sql="select Cart.id,Shopper.username,Items.name,Items.description,Items.category,Cart.quantity AS 'BuyerQty',ItemSeller.quantity AS 'SellerMaxQty',Cart.itemStatus,ItemSeller.pricePerItem,ItemSeller.unit,Seller.fullname AS fullname from ((((Cart join Users AS Shopper on((Shopper.id = Cart.userid AND Shopper.username='"+data.username+"'))) join Users AS Seller on((Seller.id = Cart.itemSellerId))) join Items on((Cart.itemno = Items.id))) join ItemSeller on(((ItemSeller.sellerId = Cart.itemSellerId) and (ItemSeller.itemId = Cart.itemno)))) order by Cart.id;";
+      sql += "select Items.id,Items.name,pricePerItem,unit,Users.fullname AS fullname,Items.category from ItemSeller JOIN Items ON itemId=Items.id JOIN Users on sellerId=Users.id WHERE Users.fullname IN (select fullname from CartView where itemStatus='buying' AND username='"+data.username+"' group by fullname) LIMIT 3;";
       console.log("QUERY".query,sql)
       db.query(sql,function(err,ans){
           if(err)

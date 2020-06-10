@@ -4,17 +4,23 @@ import '../shared/stylesheets/product-description-style.css'
 import StarRatings from 'react-star-ratings';
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
+import Select from 'react-dropdown-select';
+import {Input} from 'reactstrap';
+import { createNotification } from '../App';
 
-export const getDropdown = (num,index) => {
+export const getDropdown = (num,index,onchangeFn) => {
     let items = [];
     items.push(<option key={0} value="0">--</option>)      
     for (let i = 1; i <= num; i++) {             
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index}>
+        // <select className="form-control form-control-sm fsx" id={"exampleSelect"+index}>
+        //     {items}
+        // </select>
+        <Input type="select" name="select" id={`exampleSelect#${index}`} onChange={onchangeFn}>
             {items}
-        </select>
+        </Input>
     );
 }
 class ProductDetails extends Component
@@ -26,9 +32,12 @@ class ProductDetails extends Component
             rating: 0,
             comments: [],
             sellers: [],
-            avgrating: 0
+            avgrating: 0,
+            unitsBuying: {}
         };
         this.changeRating = this.changeRating.bind(this);
+        this.handleOnAdd = this.handleOnAdd.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
     changeRating( newRating ) {
         this.setState({
@@ -50,9 +59,28 @@ class ProductDetails extends Component
         .catch(err=>{
             console.log(err);
         });
-        this.state.sellers.map((seller,index)=>{
-            document.getElementById(`exampleSelect${index}`).innerHTML="";
-        });
+
+    };
+    handleOnAdd(event,id){
+        event.preventDefault();
+        let idAdded = event.target.id.split('#')[1];
+
+        console.log("Added ",event,event.target.id.split('#'));
+        let itemName = document.getElementById('pdtName').innerHTML;
+        let itemSellerName = document.getElementById(`sellerDetails${idAdded}`).innerHTML;
+        let itemQty = document.getElementById(`exampleSelect${idAdded}`).value;
+        if(itemQty=="0")
+        {
+            createNotification(`error`,`Invalid Quantity`);
+        }
+        else
+        {
+            createNotification(`success`,`Added to Cart`,`${itemName} from ${itemSellerName} (${itemQty})`);
+        }
+        
+    }
+    handleChange(index){
+
     }
     render()
     {
@@ -64,16 +92,15 @@ class ProductDetails extends Component
                 <h6>Sellers</h6>
                 {this.state.sellers.map((seller,index)=>
                     <div className="row sellerlist" style={{fontSize:"12px"}} key={index}>
-                        <div className="col-lg-9 col-lg-9 col-sm-12">
-                            {seller.sellerName}
-                            <br/>
+                        <div className="col-lg-8 col-md-9 col-sm-12">
+                            <div id={`sellerDetails${index}`}>{seller.sellerName}</div>
                             {seller.pricePerItem} {seller.unit}
                         </div>
-                        <div className="col-lg-3 col-md-3 col-sm-12">
+                        <div className="col-lg-4 col-md-3 col-sm-12">
                             <div className="input-group mb-3">
                                 {getDropdown(seller.quantity,index)}
                                 <div className="input-group-append">
-                                    <button className="btn btn-success btn-sm" type="button">Add to Cart</button>
+                                    <button className="btn btn-info btn-sm" id={"AddToCart#"+index} onChange={this.handleChange(index)} onClick={this.handleOnAdd} type="button">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +116,7 @@ class ProductDetails extends Component
                         <div className="row">
                             <div className="col-lg-9 col-sm-12">
                                 <small>{this.state.product.category} Department</small>
-                                <h2>{this.state.product.name}</h2>
+                                <h2 id="pdtName">{this.state.product.name}</h2>
                             </div>
                             <div className="col-lg-3 col-sm-12" style={{textAlign:"right",color:"green"}}>
                                 <small>Rs/Kg (Avg)</small>
