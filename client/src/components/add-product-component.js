@@ -70,7 +70,7 @@ const Addproduct = (props)=> {
                     <div className="form-group">
                     <label>Product</label>
                     <br/>
-                    <select style={{width:'100%'}} onChange={(e) => setproductid(e.target.value)} value={productid}>
+                    <select class="form-control" style={{width:'100%'}} onChange={(e) => setproductid(e.target.value)} value={productid}>
                         <option value = "">select</option>
                         {
                             console.log(loading),
@@ -83,13 +83,13 @@ const Addproduct = (props)=> {
 
                     <div className="form-group">
                     <label>Price</label>
-                    <input required onChange={(e) => setprice(e.target.value)} value={price} type="text" className="form-control"  />
+                    <input class="form-control" required onChange={(e) => setprice(e.target.value)} value={price} type="text" className="form-control"  />
                     </div>
 
                     <div className="form-group">
                     <label>Price Unit</label>
                     <br/>
-                    <select style={{width:'100%'}} onChange={(e) => setunit(e.target.value)} value={unit}>
+                    <select  class="form-control" style={{width:'100%'}} onChange={(e) => setunit(e.target.value)} value={unit}>
                         <option>select</option>
                         <option value = 'rupee/kg'>rupee/kg</option>
                         <option value = 'rupee/lit'>rupee/litere</option>
@@ -98,7 +98,7 @@ const Addproduct = (props)=> {
 
                     <div className="form-group" onChange={(e) => setquantity(e.target.value)} value={quantity}>
                     <label>Quantity</label>
-                    <input required type="text" className="form-control"  />
+                    <input class="form-control" required type="text" className="form-control"  />
                     </div>
 
                     <div className="form-group"onChange={(e) => {setimage(e.target.files[0])}} value={image} >

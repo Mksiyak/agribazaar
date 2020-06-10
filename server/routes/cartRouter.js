@@ -16,17 +16,15 @@ router.route('/')
     });
 })
 .post((req,res,next)=>{
-    //TODO Procedure not added yet
-    res.end(req.body.username+"XXX"+req.body.cartArr+"XCX"+typeof req.body.cartArr);
-    // var sql = "CALL Cart_addToCart("+req.params.userId+")";
-    // console.log("QUERY".query,sql);
-    // db.query(sql,(err,ans)=>{
-    //     if(err){
-    //         throw console.error("ERROR".error,err);
-    //     }
-    //     console.log("RESULT".success,JSON.stringify(ans[0]));
-    //     res.end(JSON.stringify(ans[0]));
-    // })
+    var sql = "CALL Cart_BuyItems("+req.body.userid+")";
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err){
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(ans[0]));
+        res.end(JSON.stringify(ans[0]));
+    })
 })
 .delete((req,res,next)=>{
     var sql = "CALL Cart_clearAll("+req.params.userId+")";

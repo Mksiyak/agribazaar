@@ -106,7 +106,7 @@ class Navbar extends Component{
                     return(
                         <>
                             <li className="nav-item"><Link className="nav-link" to="/add-item">Add Items</Link></li>
-                            <li className="nav-item"><Link className="nav-link" to="/cart">Analytics</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {userdetails.username}

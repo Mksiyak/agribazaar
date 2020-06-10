@@ -16,6 +16,7 @@ import 'react-notifications/lib/notifications.css';
 import Profile from './components/profile-component';
 import Addproduct from './components/add-product-component';
 import OrderHistory from './components/order-history-component';
+import Analytics from './components/analytics-component';
 
 // import OrderHistory from './components/order-history-component';
 
@@ -94,6 +95,7 @@ export default class App extends Component {
               <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
               <Route path="/add-item" component = {Addproduct}/>
               <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
+              <Route path="/analytics" component={()=><Analytics user={this.state}/>}/>
             </div>
           <Footer/>
           {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}
@@ -105,8 +107,8 @@ export default class App extends Component {
               <div id="page-container">
                 <BrowserRouter>
                   <Switch>
-                    <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
-                    <Route exact path="/sign-up" component={() => <SignUp handleAccount={this.handleAccount}/>} />
+                    <Route exact path="/sign-in" component={() => <Login user={this.state} handleAccount={this.handleAccount}/>} />
+                    <Route exact path="/sign-up" component={() => <SignUp user={this.state} handleAccount={this.handleAccount}/>} />
                     <Route component={DefaultContainer}/>
                   </Switch>
                 </BrowserRouter>

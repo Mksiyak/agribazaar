@@ -1,11 +1,13 @@
 import React, { Component } from "react";
 import '../App.css';
 import SIOC from 'socket.io-client'
-import { websocketUrl } from './../shared/baseUrl';
+import { websocketUrl, serverUrl } from './../shared/baseUrl';
 import '../shared/stylesheets/cart-style.css'
 import { Link } from "react-router-dom";
 import { getDropdown } from "./product-description-component";
 import { createNotification } from "../App";
+import Axios from "axios";
+
 const socket = SIOC(websocketUrl);
 
 export const getCartItemImage = (imgx) => {
@@ -52,7 +54,16 @@ class Cart extends Component{
     }
     handleBuyCart(event){
       event.preventDefault();
-      createNotification('warning',`You have bought ${this.state.buying_count} items!`)
+      let userid = this.props.user.id;
+      Axios.post(`${serverUrl}cart`,{
+        userid
+      }).then(res=>{
+        createNotification('warning',`You have bought ${this.state.buying_count} items!`);
+      })
+      .catch(err=>{
+        createNotification(`error`,err);
+      })
+
     }
     render(){
       const renderSuggestions = () => {
@@ -89,7 +100,7 @@ class Cart extends Component{
                   {this.state.cart.map((item,index)=>
                         <div className="row" style={{paddingBottom:"1em"}} key={index}>
                         <div className="col-lg-2 col-md-0 col-sm-0">
-                          {getCartItemImage(this.state.item.image)}
+                          {getCartItemImage()}
                         </div>
                         <div className="col-lg-10 col-sm-12">
                           <div className="row">

@@ -37,3 +37,6 @@ footer li:before {
     margin-left: -20px;
     margin-right: 10px;
 }
+b{
+    font-weight: bold;
+}

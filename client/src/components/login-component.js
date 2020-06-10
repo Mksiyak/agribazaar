@@ -32,7 +32,11 @@ class Login extends Component {
             createNotification("success",`Welcome ${res.data[0]["username"]}`);  
         })        
         .then(()=>{
-            this.props.history.push('/')
+            if(this.props.user.role=="shopper")
+                this.props.history.push('/');
+            else{
+                this.props.history.push('/analytics');
+            }
         })
         .catch(err=>{
             createNotification("error",`Incorrect username or password`);

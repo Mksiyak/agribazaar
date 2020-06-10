@@ -50,7 +50,7 @@ class Index extends Component{
     render(){
         return (
             <div>
-                <div className='slider'><Slider images = {slides.images}/></div>
+                <div claaltssName='slider'><Slider images = {slides.images}/></div>
                 <div className="offer"><Offers/></div>
                 <div className="containers-fluid">
                     <div className='products'>
