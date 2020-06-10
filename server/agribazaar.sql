@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (2,1,10,'buying',1,1),(2,2,5,'buying',2,1),(3,1,20,'bought',4,1),(2,1,1,'buying',5,1),(2,1,20,'bought',6,1),(2,2,20,'bought',7,1),(3,2,20,'buying',8,1);
+INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -126,7 +126,42 @@ CREATE TABLE `ItemSeller` (
 
 LOCK TABLES `ItemSeller` WRITE;
 /*!40000 ALTER TABLE `ItemSeller` DISABLE KEYS */;
-INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1,NULL,NULL),(1,2,10.00,'Rupees/Kg',10,2,NULL,NULL),(4,1,4.00,'Rupees/Kg',10,3,NULL,NULL),(10,2,234.00,'Rupees/Kg',10,4,NULL,NULL),(1,1,100.00,'unit',100,5,'itemImagein','tagsin'),(1,1,67.00,'ghjkl',67,6,'rtyujkl;','fghjk'),(1,2,232.00,'rupee/kg',782367,7,'undefined','#rice'),(1,2,234.00,'rupee/kg',2312,8,'facafb3b-f11d-40dd-8aeb-982e73dfb9f4-img_20190309_185722.jpg','#Urad dal'),(1,2,234.00,'rupee/kg',2312,9,'ddf24b0b-efc4-494b-ab3a-084ac5fed416-img_20190309_185722.jpg','#Urad dal'),(1,2,234.00,'rupee/kg',2312,10,'581e1f94-9e59-4d8b-acb4-dad92290e74a-img_20190309_185722.jpg','#Urad dal'),(1,2,345543.00,'rupee/kg',43432,11,'6cf47d2a-f744-4941-88fb-757d7eae1264-53fdaec0bdf65a97.jpg','#idk'),(1,1,4325.00,'rupee/kg',235,12,'f192ed36-134a-46fe-bd50-d4de12cde648-53fdaec0bdf65a97.jpg','25'),(1,2,345.00,'rupee/kg',456,13,'3fca86e7-2352-455f-aa01-134b4a2d3bd2-53fdaec0bdf65a97.jpg','qrew'),(1,2,3241.00,'rupee/kg',34,14,'3311b3cf-d7e2-4375-809d-c4fe55ae8eeb-53fdaec0bdf65a97.jpg','14132'),(1,2,524.00,'rupee/kg',25,15,'becb3b98-4bcc-44f1-82cf-1e4f7370fce4-53fdaec0bdf65a97.jpg','34ed'),(1,2,234.00,'rupee/kg',243,16,'b8cd16cb-9680-45b8-82ff-5e4bb67f2216-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,17,'8f6cfe5c-1573-4438-838b-fe239d60b748-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,18,'8b072fc3-0352-45b5-96dd-bf756121f705-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,19,'d737a859-77e7-4135-90d8-809a1ad2ff34-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,20,'9cff3a0a-2634-43ba-98a2-aa33665fb7c4-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,21,'c9561520-8a9a-4ef4-b944-62762c87359a-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,22,'a21fc9e4-1142-465e-b869-fb4ad8a03808-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,23,'1c964e02-0523-43c6-8216-68ee3e9afc52-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,24,'88d3b076-0f27-4f9c-943c-22d6f7a2394c-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,25,'4acf98cc-7224-4c0e-841d-b7930984c0bb-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,26,'0a3a0494-fbd7-4953-8905-49519f026967-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,27,'442155a7-a9bf-45de-83fe-9dad5844a58b-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,28,'24936442-9ac2-4915-b9e6-d523a6801a97-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,29,'8850edaa-13d5-4234-8610-669852cecec1-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,30,'db05c6e7-a4d1-42df-8b68-948bd18a0a73-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,31,'795362af-3275-4f72-85c8-75fae29f1919-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,32,'45235a13-3e97-4bc2-a1dc-f71b58f8e97e-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,33,'23a57bcf-465e-473a-ac13-a01abfe3ae0f-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,34,'be22e350-780b-48ba-a2c3-d4af313e4e96-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,35,'049d1d75-4914-4d2c-a83e-bda804e14ff1-53fdaec0bdf65a97.jpg','243');
+INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (2,1,4.00,'Rupees/Kg',52,2,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,1,6.00,'Rupees/Kg',65,3,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (4,1,2.00,'Rupees/Kg',55,4,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (5,1,9.00,'Rupees/Kg',5,5,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (5,2,6.00,'Rupees/Kg',55,6,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (6,2,3.00,'Rupees/Kg',8,7,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (7,2,6.00,'Rupees/Kg',55,8,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,2,3.00,'Rupees/Kg',89,9,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (1,3,5.00,'Rupees/Kg',8,11,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (2,4,4.00,'Rupees/Kg',52,12,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,3,6.00,'Rupees/Kg',65,13,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (4,5,2.00,'Rupees/Kg',55,14,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,5,9.00,'Rupees/Kg',5,15,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,5,6.00,'Rupees/Kg',55,16,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (6,7,3.00,'Rupees/Kg',8,17,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (7,8,6.00,'Rupees/Kg',55,18,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,6,3.00,'Rupees/Kg',89,19,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (1,6,5.00,'Rupees/Kg',8,21,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (2,7,4.00,'Rupees/Kg',52,22,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,8,6.00,'Rupees/Kg',65,23,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (4,3,2.00,'Rupees/Kg',55,24,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (5,4,9.00,'Rupees/Kg',5,25,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (5,7,6.00,'Rupees/Kg',55,26,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (6,8,3.00,'Rupees/Kg',8,27,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (7,6,6.00,'Rupees/Kg',55,28,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,1,3.00,'Rupees/Kg',89,29,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (1,11,52.00,'Rupees/Kg',8,31,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (2,12,45.00,'Rupees/Kg',52,32,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,13,64.00,'Rupees/Kg',65,33,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (4,14,25.00,'Rupees/Kg',55,34,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,15,95.00,'Rupees/Kg',5,35,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (3,11,65.00,'Rupees/Kg',55,36,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (6,13,38.00,'Rupees/Kg',8,37,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (7,14,68.00,'Rupees/Kg',55,38,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (8,15,39.00,'Rupees/Kg',89,39,NULL,NULL);
 /*!40000 ALTER TABLE `ItemSeller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -153,7 +188,19 @@ CREATE TABLE `Items` (
 
 LOCK TABLES `Items` WRITE;
 /*!40000 ALTER TABLE `Items` DISABLE KEYS */;
-INSERT INTO `Items` VALUES ('Rice','Basmati Indian Rice',1,'Cereals',NULL),('Urad Dal','Skinned Urad Dal',2,'Lentils',NULL),('idk','idk',3,'idk','idk');
+INSERT INTO `Items` VALUES ('Rice','Basmati Rice',1,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Wheat','Whole Grain',2,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Barley','Nutritious',3,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Oat','Morning Breakfast',4,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Millet','Pearl Millet',5,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Jawar','Sorghum',6,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Bajra','Staple',7,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Maize','Sweet Corn',8,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Moong','Green Moong Dal',11,'Lentils',NULL);
+INSERT INTO `Items` VALUES ('Moong','Yellow Moong Dal',12,'Lenntilss',NULL);
+INSERT INTO `Items` VALUES ('Urad','Unpolished',13,'Lentils',NULL);
+INSERT INTO `Items` VALUES ('Channa','Large to Small',14,'Lentils',NULL);
+INSERT INTO `Items` VALUES ('Rajma','Red Kidney Beans',15,'Cereals',NULL);
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -205,8 +252,8 @@ CREATE TABLE `Users` (
   `last_name` varchar(20) DEFAULT NULL,
   `pin_code` int DEFAULT NULL,
   `house_no` int DEFAULT NULL,
-  `city` varchar(50) DEFAULT NULL,
   `street` varchar(50) DEFAULT NULL,
+  `city` varchar(50) DEFAULT NULL,
   `state` varchar(50) DEFAULT NULL,
   `country` varchar(50) DEFAULT NULL,
   `timestamp` datetime DEFAULT CURRENT_TIMESTAMP,
@@ -223,7 +270,19 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(2,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(3,'yash','262cc47030b1803064844b94c1cb0054a247d1e550e26bb33f215149d8b2c72e','yash@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(4,'john','eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c','john@agribazar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(8,'mksiyak','MUKESH','MUKESH','farmer','MUKESH','MUKESH',123,12,'MUKESH','MUKESH','MUKESH','MUKESH','2020-06-08 22:40:00'),(10,'mks','mksiyak','mk@agrimail.com','farmer','mukesh','kumar',332312,10,'sikar','ghana','Raj','India','2020-06-08 22:44:01'),(12,'Mksiyak2','6db92827f1264540771ad58b281396fe227dad7e','mksiyak@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:22:49'),(16,'Mksiyak3','6db92827f1264540771ad58b281396fe227dad7e','mksiyak3@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:27:07'),(18,'','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','','',12,2,'','','','','2020-06-08 23:31:56'),(19,'mksiyak4','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh4@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:37:15'),(20,'mksiyak5','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh5@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:38:24'),(21,'Mksiya6','5bff30a5ff9fd838331d873e25b55dc7886a3efe','afds@ds.dfs','','asfd','afds',23,32,'','','','','2020-06-08 23:40:45'),(22,'aasdf','4d903ce56d8a0509ebd1450fbe43c0fe412a1a1d','fasdfaf@dsaf.fasd','','afdsafs','afdsdsaf',12321,321,'','','','','2020-06-08 23:48:50'),(23,'asfd','27e86d8cb3f56985c625d61921ccdce960cab2be','jlklerqwj@jsadf.afsd','','afds','afsd',23,423,'','','','','2020-06-08 23:58:48'),(24,'asfahk','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh324@agribazaar.com','farmer','afsdjafjk','jklafsdlkj',1423,234,'kljfqdkjjk','afdsjl','fadskjf;lsad','afjfdkjl','2020-06-09 20:28:29'),(25,'afdsjkl','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukes4343h@agribazaar.com','farmer','kjafds','fads',34,53,'afdsa','rewfqwer','ljk','asfdjkl','2020-06-09 20:52:54'),(26,'jkadsf','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','muafsdkesh@agribazaar.com','shopper','kljhfsdaiojk','kjjkfsdn,',34,523,'','','','','2020-06-09 20:54:30');
+INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer','Nirmal','Khedkar',568916,24,'Civil Lines','Nashik','Maharashtra','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (2,'manoj','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','manoj@agribazaar.com','farmer','Manoj','Singh',156995,45,'Civil Lines','Jaipur','Rajasthan','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (3,'bhupesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','bhupesh@agribazaar.com','farmer','Bhupesh','Sahu',486182,59,'Civil Lines','Raipur','Chhattisgarh','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (4,'kiran','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','kiran@agribazaar.com','farmer','Kiran','Ghosh',648156,69,'Civil Lines','Kolkata','West Bengal','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (5,'surya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','surya@agribazaar.com','farmer','Surya','Rao',464935,98,'Civil Lines','Guntur','Andhra Pradesh','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (6,'geet','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','geet@agribazaar.com','farmer','Geet','Patel',481682,96,'Civil Lines','Surat','Gujarat','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (7,'soumya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','soumya@agribazaar.com','farmer','Soumya','Patil',234649,23,'Civil Lines','Belgavi','Karnataka','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (8,'vishesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','visheshl@agribazaar.com','farmer','Vishessh','Kumar',568465,65,'Civil Lines','Gaya','Bihar','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (11,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper','Mukesh','Siyak',456813,51,'Civil Lines','Ambala','Haryana','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (12,'prateek','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','prateek@agribazaar.com','shopper','Prateek','Sinha',654565,16,'Civil Lines','Ujjain','Madhya Pradesh','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (13,'jayesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','jayesh@agribazaar.com','shopper','Jayesh','Rawat',125242,91,'Civil Lines','Nainital','Uttrakhand','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (14,'biswa','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','biswa@agribazaar.com','shopper','Biswa','Sharma',754625,64,'Civil Lines','Dispur','Assam','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (15,'karthik','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','karthik@agribazaar.com','shopper','Karthik','Ramakant',146427,50,'Civil Lines','Madurai','Tamil Nadu','India','2020-06-08 22:16:30');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
