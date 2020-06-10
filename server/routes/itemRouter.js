@@ -92,7 +92,6 @@ router.route('/:itemid')
 .get((req,res,next)=>{
     var sql = "select name,description,category,SellerCount,AvgPrice from SearchView where id="+req.params.itemid+";";
     sql += "call search_getSellers("+req.params.itemid+");";
-   // sql += "select sellerId,Users.first_name as 'sellerName',pricePerItem,unit,quantity from ItemSeller join Users on ItemSeller.sellerId=Users.id where itemId="+req.params.itemid+";";
     sql += "call Item_getComments("+req.params.itemid+");";
     sql += "select avg(rating) as avg from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id WHERE itemId="+req.params.itemid+";";
     var sqlsplit = sql.split(';');
