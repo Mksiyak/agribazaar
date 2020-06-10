@@ -64,6 +64,7 @@ SET @saved_cs_client     = @@character_set_client;
  1 AS `category`,
  1 AS `BuyerQty`,
  1 AS `SellerQty`,
+ 1 AS `itemImage`,
  1 AS `itemStatus`,
  1 AS `pricePerItem`,
  1 AS `unit`,
@@ -147,6 +148,7 @@ CREATE TABLE `Items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category` varchar(20) NOT NULL,
   `tags` text,
+  `image` text,
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -157,7 +159,7 @@ CREATE TABLE `Items` (
 
 LOCK TABLES `Items` WRITE;
 /*!40000 ALTER TABLE `Items` DISABLE KEYS */;
-INSERT INTO `Items` VALUES ('Rice','Basmati Rice',1,'Cereals',NULL),('Wheat','Whole Grain',2,'Cereals',NULL),('Barley','Nutritious',3,'Cereals',NULL),('Oat','Morning Breakfast',4,'Cereals',NULL),('Millet','Pearl Millet',5,'Cereals',NULL),('Jawar','Sorghum',6,'Cereals',NULL),('Bajra','Staple',7,'Cereals',NULL),('Maize','Sweet Corn',8,'Cereals',NULL),('Moong','Green Moong Dal',11,'Lentils',NULL),('Moong','Yellow Moong Dal',12,'Lenntilss',NULL),('Urad','Unpolished',13,'Lentils',NULL),('Channa','Large to Small',14,'Lentils',NULL),('Rajma','Red Kidney Beans',15,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Rice','Basmati Rice',1,'Cereals',NULL,NULL),('Wheat','Whole Grain',2,'Cereals',NULL,NULL),('Barley','Nutritious',3,'Cereals',NULL,NULL),('Oat','Morning Breakfast',4,'Cereals',NULL,NULL),('Millet','Pearl Millet',5,'Cereals',NULL,NULL),('Jawar','Sorghum',6,'Cereals',NULL,NULL),('Bajra','Staple',7,'Cereals',NULL,NULL),('Maize','Sweet Corn',8,'Cereals',NULL,NULL),('Moong','Green Moong Dal',11,'Lentils',NULL,NULL),('Moong','Yellow Moong Dal',12,'Lenntilss',NULL,NULL),('Urad','Unpolished',13,'Lentils',NULL,NULL),('Channa','Large to Small',14,'Lentils',NULL,NULL),('Rajma','Red Kidney Beans',15,'Cereals',NULL,NULL);
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -619,7 +621,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `CartView` AS select `Cart`.`id` AS `id`,`Items`.`id` AS `itemid`,`Shopper`.`username` AS `username`,`Items`.`name` AS `name`,`Items`.`description` AS `description`,`Items`.`category` AS `category`,`Cart`.`quantity` AS `BuyerQty`,`ItemSeller`.`quantity` AS `SellerQty`,`Cart`.`itemStatus` AS `itemStatus`,`ItemSeller`.`pricePerItem` AS `pricePerItem`,`ItemSeller`.`unit` AS `unit`,concat(`Seller`.`first_name`,' ',`Seller`.`last_name`) AS `fullname` from ((((`Cart` join `Users` `Shopper` on((`Shopper`.`id` = `Cart`.`userid`))) join `Users` `Seller` on((`Seller`.`id` = `Cart`.`itemSellerId`))) join `Items` on((`Cart`.`itemno` = `Items`.`id`))) join `ItemSeller` on(((`ItemSeller`.`sellerId` = `Cart`.`itemSellerId`) and (`ItemSeller`.`itemId` = `Cart`.`itemno`)))) order by `Cart`.`id` */;
+/*!50001 VIEW `CartView` AS select `Cart`.`id` AS `id`,`Items`.`id` AS `itemid`,`Shopper`.`username` AS `username`,`Items`.`name` AS `name`,`Items`.`description` AS `description`,`Items`.`category` AS `category`,`Cart`.`quantity` AS `BuyerQty`,`ItemSeller`.`quantity` AS `SellerQty`,`ItemSeller`.`itemImage` AS `itemImage`,`Cart`.`itemStatus` AS `itemStatus`,`ItemSeller`.`pricePerItem` AS `pricePerItem`,`ItemSeller`.`unit` AS `unit`,concat(`Seller`.`first_name`,' ',`Seller`.`last_name`) AS `fullname` from ((((`Cart` join `Users` `Shopper` on((`Shopper`.`id` = `Cart`.`userid`))) join `Users` `Seller` on((`Seller`.`id` = `Cart`.`itemSellerId`))) join `Items` on((`Cart`.`itemno` = `Items`.`id`))) join `ItemSeller` on(((`ItemSeller`.`sellerId` = `Cart`.`itemSellerId`) and (`ItemSeller`.`itemId` = `Cart`.`itemno`)))) order by `Cart`.`id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -669,4 +671,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 22:46:30
+-- Dump completed on 2020-06-11  0:14:15
