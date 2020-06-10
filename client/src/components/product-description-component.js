@@ -9,14 +9,15 @@ import en from 'javascript-time-ago/locale/en';
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
-export const getDropdown = (num,index) => {
+
+export const getDropdown = (num,index,fun,id) => {
     let items = [];
     items.push(<option key={0} value="0">--</option>)      
     for (let i = 1; i <= num; i++) {             
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange={console.log('changed')}>
+        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange = {(ev) => {fun(ev.target.value,id)}}>
             {items}
         </select>
     );
@@ -60,8 +61,6 @@ class ProductDetails extends Component
     }
     render()
     {
-
-
         const getProductSellers = () => {
             return(
                 <>
