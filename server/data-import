@@ -1,0 +1,5 @@
+#!/bin/bash
+
+mysql -u root -p -e "DROP DATABASE agribazaar"
+mysql -u root -p -e "CREATE DATABASE agribazaar"
+mysql -u root -p agribazaar < agribazaar.sql

@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7);
+INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
