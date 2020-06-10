@@ -24,8 +24,8 @@ class Cart extends Component{
       let cartval = JSON.parse(ans)[0].filter((d)=>{return d.itemStatus === "buying"});
       this.setState({
         cart: cartval,
-        //buying_count: cartval.length,
-        buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem;},0),
+        buying_count: cartval.reduce((sum,d)=>{return sum+d.BuyerQty;},0),
+        buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem*d.BuyerQty;},0),
         suggestions: JSON.parse(ans)[2]
       }); 
     }
@@ -66,7 +66,7 @@ class Cart extends Component{
                 {this.state.suggestions.map((item,index)=>
                 <div class="row" style={{paddingTop:"1em"}} key={index}>
                   <div class="col-lg-9 col-md-6 col-sm-12">
-                    <h6><Link to="/">{item.name}</Link></h6>
+                    <h6><Link to={`/product/${item.itemId}`}>{item.name}</Link></h6>
                     <small>{item.category} sold by {item.fullname}</small>
 
                   </div>
@@ -97,14 +97,14 @@ class Cart extends Component{
                           <div className="row">
                             <div className="col-lg-10 col-sm-12">
                               <small>{item.category} Department</small>
-                              <h4><Link to="/">{item.name}</Link></h4>
+                              <h4><Link to={`/product/${item.itemid}`}>{item.name}</Link></h4>
                               Seller: <Link to="/">{item.fullname}</Link>
                               <p>{item.description}</p>
                             </div>
                             <div className="col-lg-2 col-sm-12" style={{textAlign:"right",color:"green"}}>
-                              <small>{item.pricePerItem} {item.unit}</small>
-                              <h5>{item.pricePerItem*item.quantity} Rs</h5>
-                              {getDropdown(item.quantity,index)}
+                              <small>{item.pricePerItem} {item.unit == "Rupees/Kg" ? "Rs/Kg": ""}</small>
+                              <h5>{item.pricePerItem*item.BuyerQty} Rs</h5>
+                              {getDropdown(item.SellerQty,index)}
                             </div>
                           </div>
                         </div>
