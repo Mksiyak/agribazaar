@@ -34,7 +34,7 @@ CREATE TABLE `Cart` (
   KEY `itemSellerId` (`itemSellerId`),
   CONSTRAINT `Cart_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
   CONSTRAINT `Cart_ibfk_2` FOREIGN KEY (`itemSellerId`) REFERENCES `ItemSeller` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'bought',5,4),(15,13,20,'buying',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'buying',9,1);
+INSERT INTO `Cart` VALUES (12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'bought',5,4),(15,13,20,'buying',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'bought',9,1),(11,1,12,'bought',11,1),(11,1,6,'bought',12,1);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -671,4 +671,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-11  0:14:15
+-- Dump completed on 2020-06-11  2:09:36
