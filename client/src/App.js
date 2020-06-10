@@ -86,14 +86,14 @@ export default class App extends Component {
       const DefaultContainer = ({location}) =>(
         <>
           <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
-            <div style={{marginTop:"40px"}}>
-            <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
-            <Route exact path="/product/:id" component={Product}/>
-            <Route path="/search" component={Search}/>
-            <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
-            <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
-            <Route path="/add-item" component = {Addproduct}/>
-            <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
+            <div id="content-wrap" style={{marginTop:"40px"}}>
+              <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
+              <Route exact path="/product/:id" component={Product}/>
+              <Route path="/search" component={Search}/>
+              <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
+              <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+              <Route path="/add-item" component = {Addproduct}/>
+              <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
             </div>
           <Footer/>
           {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}
@@ -102,7 +102,7 @@ export default class App extends Component {
       return (
 
             <div className="App">
-              <div className = 'nofooter'>
+              <div id="page-container">
                 <BrowserRouter>
                   <Switch>
                     <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
@@ -113,7 +113,6 @@ export default class App extends Component {
                 <NotificationContainer/>
               </div>
             </div>
-
     );
   }
 }

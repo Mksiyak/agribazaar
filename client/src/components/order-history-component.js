@@ -35,13 +35,15 @@ export default class OrderHistory extends Component{
                                 </div>
                                 <div class="col-lg-9 col-md-9 col-sm-12">
                                     {item.category}
-                                    <h4><Link to="/">{item.name}</Link></h4>
+                                    <h4><Link to={item.itemid}>{item.name}</Link></h4>
                                     {item.description}
                                 </div>
                                 <div class="col-lg-2 col-md-3 col-sm-12" style={{textAlign:"right"}}>
-                                    <small>Rs/Kg</small>
+                                    <small>{item.unit === "Rupees/Kg" ? "Rs/Kg":""}</small>
                                     <h6 class="text-success">{item.pricePerItem*item.BuyerQty}/-</h6>
                                     Quantity- {item.BuyerQty}
+                                    <br/>
+                                    Sold by {item.fullname}
                                 </div>
                             </div>
                             )}
