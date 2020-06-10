@@ -5,6 +5,7 @@ import { websocketUrl } from './../shared/baseUrl';
 import '../shared/stylesheets/cart-style.css'
 import { Link } from "react-router-dom";
 import { getDropdown } from "./product-description-component";
+import { createNotification } from "../App";
 const socket = SIOC(websocketUrl);
 
 class Cart extends Component{
@@ -16,13 +17,14 @@ class Cart extends Component{
         buying_total: 0,
         suggestions: []
       }
+      this.handleBuyCart=this.handleBuyCart.bind(this);
     }
     ajaxGoBrr = ans =>{
       console.log("ANSWER",JSON.parse(ans)[0],JSON.parse(ans)[2])
       let cartval = JSON.parse(ans)[0].filter((d)=>{return d.itemStatus === "buying"});
       this.setState({
         cart: cartval,
-        buying_count: cartval.length,
+        //buying_count: cartval.length,
         buying_total: cartval.reduce((sum,d)=>{return sum+d.pricePerItem;},0),
         suggestions: JSON.parse(ans)[2]
       }); 
@@ -30,9 +32,21 @@ class Cart extends Component{
     componentDidMount(){
       socket.emit('send userid', { username: this.props.user.username });
       socket.on('get cart',this.ajaxGoBrr);
+      let count = 0;
+      for(let i=0;i<document.getElementsByClassName("fsx").length;++i)
+      {
+        count += document.getElementsByClassName("fsx")[i].value;
+      }
+      this.setState({
+        buying_count: count
+      })
     }
-
+    handleBuyCart(event){
+      event.preventDefault();
+      createNotification('warning',`You have bought ${this.state.buying_count} items!`)
+    }
     render(){
+
       const getCartItemImage = () => {
         if(this.state.cart.image)
         {
@@ -105,7 +119,7 @@ class Cart extends Component{
                 <div className="card-body">
                   <h5 className="card-title text-danger">Subtotal ({this.state.buying_count} Items): {this.state.buying_total}/-</h5>
                   <p className="card-text"></p>
-                  <Link to="#" className="btn btn-warning btn-md w-100">Proceed to Buy</Link>
+                  <Link onClick={this.handleBuyCart} className="btn btn-warning btn-md w-100">Proceed to Buy</Link>
                 </div>
               </div>
               {renderSuggestions()}

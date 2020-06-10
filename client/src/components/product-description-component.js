@@ -6,12 +6,13 @@ import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
 
 export const getDropdown = (num,index) => {
-    let items = [];         
+    let items = [];
+    items.push(<option key={0} value="0">--</option>)      
     for (let i = 1; i <= num; i++) {             
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm" id={"exampleSelect"+index}>
+        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index}>
             {items}
         </select>
     );
