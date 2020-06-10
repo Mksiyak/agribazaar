@@ -5,8 +5,7 @@ var router = express.Router();
 
 router.route('/')
 .get((req,res,next)=>{
-    var sql = "CALL Cart_getItems('"+req.query.userId+"');";
-    sql += "select ItemSeller.id,Items.name,pricePerItem,unit,Users.fullname from ItemSeller JOIN Items ON itemId=Items.id JOIN Users on sellerId=Users.id WHERE Users.fullname IN (select fullname from CartView where itemStatus='buying' AND username='"+req.query.userId+"' group by fullname);"
+    var sql = "CALL Cart_getItems('"+req.query.username+"');";
     console.log("QUERY".query,sql);
     db.query(sql,(err,ans)=>{
         if(err){

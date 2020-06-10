@@ -8,6 +8,15 @@ import { getDropdown } from "./product-description-component";
 import { createNotification } from "../App";
 const socket = SIOC(websocketUrl);
 
+export const getCartItemImage = (imgx) => {
+  if(imgx)
+  {
+    return <img src={imgx} className="img-fluid img-thumbnail" alt=""/>
+  }
+  else{
+    return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
+  }
+}
 class Cart extends Component{
     constructor(props){
       super(props);
@@ -46,17 +55,6 @@ class Cart extends Component{
       createNotification('warning',`You have bought ${this.state.buying_count} items!`)
     }
     render(){
-
-      const getCartItemImage = () => {
-        if(this.state.cart.image)
-        {
-          return <img src={this.state.cart.image} className="img-fluid img-thumbnail" alt=""/>
-        }
-        else{
-          return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
-        }
-      }
-
       const renderSuggestions = () => {
         return(
           <div className="card w-100" style={{marginTop:"2em"}}>
@@ -91,7 +89,7 @@ class Cart extends Component{
                   {this.state.cart.map((item,index)=>
                         <div className="row" style={{paddingBottom:"1em"}} key={index}>
                         <div className="col-lg-2 col-md-0 col-sm-0">
-                          {getCartItemImage()}
+                          {getCartItemImage(this.state.item.image)}
                         </div>
                         <div className="col-lg-10 col-sm-12">
                           <div className="row">

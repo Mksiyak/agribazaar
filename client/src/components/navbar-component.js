@@ -94,7 +94,7 @@ class Navbar extends Component{
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" to="/order-history">Previous Orders</Link>
+                                    <Link className="dropdown-item" to="/prev">Previous Orders</Link>
                                     <Link className="dropdown-item" to="/order-history">Previous Reviews</Link>
                                     <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount()}>Logout</Link>
                                 </div>
