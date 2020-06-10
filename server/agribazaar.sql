@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7);
+INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'buying',9,1);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -82,6 +82,7 @@ CREATE TABLE `ItemComments` (
   `userid` int NOT NULL,
   `itemsellerid` int NOT NULL,
   `rating` float DEFAULT NULL,
+  `timestampCreated` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
   KEY `userid` (`userid`),
   KEY `itemsellerid` (`itemsellerid`),
   CONSTRAINT `ItemComments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
@@ -648,4 +649,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 19:05:32
+-- Dump completed on 2020-06-10 19:34:40
