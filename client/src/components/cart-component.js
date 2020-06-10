@@ -1,13 +1,24 @@
 import React, { Component ,useEffect} from "react";
 import '../App.css';
 import SIOC from 'socket.io-client'
-import { websocketUrl } from './../shared/baseUrl';
+import { websocketUrl, serverUrl } from './../shared/baseUrl';
 import '../shared/stylesheets/cart-style.css'
 import { Link } from "react-router-dom";
 import { getDropdown } from "./product-description-component";
 import { createNotification } from "../App";
+import Axios from "axios";
+
 const socket = SIOC(websocketUrl);
 
+export const getCartItemImage = (imgx) => {
+  if(imgx)
+  {
+    return <img src={imgx} className="img-fluid img-thumbnail" alt=""/>
+  }
+  else{
+    return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
+  }
+}
 class Cart extends Component{
     constructor(props){
       super(props);
@@ -51,7 +62,16 @@ class Cart extends Component{
     }
     handleBuyCart(event){
       event.preventDefault();
-      createNotification('warning',`You have bought ${this.state.buying_count} items!`)
+      let userid = this.props.user.id;
+      Axios.post(`${serverUrl}cart`,{
+        userid
+      }).then(res=>{
+        createNotification('warning',`You have bought ${this.state.buying_count} items!`);
+      })
+      .catch(err=>{
+        createNotification(`error`,err);
+      })
+
     }
     render(){
 
