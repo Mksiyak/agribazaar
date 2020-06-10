@@ -22,7 +22,8 @@ export default class Profile extends Component{
         .then(res=>{
             this.setState({
                 username: res.data[0]["username"],
-                fullname: res.data[0]["fullname"],
+                firstname: res.data[0]["first_name"],
+                lastname: res.data[0]["last_name"],
                 email: res.data[0]["email"],
                 role: res.data[0]["role"],
                 address: res.data[0]["address"],
@@ -78,9 +79,9 @@ export default class Profile extends Component{
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label for="ag_fullname" className="col-sm-2 col-form-label">Full Name</label>
+                        <label for="ag_fullname" className="col-sm-2 col-form-label">First Name</label>
                         <div className="col-sm-10">
-                        <input type="text" className="form-control" id="ag_fullname" value={this.state.fullname} onChange={(ev) => this.handleChangeField('fullname', ev)}/>
+                        <input type="text" className="form-control" id="ag_fullname" value={this.state.firstname} onChange={(ev) => this.handleChangeField('fullname', ev)}/>
                         </div>
                     </div>
                     <div className="form-group row">
