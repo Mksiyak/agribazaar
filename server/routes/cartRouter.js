@@ -3,6 +3,7 @@ var router = express.Router();
 
 
 
+
 router.route('/')
 .get((req,res,next)=>{
     var sql = "CALL Cart_getItems('"+req.query.username+"');";
@@ -45,12 +46,29 @@ router.route('/:itemid')
     console.log('Add item to Cart');
 })
 .delete((req,res,next)=>{
-    console.log('Delete item from cart')
+    console.log('Delete item from cart',req.params.itemid);
+    var sql = `delete from Cart where id = ${req.params.itemid}`;
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err){
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(ans));
+        res.end(JSON.stringify("OK"));
+    })
 })
 .put((req,res,next)=>{
-    console.log('Change Item properties in cart');
+    console.log('Change Item properties in cart',JSON.stringify(req.body));
+    var sql = `update Cart set quantity = ${req.body.val} where id = ${req.params.itemid}`;
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err){
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(ans));
+        res.end(JSON.stringify("OK"));
+    })
 })
-
 module.exports = {
     cart: router,
 };
