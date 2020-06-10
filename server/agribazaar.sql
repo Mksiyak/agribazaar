@@ -79,6 +79,7 @@ CREATE TABLE `ItemComments` (
   `review` varchar(100) DEFAULT NULL,
   `userid` int NOT NULL,
   `itemsellerid` int NOT NULL,
+  `rating` float DEFAULT NULL,
   KEY `userid` (`userid`),
   KEY `itemsellerid` (`itemsellerid`),
   CONSTRAINT `ItemComments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
@@ -109,12 +110,14 @@ CREATE TABLE `ItemSeller` (
   `unit` varchar(10) DEFAULT NULL,
   `quantity` int DEFAULT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
+  `itemImage` text,
+  `tags` text,
   PRIMARY KEY (`id`),
   KEY `sellerId` (`sellerId`),
   KEY `itemId` (`itemId`),
   CONSTRAINT `ItemSeller_ibfk_1` FOREIGN KEY (`sellerId`) REFERENCES `Users` (`id`),
   CONSTRAINT `ItemSeller_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `Items` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -123,7 +126,7 @@ CREATE TABLE `ItemSeller` (
 
 LOCK TABLES `ItemSeller` WRITE;
 /*!40000 ALTER TABLE `ItemSeller` DISABLE KEYS */;
-INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1),(1,2,10.00,'Rupees/Kg',10,2),(4,1,4.00,'Rupees/Kg',10,3),(10,2,234.00,'Rupees/Kg',10,4);
+INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1,NULL,NULL),(1,2,10.00,'Rupees/Kg',10,2,NULL,NULL),(4,1,4.00,'Rupees/Kg',10,3,NULL,NULL),(10,2,234.00,'Rupees/Kg',10,4,NULL,NULL),(1,1,100.00,'unit',100,5,'itemImagein','tagsin'),(1,1,67.00,'ghjkl',67,6,'rtyujkl;','fghjk'),(1,2,232.00,'rupee/kg',782367,7,'undefined','#rice'),(1,2,234.00,'rupee/kg',2312,8,'facafb3b-f11d-40dd-8aeb-982e73dfb9f4-img_20190309_185722.jpg','#Urad dal'),(1,2,234.00,'rupee/kg',2312,9,'ddf24b0b-efc4-494b-ab3a-084ac5fed416-img_20190309_185722.jpg','#Urad dal'),(1,2,234.00,'rupee/kg',2312,10,'581e1f94-9e59-4d8b-acb4-dad92290e74a-img_20190309_185722.jpg','#Urad dal'),(1,2,345543.00,'rupee/kg',43432,11,'6cf47d2a-f744-4941-88fb-757d7eae1264-53fdaec0bdf65a97.jpg','#idk'),(1,1,4325.00,'rupee/kg',235,12,'f192ed36-134a-46fe-bd50-d4de12cde648-53fdaec0bdf65a97.jpg','25'),(1,2,345.00,'rupee/kg',456,13,'3fca86e7-2352-455f-aa01-134b4a2d3bd2-53fdaec0bdf65a97.jpg','qrew'),(1,2,3241.00,'rupee/kg',34,14,'3311b3cf-d7e2-4375-809d-c4fe55ae8eeb-53fdaec0bdf65a97.jpg','14132'),(1,2,524.00,'rupee/kg',25,15,'becb3b98-4bcc-44f1-82cf-1e4f7370fce4-53fdaec0bdf65a97.jpg','34ed'),(1,2,234.00,'rupee/kg',243,16,'b8cd16cb-9680-45b8-82ff-5e4bb67f2216-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,17,'8f6cfe5c-1573-4438-838b-fe239d60b748-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,18,'8b072fc3-0352-45b5-96dd-bf756121f705-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,19,'d737a859-77e7-4135-90d8-809a1ad2ff34-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,20,'9cff3a0a-2634-43ba-98a2-aa33665fb7c4-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,21,'c9561520-8a9a-4ef4-b944-62762c87359a-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,22,'a21fc9e4-1142-465e-b869-fb4ad8a03808-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,23,'1c964e02-0523-43c6-8216-68ee3e9afc52-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,24,'88d3b076-0f27-4f9c-943c-22d6f7a2394c-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,25,'4acf98cc-7224-4c0e-841d-b7930984c0bb-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,26,'0a3a0494-fbd7-4953-8905-49519f026967-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,27,'442155a7-a9bf-45de-83fe-9dad5844a58b-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,28,'24936442-9ac2-4915-b9e6-d523a6801a97-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,29,'8850edaa-13d5-4234-8610-669852cecec1-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,30,'db05c6e7-a4d1-42df-8b68-948bd18a0a73-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,31,'795362af-3275-4f72-85c8-75fae29f1919-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,32,'45235a13-3e97-4bc2-a1dc-f71b58f8e97e-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,33,'23a57bcf-465e-473a-ac13-a01abfe3ae0f-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,34,'be22e350-780b-48ba-a2c3-d4af313e4e96-53fdaec0bdf65a97.jpg','243'),(1,2,234.00,'rupee/kg',243,35,'049d1d75-4914-4d2c-a83e-bda804e14ff1-53fdaec0bdf65a97.jpg','243');
 /*!40000 ALTER TABLE `ItemSeller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -139,8 +142,9 @@ CREATE TABLE `Items` (
   `description` varchar(100) DEFAULT NULL,
   `id` int NOT NULL AUTO_INCREMENT,
   `category` varchar(20) NOT NULL,
+  `tags` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -149,7 +153,7 @@ CREATE TABLE `Items` (
 
 LOCK TABLES `Items` WRITE;
 /*!40000 ALTER TABLE `Items` DISABLE KEYS */;
-INSERT INTO `Items` VALUES ('Rice','Basmati Indian Rice',1,'Cereals'),('Urad Dal','Skinned Urad Dal',2,'Lentils');
+INSERT INTO `Items` VALUES ('Rice','Basmati Indian Rice',1,'Cereals',NULL),('Urad Dal','Skinned Urad Dal',2,'Lentils',NULL),('idk','idk',3,'idk','idk');
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -210,7 +214,7 @@ CREATE TABLE `Users` (
   UNIQUE KEY `UniqueConstraint` (`username`,`email`),
   UNIQUE KEY `username` (`username`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=27 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +223,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(2,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(3,'yash','262cc47030b1803064844b94c1cb0054a247d1e550e26bb33f215149d8b2c72e','yash@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(4,'john','eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c','john@agribazar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(8,'mksiyak','MUKESH','MUKESH','farmer','MUKESH','MUKESH',123,12,'MUKESH','MUKESH','MUKESH','MUKESH','2020-06-08 22:40:00'),(10,'mks','mksiyak','mk@agrimail.com','farmer','mukesh','kumar',332312,10,'sikar','ghana','Raj','India','2020-06-08 22:44:01'),(12,'Mksiyak2','6db92827f1264540771ad58b281396fe227dad7e','mksiyak@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:22:49'),(16,'Mksiyak3','6db92827f1264540771ad58b281396fe227dad7e','mksiyak3@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:27:07'),(18,'','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','','',12,2,'','','','','2020-06-08 23:31:56'),(19,'mksiyak4','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh4@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:37:15'),(20,'mksiyak5','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh5@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:38:24'),(21,'Mksiya6','5bff30a5ff9fd838331d873e25b55dc7886a3efe','afds@ds.dfs','','asfd','afds',23,32,'','','','','2020-06-08 23:40:45'),(22,'aasdf','4d903ce56d8a0509ebd1450fbe43c0fe412a1a1d','fasdfaf@dsaf.fasd','','afdsafs','afdsdsaf',12321,321,'','','','','2020-06-08 23:48:50'),(23,'asfd','27e86d8cb3f56985c625d61921ccdce960cab2be','jlklerqwj@jsadf.afsd','','afds','afsd',23,423,'','','','','2020-06-08 23:58:48');
+INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(2,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(3,'yash','262cc47030b1803064844b94c1cb0054a247d1e550e26bb33f215149d8b2c72e','yash@agribazaar.com','shopper',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(4,'john','eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c','john@agribazar.com','farmer',NULL,NULL,NULL,NULL,NULL,NULL,NULL,NULL,'2020-06-08 22:16:30'),(8,'mksiyak','MUKESH','MUKESH','farmer','MUKESH','MUKESH',123,12,'MUKESH','MUKESH','MUKESH','MUKESH','2020-06-08 22:40:00'),(10,'mks','mksiyak','mk@agrimail.com','farmer','mukesh','kumar',332312,10,'sikar','ghana','Raj','India','2020-06-08 22:44:01'),(12,'Mksiyak2','6db92827f1264540771ad58b281396fe227dad7e','mksiyak@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:22:49'),(16,'Mksiyak3','6db92827f1264540771ad58b281396fe227dad7e','mksiyak3@agrimail.com','shopper','mukesh','kumar',332312,10,'idk','idk','Raj','India','2020-06-08 23:27:07'),(18,'','da39a3ee5e6b4b0d3255bfef95601890afd80709','','','','',12,2,'','','','','2020-06-08 23:31:56'),(19,'mksiyak4','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh4@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:37:15'),(20,'mksiyak5','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh5@agribazaar.com','shopper','mukesh','kumar',12,2,'','','','','2020-06-08 23:38:24'),(21,'Mksiya6','5bff30a5ff9fd838331d873e25b55dc7886a3efe','afds@ds.dfs','','asfd','afds',23,32,'','','','','2020-06-08 23:40:45'),(22,'aasdf','4d903ce56d8a0509ebd1450fbe43c0fe412a1a1d','fasdfaf@dsaf.fasd','','afdsafs','afdsdsaf',12321,321,'','','','','2020-06-08 23:48:50'),(23,'asfd','27e86d8cb3f56985c625d61921ccdce960cab2be','jlklerqwj@jsadf.afsd','','afds','afsd',23,423,'','','','','2020-06-08 23:58:48'),(24,'asfahk','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukesh324@agribazaar.com','farmer','afsdjafjk','jklafsdlkj',1423,234,'kljfqdkjjk','afdsjl','fadskjf;lsad','afjfdkjl','2020-06-09 20:28:29'),(25,'afdsjkl','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','mukes4343h@agribazaar.com','farmer','kjafds','fads',34,53,'afdsa','rewfqwer','ljk','asfdjkl','2020-06-09 20:52:54'),(26,'jkadsf','256d23ebdfeb388c10a3019a2c223ca5c90edfcc','muafsdkesh@agribazaar.com','shopper','kljhfsdaiojk','kjjkfsdn,',34,523,'','','','','2020-06-09 20:54:30');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -245,6 +249,25 @@ DELIMITER ;
 --
 -- Dumping routines for database 'agribazaar'
 --
+/*!50003 DROP PROCEDURE IF EXISTS `AddItem` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `AddItem`(in itemIdin int,in sellerIdin int,in pricePerItemin float,in unitin varchar(10),in quantity int,in itemImagein text,in tagsin text)
+begin
+insert into ItemSeller (sellerId,itemId,pricePerItem,unit,quantity,itemImage,tags) values (sellerIdin,itemIdin,pricePerItemin,unitin,quantity,itemImagein,tagsin);
+end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
 /*!50003 DROP PROCEDURE IF EXISTS `cart_AddItems` */;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
 /*!50003 SET @saved_cs_results     = @@character_set_results */ ;
@@ -606,4 +629,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-09 19:19:29
+-- Dump completed on 2020-06-10 11:45:36
