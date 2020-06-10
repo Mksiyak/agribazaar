@@ -215,7 +215,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','NirmalHK7','nirmal@agribazaar.com','farmer','address 1'),(2,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','Mukesh Siyak','mukesh@agribazaar.com','shopper','address 2'),(3,'yash','262cc47030b1803064844b94c1cb0054a247d1e550e26bb33f215149d8b2c72e','Yash Parakh','yash@agribazaar.com','shopper','B5RX'),(4,'john','eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c','Johnva Doe','john@agribazar.com','farmer','Apparently it worked!');
+INSERT INTO `Users` VALUES (1,'Nirmalooo','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','NirmalHK7','nirmal@agribazaar.com','farmer','address 1'),(2,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','Mukesh Siyak','mukesh@agribazaar.com','shopper','address 2'),(3,'yash','262cc47030b1803064844b94c1cb0054a247d1e550e26bb33f215149d8b2c72e','Yash Parakh','yash@agribazaar.com','shopper','B5RX'),(4,'john','eb045d78d273107348b0300c01d29b7552d622abbc6faf81b3ec55359aa9950c','Johnva Doe','john@agribazar.com','farmer','Apparently it worked!');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
