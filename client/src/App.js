@@ -17,7 +17,7 @@ import Profile from './components/profile-component';
 import Addproduct from './components/add-product-component';
 import OrderHistory from './components/order-history-component';
 import Analytics from './components/analytics-component';
-
+import OpenOrders from './components/orders-component';
 // import OrderHistory from './components/order-history-component';
 
 export const createNotification = (type,title,body,delay) => {
@@ -99,6 +99,7 @@ export default class App extends Component {
               <Route path="/add-item" component = {Addproduct}/>
               <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
               <Route path="/analytics" component={()=><Analytics user={this.state}/>}/>
+              <Route path="/open-orders" component={()=><OpenOrders user={this.state}/>}/>
             </div>
           <Footer/>
           {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}
