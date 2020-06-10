@@ -1,32 +1,19 @@
 var express = require('express');
 var router = express.Router();
 
-const getCart = (userId) =>{
-    let sql="call Cart_getItems("+userId+")";
-    console.log("QUERY".query,sql)
-    db.query(sql,function(err,ans){
-        if(err)
-        {
-            throw console.error("ERROR".error,err);
-        }
-        console.log("RESULT".success,JSON.stringify(ans[0]));
-        return JSON.stringify(ans[0]);
-    });
-};
 
 
 router.route('/')
 .get((req,res,next)=>{
-    var userId =  req.query.userId;
-    let sql="call Cart_getItems("+userId+")";
-    console.log("QUERY".query,sql)
-    db.query(sql,function(err,ans){
-        if(err)
-        {
+    var sql = "CALL Cart_getItems('"+req.query.userId+"');";
+    sql += "select ItemSeller.id,Items.name,pricePerItem,unit,Users.fullname from ItemSeller JOIN Items ON itemId=Items.id JOIN Users on sellerId=Users.id WHERE Users.fullname IN (select fullname from CartView where itemStatus='buying' AND username='"+req.query.userId+"' group by fullname);"
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err){
             throw console.error("ERROR".error,err);
         }
-        console.log("RESULT".success,JSON.stringify(ans[0]));
-        return JSON.stringify(ans[0]);
+        console.log("RESULT".success,JSON.stringify(ans));
+        res.end(JSON.stringify(ans));
     });
 })
 .put((req,res,next)=>{
@@ -66,5 +53,4 @@ router.route('/:itemid')
 
 module.exports = {
     cart: router,
-    cartws: getCart,
 };

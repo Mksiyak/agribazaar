@@ -11,7 +11,7 @@ export const getDropdown = (num,index) => {
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select class="form-control form-control-sm" id={"exampleSelect"+index}>
+        <select className="form-control form-control-sm" id={"exampleSelect"+index}>
             {items}
         </select>
     );
@@ -62,17 +62,17 @@ class ProductDetails extends Component
                 <>
                 <h6>Sellers</h6>
                 {this.state.sellers.map((seller,index)=>
-                    <div class="row sellerlist" style={{fontSize:"12px"}} key={index}>
-                        <div class="col-lg-9 col-lg-9 col-sm-12">
+                    <div className="row sellerlist" style={{fontSize:"12px"}} key={index}>
+                        <div className="col-lg-9 col-lg-9 col-sm-12">
                             {seller.sellerName}
                             <br/>
                             {seller.pricePerItem} {seller.unit}
                         </div>
-                        <div class="col-lg-3 col-md-3 col-sm-12">
-                            <div class="input-group mb-3">
+                        <div className="col-lg-3 col-md-3 col-sm-12">
+                            <div className="input-group mb-3">
                                 {getDropdown(seller.quantity,index)}
-                                <div class="input-group-append">
-                                    <button class="btn btn-success btn-sm" type="button">Add to Cart</button>
+                                <div className="input-group-append">
+                                    <button className="btn btn-success btn-sm" type="button">Add to Cart</button>
                                 </div>
                             </div>
                         </div>
@@ -83,14 +83,14 @@ class ProductDetails extends Component
         }
         const RenderProductDetails= () => {
             return(
-                <div class="card w-100 h-100">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-lg-9 col-sm-12">
+                <div className="card w-100 h-100">
+                    <div className="card-body">
+                        <div className="row">
+                            <div className="col-lg-9 col-sm-12">
                                 <small>{this.state.product.category} Department</small>
                                 <h2>{this.state.product.name}</h2>
                             </div>
-                            <div class="col-lg-3 col-sm-12" style={{textAlign:"right",color:"green"}}>
+                            <div className="col-lg-3 col-sm-12" style={{textAlign:"right",color:"green"}}>
                                 <small>Rs/Kg (Avg)</small>
                                 <h3>{this.state.product.AvgPrice}/-</h3>
                             </div>
@@ -107,14 +107,14 @@ class ProductDetails extends Component
             if(this.state.product.images)
             {
                 return(
-                    <div class="card">
+                    <div className="card">
                         <img className = "card-img-top" src = {this.state.product.images[0]} alt = {this.state.product.name}></img>
                     </div>
                 );
            }
            else{
                return(
-                <div class="card">
+                <div className="card">
                     <img className = "card-img-top" src="/assets/images/rice.jpg" alt = {this.state.product.name}></img>
                 </div>
                );
@@ -122,9 +122,9 @@ class ProductDetails extends Component
         }
         const RenderComments = () =>{
             return(
-                <div class="card w-100 snippets">
-                    <div class="card-body">
-                        <h5 class="card-title">Product Comments</h5>
+                <div className="card w-100 snippets">
+                    <div className="card-body">
+                        <h5 className="card-title">Product Comments</h5>
                         <textarea className="form-control" placeholder="Write a comment!" rows="3"></textarea>
                         <br/>
                         <StarRatings
@@ -141,7 +141,7 @@ class ProductDetails extends Component
                         <hr/>
                         {
                             this.state.comments.map((comment,index)=>
-                                <div class="container-fluid" key={index}>
+                                <div className="container-fluid" key={index}>
                                     
                                     <div className="media-body">
                                         <span className="text-muted pull-right">
@@ -161,7 +161,7 @@ class ProductDetails extends Component
             );
         }
         return(
-            <div class="container">
+            <div className="container">
                 <div className = "desc-wrapper" style={{paddingTop:"70px"}}>
                     <div className = "row item-wrapper">
                         <div className = "col-lg-4 col-sm-12" > 

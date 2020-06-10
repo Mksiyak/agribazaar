@@ -24,7 +24,7 @@ export default class Search extends Component {
     render(){
         return (
             <p style={{paddingTop:"50px"}}>
-            <div class="container">
+            <div className="container">
                 <div className='products'>
                     <Products items={this.state.data}/>
                 </div>
