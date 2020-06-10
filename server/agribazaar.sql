@@ -82,7 +82,7 @@ CREATE TABLE `ItemComments` (
   `userid` int NOT NULL,
   `itemsellerid` int NOT NULL,
   `rating` float DEFAULT NULL,
-  `timestampCreated` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `timestampUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `userid` (`userid`),
   KEY `itemsellerid` (`itemsellerid`),
   CONSTRAINT `ItemComments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
@@ -96,6 +96,7 @@ CREATE TABLE `ItemComments` (
 
 LOCK TABLES `ItemComments` WRITE;
 /*!40000 ALTER TABLE `ItemComments` DISABLE KEYS */;
+INSERT INTO `ItemComments` VALUES ('Haha not bad',2,1,3,'2020-06-10 16:30:18');
 /*!40000 ALTER TABLE `ItemComments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -649,4 +650,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 19:34:40
+-- Dump completed on 2020-06-10 22:00:44
