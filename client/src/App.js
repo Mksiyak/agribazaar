@@ -14,6 +14,7 @@ import Search from './components/search-component';
 import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import Profile from './components/profile-component';
+import Addproduct from './components/add-product-component';
 
 // import OrderHistory from './components/order-history-component';
 
@@ -82,6 +83,7 @@ export default class App extends Component {
             <Route path="/search" component={Search}/>
             <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
             <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+            <Route path="/add-item" component = {Addproduct}/>
             </div>
           <Footer/>
           {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}

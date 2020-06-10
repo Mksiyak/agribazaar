@@ -1,7 +1,23 @@
-var express = require('express')
+var express = require('express');
 var router = express.Router();
-
-
+var multer = require('multer');
+var uuidv4 = require('uuid/v4');
+router.route('/all')
+.get((req,res,next)=>{
+    var sql = `select name,id from Items`;
+    db.query(sql,(err,ans)=>{
+        if(err){
+            res.statusCode = 500;
+            console.log("ERROR".error,err);
+            res.send("error occured");
+        }
+        else
+        {
+            console.log("RESULT".success,JSON.stringify(ans));
+            res.end(JSON.stringify(ans));
+        }
+    })
+});
 router.route('/')
 .get((req,res,next)=>{
     var sql = "call Items_getRandomN("+req.query.count+");";
@@ -19,6 +35,59 @@ router.route('/')
     })
 });
 
+const DIR = '../uploads';
+
+const storage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, DIR);
+    },
+    filename: (req, file, cb) => {
+        const fileName = file.originalname.toLowerCase().split(' ').join('-');
+        cb(null, uuidv4() + '-' + fileName)
+    }
+});
+
+
+ var upload = multer({
+    storage: storage,
+    fileFilter: (req, file, cb) => {
+        if (file.mimetype == "image/png" || file.mimetype == "image/jpg" || file.mimetype == "image/jpeg") {
+            cb(null, true);
+        } else {
+            cb(null, false);
+            return cb(new Error('Only .png, .jpg and .jpeg format allowed!'));
+        }
+    }
+});
+
+
+
+router.route('/')
+.post(upload.single('image'),(req,res,next)=>{
+    console.log("request",req.body,req.file);
+    var post = req.body;
+    var itemId = post.productid;
+    var sellerId = post.sellerId;
+    var pricePerItem = post.price;
+    var unit = post.unit;
+    var quantity = post.quantity;
+    var itemImage = req.file.filename;
+    var tags = post.tags;
+     var sql = `call AddItem(${itemId},${sellerId},${pricePerItem},'${unit}',${quantity},'${itemImage}','${tags}')`;
+     console.log("QUERY".query,sql);
+     db.query(sql,(err,ans)=>{
+         if(err){
+             res.statusCode = 500;
+             console.log("ERROR".error,err)
+             res.end("cann't add product");
+         }
+         else{
+             res.statusCode = 200;
+            console.log("RESULT".success,JSON.stringify(ans));
+            res.end(`product added successfully`);
+         }
+     })
+});
 router.route('/:itemid')
 .get((req,res,next)=>{
     var sql = "select name,description,category,SellerCount,AvgPrice from SearchView where id="+req.params.itemid+";";
