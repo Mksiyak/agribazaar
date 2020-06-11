@@ -105,10 +105,15 @@ class Navbar extends Component{
                 else if(userdetails.role === "farmer"){
                     return(
                         <>
+<<<<<<< HEAD
+                            <li className="nav-item"><Link className="nav-link" to="/additem">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/cart">Analytics</Link></li>
+=======
                             <li className="nav-item"><Link className="nav-link" to="/add-item">Add Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/all">Hosted Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
+>>>>>>> 4b5b9cd0cb9577615da90e5faf131d6438f0752e
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {userdetails.username}
