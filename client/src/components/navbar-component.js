@@ -96,7 +96,7 @@ class Navbar extends Component{
                                     <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link className="dropdown-item" to="/prev">Previous Orders</Link>
                                     <Link className="dropdown-item" to="/order-history">Previous Reviews</Link>
-                                    <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount()}>Logout</Link>
+                                    <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount(undefined,undefined,undefined,undefined,undefined,this.props.history)}>Logout</Link>
                                 </div>
                             </li>
                         </>
@@ -106,6 +106,7 @@ class Navbar extends Component{
                     return(
                         <>
                             <li className="nav-item"><Link className="nav-link" to="/add-item">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/all">Hosted Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
                             <li className="nav-item dropdown">
