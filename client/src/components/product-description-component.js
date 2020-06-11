@@ -4,14 +4,20 @@ import '../shared/stylesheets/product-description-style.css'
 import StarRatings from 'react-star-ratings';
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
+import TimeAgo from 'javascript-time-ago';
+import en from 'javascript-time-ago/locale/en';
 
-export const getDropdown = (num,index) => {
-    let items = [];         
+TimeAgo.addLocale(en);
+const timeAgo = new TimeAgo('en-US');
+
+export const getDropdown = (num,index,fun,id) => {
+    let items = [];
+    items.push(<option key={0} value="0">--</option>)      
     for (let i = 1; i <= num; i++) {             
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm" id={"exampleSelect"+index}>
+        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange = {(ev) => {fun(ev.target.value,id)}}>
             {items}
         </select>
     );
@@ -55,8 +61,6 @@ class ProductDetails extends Component
     }
     render()
     {
-
-
         const getProductSellers = () => {
             return(
                 <>
@@ -145,7 +149,7 @@ class ProductDetails extends Component
                                     
                                     <div className="media-body">
                                         <span className="text-muted pull-right">
-                                            <small className="text-muted">30 min ago</small>
+                                            <small className="text-muted">{comment.timestampUpdated}</small>
                                         </span>
                                         <strong className="text-secondary">@{comment.buyerusername}</strong>
                                         <p>

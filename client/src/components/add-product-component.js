@@ -1,15 +1,13 @@
-import React, { Component, useEffect } from "react";
+import React, { useEffect } from "react";
 import { listProducts } from "../actions.js/productActions";
 import { useDispatch , useSelector } from 'react-redux';
 import { useState } from "react";
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
 import { createNotification } from "../App";
-import { Redirect, withRouter } from "react-router-dom";
 
-const Addproduct = (props)=> {
+const Addproduct = ()=> {
     const productlist = useSelector(state => state.productList).products;
-    const { products, loading, error } = productlist;
     const dispatch = useDispatch();
     const [productid, setproductid] = useState('');
     const [price, setprice] = useState('');
@@ -19,7 +17,7 @@ const Addproduct = (props)=> {
     const [quantity, setquantity] = useState('')
     useEffect(() => {
         dispatch(listProducts());
-    }, []);
+    },[]);
     useEffect(()=>{ 
         console.log(image);    
     },[image]
@@ -49,7 +47,7 @@ const Addproduct = (props)=> {
         };
         Axios.post(serverUrl+"item",formData,config).then(res => {
                     console.log(res);
-                    if(res.status/100==2)
+                    if(res.status/100===2)
                     {
                         createNotification("success",`Product added successfully`);
                     }
@@ -70,10 +68,9 @@ const Addproduct = (props)=> {
                     <div className="form-group">
                     <label>Product</label>
                     <br/>
-                    <select style={{width:'100%'}} onChange={(e) => setproductid(e.target.value)} value={productid}>
+                    <select class="form-control" style={{width:'100%'}} onChange={(e) => setproductid(e.target.value)} value={productid}>
                         <option value = "">select</option>
                         {
-                            console.log(loading),
                             productlist.map((product)=>
                                 <option value = { product.id }>{ product.name }</option>
                             )
@@ -83,13 +80,13 @@ const Addproduct = (props)=> {
 
                     <div className="form-group">
                     <label>Price</label>
-                    <input required onChange={(e) => setprice(e.target.value)} value={price} type="text" className="form-control"  />
+                    <input class="form-control" required onChange={(e) => setprice(e.target.value)} value={price} type="text" className="form-control"  />
                     </div>
 
                     <div className="form-group">
                     <label>Price Unit</label>
                     <br/>
-                    <select style={{width:'100%'}} onChange={(e) => setunit(e.target.value)} value={unit}>
+                    <select  class="form-control" style={{width:'100%'}} onChange={(e) => setunit(e.target.value)} value={unit}>
                         <option>select</option>
                         <option value = 'rupee/kg'>rupee/kg</option>
                         <option value = 'rupee/lit'>rupee/litere</option>
@@ -98,7 +95,7 @@ const Addproduct = (props)=> {
 
                     <div className="form-group" onChange={(e) => setquantity(e.target.value)} value={quantity}>
                     <label>Quantity</label>
-                    <input required type="text" className="form-control"  />
+                    <input class="form-control" required type="text" className="form-control"  />
                     </div>
 
                     <div className="form-group"onChange={(e) => {setimage(e.target.files[0])}} value={image} >

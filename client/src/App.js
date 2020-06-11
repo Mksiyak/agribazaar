@@ -15,7 +15,9 @@ import {NotificationContainer, NotificationManager} from 'react-notifications';
 import 'react-notifications/lib/notifications.css';
 import Profile from './components/profile-component';
 import Addproduct from './components/add-product-component';
-
+import OrderHistory from './components/order-history-component';
+import Analytics from './components/analytics-component';
+import OpenOrders from './components/orders-component';
 // import OrderHistory from './components/order-history-component';
 
 export const createNotification = (type,title,body,delay) => {
@@ -39,6 +41,9 @@ export const createNotification = (type,title,body,delay) => {
         console.log(title,body)
       });
       break;
+    default :
+      NotificationManager.warning('invalid notification type',body, delay);
+      break;
   }
 }
 export default class App extends Component {
@@ -54,7 +59,7 @@ export default class App extends Component {
     this.handleAccount=this.handleAccount.bind(this);
   }
   handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
-    if(!user_email && user_email!=this.state.email)
+    if(!user_email && user_email!==this.state.email)
     {
       createNotification(`success`,`Successful Logout!`,`Sorry to see you go!`);
     }
@@ -85,13 +90,16 @@ export default class App extends Component {
       const DefaultContainer = ({location}) =>(
         <>
           <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
-            <div style={{marginTop:"40px"}}>
-            <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
-            <Route exact path="/product/:id" component={Product}/>
-            <Route path="/search" component={Search}/>
-            <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
-            <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
-            <Route path="/add-item" component = {Addproduct}/>
+            <div id="content-wrap" style={{marginTop:"40px"}}>
+              <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
+              <Route exact path="/product/:id" component={Product}/>
+              <Route path="/search" component={Search}/>
+              <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
+              <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
+              <Route path="/add-item" component = {Addproduct}/>
+              <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
+              <Route path="/analytics" component={()=><Analytics user={this.state}/>}/>
+              <Route path="/open-orders" component={()=><OpenOrders user={this.state}/>}/>
             </div>
           <Footer/>
           {/* <Route path="/order-history" component={()=><OrderHistory user={this.state}/>}/> */}
@@ -100,18 +108,17 @@ export default class App extends Component {
       return (
 
             <div className="App">
-              <div className = 'nofooter'>
+              <div id="page-container">
                 <BrowserRouter>
                   <Switch>
-                    <Route exact path="/sign-in" component={() => <Login handleAccount={this.handleAccount}/>} />
-                    <Route exact path="/sign-up" component={() => <SignUp handleAccount={this.handleAccount}/>} />
+                    <Route exact path="/sign-in" component={() => <Login user={this.state} handleAccount={this.handleAccount}/>} />
+                    <Route exact path="/sign-up" component={() => <SignUp user={this.state} handleAccount={this.handleAccount}/>} />
                     <Route component={DefaultContainer}/>
                   </Switch>
                 </BrowserRouter>
                 <NotificationContainer/>
               </div>
             </div>
-
     );
   }
 }

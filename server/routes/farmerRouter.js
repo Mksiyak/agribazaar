@@ -1,18 +1,21 @@
 var express = require('express');
 var router = express.Router();
 
-router.route('/:farmerId/last-sales')
+router.route('/analytics')
 .get((req,res,next)=>{
-    var sql="CALL Seller_getLastSales("+req.session.userId+");"
+    var sql="select itemsellerid,review,Users.username,Users.email,rating,timestampUpdated,Items.name from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id JOIN Users on Users.id=userid JOIN Items on Items.id=itemId WHERE itemsellerid="+req.query.userid+";"
+    sql+="select SUM(BuyerQty) AS 'buy_ct',SUM(BuyerQty*pricePerItem) AS 'buy_amt' from CartView JOIN Users ON CartView.fullname=CONCAT(Users.first_name,' ',Users.last_name) WHERE Users.id="+req.query.userid+" AND itemStatus='buying';"
+    sql+="select SUM(BuyerQty) AS 'bought_ct',SUM(BuyerQty*pricePerItem) AS 'bought_amt' from CartView JOIN Users ON CartView.fullname=CONCAT(Users.first_name,' ',Users.last_name) WHERE Users.id="+req.query.userid+" AND itemStatus='bought';";
+    sql+="select AVG(rating) as avgr from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id JOIN Users on Users.id=userid JOIN Items on Items.id=itemId WHERE itemsellerid="+req.query.userid+";";
+    sql+="select count(id) as hosted_ct from ItemSeller where sellerId="+req.query.userid+";";
     console.log("QUERY".query,sql);
     db.query(sql,function(err,results){
         if(err)
         {
             throw console.error("ERROR".error,err);
         }
-        var sales=JSON.parse(JSON.stringify(results[0]))
-        console.log("RESULT".success,sales);
-        res.end(sales);
+        console.log("RESULT".success,JSON.stringify(results));
+        res.end(JSON.stringify(results));
     });
 });
 
@@ -31,4 +34,18 @@ router.route('/:farmerId/add')
     }
 });
 
+router.route('/open')
+.get((req,res,next)=>{
+    var sql="SELECT CartView.itemStatus,itemid,Buyer.username,name,category,BuyerQty,pricePerItem,unit,CONCAT(Buyer.house_no,', ',Buyer.street,', ',Buyer.city,', ',Buyer.state,', ',Buyer.state,', ',Buyer.country,', ',Buyer.pin_code) AS 'address' FROM CartView JOIN Users as Buyer ON Buyer.username=CartView.username JOIN Users as Sellers ON CONCAT(Sellers.first_name,' ',Sellers.last_name)=CartView.fullname WHERE Sellers.id="+req.query.userid+" AND CartView.itemStatus='bought';";
+    console.log("QUERY".query,sql);
+    db.query(sql,function(err,results){
+        if(err)
+        {
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(results));
+        res.end(JSON.stringify(results));
+    });
+
+})
 module.exports = router

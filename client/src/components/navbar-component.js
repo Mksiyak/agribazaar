@@ -94,7 +94,7 @@ class Navbar extends Component{
                                 </Link>
                                 <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
                                     <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" to="/order-history">Previous Orders</Link>
+                                    <Link className="dropdown-item" to="/prev">Previous Orders</Link>
                                     <Link className="dropdown-item" to="/order-history">Previous Reviews</Link>
                                     <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount()}>Logout</Link>
                                 </div>
@@ -105,8 +105,14 @@ class Navbar extends Component{
                 else if(userdetails.role === "farmer"){
                     return(
                         <>
+<<<<<<< HEAD
                             <li className="nav-item"><Link className="nav-link" to="/additem">Add Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/cart">Analytics</Link></li>
+=======
+                            <li className="nav-item"><Link className="nav-link" to="/add-item">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
+>>>>>>> 4b5b9cd0cb9577615da90e5faf131d6438f0752e
                             <li className="nav-item dropdown">
                                 <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     {userdetails.username}

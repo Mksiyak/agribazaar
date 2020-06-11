@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import Axios from "axios"; 
 import { serverUrl } from "../shared/baseUrl";
+import { createNotification } from "../App";
 
 export default class Profile extends Component{
     constructor(props){
@@ -12,7 +13,13 @@ export default class Profile extends Component{
             role: '',
             address: '',
             password: '',
-            hasChanged: false
+            hasChanged: false,
+            pin_code: '000',
+            house_no: '',
+            street: '',
+            city: '',
+            state: '',
+            country: ''
         }
         this.handleChangeField=this.handleChangeField.bind(this);
         this.handleSubmit = this.handleSubmit.bind(this);
@@ -22,10 +29,16 @@ export default class Profile extends Component{
         .then(res=>{
             this.setState({
                 username: res.data[0]["username"],
-                fullname: res.data[0]["fullname"],
+                firstname: res.data[0]["first_name"],
+                lastname: res.data[0]["last_name"],
                 email: res.data[0]["email"],
                 role: res.data[0]["role"],
-                address: res.data[0]["address"],
+                pin_code: res.data[0]["pin_code"],
+                house_no: res.data[0]["house_no"],
+                street: res.data[0]["street"],
+                city: res.data[0]["city"],
+                state: res.data[0]["state"],
+                country: res.data[0]["country"]
             });
         })
         .catch(err=>{
@@ -40,6 +53,20 @@ export default class Profile extends Component{
         document.getElementById("button-submit").classList.remove('btn-primary');
         document.getElementById("button-submit").classList.add('btn-success');
         document.getElementById("button-submit").innerHTML="Save";
+    }
+    deleteAcc(event){
+        event.preventDefault();
+        alert(event.target.id);
+        let userId=event.target.id.split('##')[1];
+        Axios.delete(`${serverUrl}users/${event.target.id.split('##')[1]}`,{
+            userId
+        }).then(res=>{
+            this.handleSubmit();
+            createNotification(`danger`,"Sorry to see you go!")
+        })
+        .catch(err=>{
+            console.log("Error",err)
+        })
     }
     handleSubmit(event){
         event.preventDefault();
@@ -78,9 +105,9 @@ export default class Profile extends Component{
                         </div>
                     </div>
                     <div className="form-group row">
-                        <label for="ag_fullname" className="col-sm-2 col-form-label">Full Name</label>
+                        <label for="ag_fullname" className="col-sm-2 col-form-label">First Name</label>
                         <div className="col-sm-10">
-                        <input type="text" className="form-control" id="ag_fullname" value={this.state.fullname} onChange={(ev) => this.handleChangeField('fullname', ev)}/>
+                        <input type="text" className="form-control" id="ag_fullname" value={this.state.firstname} onChange={(ev) => this.handleChangeField('fullname', ev)}/>
                         </div>
                     </div>
                     <div className="form-group row">
@@ -95,12 +122,46 @@ export default class Profile extends Component{
                         <input type="text" className="form-control-plaintext" id="ag_role" value={this.state.role.toUpperCase()}/>
                         </div>
                     </div>
+                    <hr/>
+                    <h6>Address</h6>
                     <div className="form-group row">
-                        <label for="staticEmail" className="col-sm-2 col-form-label">Address</label>
+                        <label for="staticEmail" className="col-sm-2 col-form-label">Pin Code</label>
                         <div className="col-sm-10">
-                        <input type="text" className="form-control" id="staticEmail" value={this.state.address} onChange={(ev) => this.handleChangeField('address', ev)}/>
+                        <input type="number" className="form-control" id="staticEmail" value={this.state.pin_code} onChange={(ev) => this.handleChangeField('pin_code', ev)}/>
                         </div>
                     </div>
+                    <div className="form-group row">
+                        <label for="staticEmail" className="col-sm-2 col-form-label">House No.</label>
+                        <div className="col-sm-10">
+                        <input type="text" className="form-control" id="staticEmail" value={this.state.house_no} onChange={(ev) => this.handleChangeField('house_no', ev)}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="staticEmail" className="col-sm-2 col-form-label">Street</label>
+                        <div className="col-sm-10">
+                        <input type="text" className="form-control" id="staticEmail" value={this.state.street} onChange={(ev) => this.handleChangeField('street', ev)}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="staticEmail" className="col-sm-2 col-form-label">City</label>
+                        <div className="col-sm-10">
+                        <input type="text" className="form-control" id="staticEmail" value={this.state.city} onChange={(ev) => this.handleChangeField('city', ev)}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="staticEmail" className="col-sm-2 col-form-label">Pin Code</label>
+                        <div className="col-sm-10">
+                        <input type="text" className="form-control" id="staticEmail" value={this.state.state} onChange={(ev) => this.handleChangeField('state', ev)}/>
+                        </div>
+                    </div>
+                    <div className="form-group row">
+                        <label for="staticEmail" className="col-sm-2 col-form-label">Country</label>
+                        <div className="col-sm-10">
+                        <input type="text" className="form-control" id="staticEmail" value={this.state.country} onChange={(ev) => this.handleChangeField('country', ev)}/>
+                        </div>
+                    </div>
+                    <hr/>
+                    <h5>Password Settings</h5>
                     <div className="form-group row">
                         <label for="staticEmail" className="col-sm-2 col-form-label">Password</label>
                         <div className="col-sm-10">
@@ -108,6 +169,7 @@ export default class Profile extends Component{
                         </div>
                     </div>
                     <button type="submit" id="button-submit" className="btn btn-primary" style={{marginTop:"1.5em"}} onClick={this.handleSubmit}>Submit</button>
+                    <button className="btn btn-danger" id={`deleteAccount##${this.props.user.id}`} onClick={this.deleteAcc} style={{marginTop:"1.5em"}}><i className="fa fa-trash"></i>&nbsp;&nbsp;Delete Account</button>
                     </form>
                 </div>
 

@@ -34,7 +34,7 @@ CREATE TABLE `Cart` (
   KEY `itemSellerId` (`itemSellerId`),
   CONSTRAINT `Cart_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
   CONSTRAINT `Cart_ibfk_2` FOREIGN KEY (`itemSellerId`) REFERENCES `ItemSeller` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=19 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -43,7 +43,7 @@ CREATE TABLE `Cart` (
 
 LOCK TABLES `Cart` WRITE;
 /*!40000 ALTER TABLE `Cart` DISABLE KEYS */;
-INSERT INTO `Cart` VALUES (11,1,10,'buying',1,1),(12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,'buying',5,4),(15,13,20,'bought',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7);
+INSERT INTO `Cart` VALUES (12,1,5,'buying',2,2),(13,1,20,'bought',4,1),(14,1,20,'bought',5,4),(15,13,20,'buying',6,5),(11,14,20,'bought',7,6),(12,2,20,'buying',8,7),(11,13,10,'bought',9,1),(11,1,12,'bought',11,1),(11,1,6,'bought',12,1);
 /*!40000 ALTER TABLE `Cart` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -57,11 +57,14 @@ SET @saved_cs_client     = @@character_set_client;
 /*!50503 SET character_set_client = utf8mb4 */;
 /*!50001 CREATE VIEW `CartView` AS SELECT 
  1 AS `id`,
+ 1 AS `itemid`,
  1 AS `username`,
  1 AS `name`,
  1 AS `description`,
  1 AS `category`,
- 1 AS `quantity`,
+ 1 AS `BuyerQty`,
+ 1 AS `SellerQty`,
+ 1 AS `itemImage`,
  1 AS `itemStatus`,
  1 AS `pricePerItem`,
  1 AS `unit`,
@@ -80,6 +83,7 @@ CREATE TABLE `ItemComments` (
   `userid` int NOT NULL,
   `itemsellerid` int NOT NULL,
   `rating` float DEFAULT NULL,
+  `timestampUpdated` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   KEY `userid` (`userid`),
   KEY `itemsellerid` (`itemsellerid`),
   CONSTRAINT `ItemComments_ibfk_1` FOREIGN KEY (`userid`) REFERENCES `Users` (`id`),
@@ -93,6 +97,7 @@ CREATE TABLE `ItemComments` (
 
 LOCK TABLES `ItemComments` WRITE;
 /*!40000 ALTER TABLE `ItemComments` DISABLE KEYS */;
+INSERT INTO `ItemComments` VALUES ('Haha not bad',2,1,3,'2020-06-10 16:30:18');
 /*!40000 ALTER TABLE `ItemComments` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -117,7 +122,7 @@ CREATE TABLE `ItemSeller` (
   KEY `itemId` (`itemId`),
   CONSTRAINT `ItemSeller_ibfk_1` FOREIGN KEY (`sellerId`) REFERENCES `Users` (`id`),
   CONSTRAINT `ItemSeller_ibfk_2` FOREIGN KEY (`itemId`) REFERENCES `Items` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -126,42 +131,7 @@ CREATE TABLE `ItemSeller` (
 
 LOCK TABLES `ItemSeller` WRITE;
 /*!40000 ALTER TABLE `ItemSeller` DISABLE KEYS */;
-INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (2,1,4.00,'Rupees/Kg',52,2,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,1,6.00,'Rupees/Kg',65,3,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (4,1,2.00,'Rupees/Kg',55,4,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (5,1,9.00,'Rupees/Kg',5,5,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (5,2,6.00,'Rupees/Kg',55,6,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (6,2,3.00,'Rupees/Kg',8,7,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (7,2,6.00,'Rupees/Kg',55,8,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,2,3.00,'Rupees/Kg',89,9,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (1,3,5.00,'Rupees/Kg',8,11,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (2,4,4.00,'Rupees/Kg',52,12,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,3,6.00,'Rupees/Kg',65,13,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (4,5,2.00,'Rupees/Kg',55,14,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,5,9.00,'Rupees/Kg',5,15,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,5,6.00,'Rupees/Kg',55,16,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (6,7,3.00,'Rupees/Kg',8,17,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (7,8,6.00,'Rupees/Kg',55,18,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,6,3.00,'Rupees/Kg',89,19,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (1,6,5.00,'Rupees/Kg',8,21,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (2,7,4.00,'Rupees/Kg',52,22,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,8,6.00,'Rupees/Kg',65,23,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (4,3,2.00,'Rupees/Kg',55,24,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (5,4,9.00,'Rupees/Kg',5,25,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (5,7,6.00,'Rupees/Kg',55,26,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (6,8,3.00,'Rupees/Kg',8,27,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (7,6,6.00,'Rupees/Kg',55,28,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,1,3.00,'Rupees/Kg',89,29,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (1,11,52.00,'Rupees/Kg',8,31,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (2,12,45.00,'Rupees/Kg',52,32,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,13,64.00,'Rupees/Kg',65,33,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (4,14,25.00,'Rupees/Kg',55,34,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,15,95.00,'Rupees/Kg',5,35,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (3,11,65.00,'Rupees/Kg',55,36,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (6,13,38.00,'Rupees/Kg',8,37,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (7,14,68.00,'Rupees/Kg',55,38,NULL,NULL);
-INSERT INTO `ItemSeller` VALUES (8,15,39.00,'Rupees/Kg',89,39,NULL,NULL);
+INSERT INTO `ItemSeller` VALUES (1,1,5.00,'Rupees/Kg',8,1,NULL,NULL),(2,1,4.00,'Rupees/Kg',52,2,NULL,NULL),(3,1,6.00,'Rupees/Kg',65,3,NULL,NULL),(4,1,2.00,'Rupees/Kg',55,4,NULL,NULL),(5,1,9.00,'Rupees/Kg',5,5,NULL,NULL),(5,2,6.00,'Rupees/Kg',55,6,NULL,NULL),(6,2,3.00,'Rupees/Kg',8,7,NULL,NULL),(7,2,6.00,'Rupees/Kg',55,8,NULL,NULL),(8,2,3.00,'Rupees/Kg',89,9,NULL,NULL),(1,3,5.00,'Rupees/Kg',8,11,NULL,NULL),(2,4,4.00,'Rupees/Kg',52,12,NULL,NULL),(3,3,6.00,'Rupees/Kg',65,13,NULL,NULL),(4,5,2.00,'Rupees/Kg',55,14,NULL,NULL),(8,5,9.00,'Rupees/Kg',5,15,NULL,NULL),(3,5,6.00,'Rupees/Kg',55,16,NULL,NULL),(6,7,3.00,'Rupees/Kg',8,17,NULL,NULL),(7,8,6.00,'Rupees/Kg',55,18,NULL,NULL),(8,6,3.00,'Rupees/Kg',89,19,NULL,NULL),(1,6,5.00,'Rupees/Kg',8,21,NULL,NULL),(2,7,4.00,'Rupees/Kg',52,22,NULL,NULL),(3,8,6.00,'Rupees/Kg',65,23,NULL,NULL),(4,3,2.00,'Rupees/Kg',55,24,NULL,NULL),(5,4,9.00,'Rupees/Kg',5,25,NULL,NULL),(5,7,6.00,'Rupees/Kg',55,26,NULL,NULL),(6,8,3.00,'Rupees/Kg',8,27,NULL,NULL),(7,6,6.00,'Rupees/Kg',55,28,NULL,NULL),(8,1,3.00,'Rupees/Kg',89,29,NULL,NULL),(1,11,52.00,'Rupees/Kg',8,31,NULL,NULL),(2,12,45.00,'Rupees/Kg',52,32,NULL,NULL),(3,13,64.00,'Rupees/Kg',65,33,NULL,NULL),(4,14,25.00,'Rupees/Kg',55,34,NULL,NULL),(8,15,95.00,'Rupees/Kg',5,35,NULL,NULL),(3,11,65.00,'Rupees/Kg',55,36,NULL,NULL),(6,13,38.00,'Rupees/Kg',8,37,NULL,NULL),(7,14,68.00,'Rupees/Kg',55,38,NULL,NULL),(8,15,39.00,'Rupees/Kg',89,39,NULL,NULL);
 /*!40000 ALTER TABLE `ItemSeller` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -178,8 +148,9 @@ CREATE TABLE `Items` (
   `id` int NOT NULL AUTO_INCREMENT,
   `category` varchar(20) NOT NULL,
   `tags` text,
+  `image` text,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -188,19 +159,7 @@ CREATE TABLE `Items` (
 
 LOCK TABLES `Items` WRITE;
 /*!40000 ALTER TABLE `Items` DISABLE KEYS */;
-INSERT INTO `Items` VALUES ('Rice','Basmati Rice',1,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Wheat','Whole Grain',2,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Barley','Nutritious',3,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Oat','Morning Breakfast',4,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Millet','Pearl Millet',5,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Jawar','Sorghum',6,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Bajra','Staple',7,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Maize','Sweet Corn',8,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Moong','Green & Yellow',11,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Masoor','High Nutrition',12,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Urad','Unpolished',13,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Channa','Large to Small',14,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Rajma','Red Kidney Beans',15,'Lentils',NULL);
+INSERT INTO `Items` VALUES ('Rice','Basmati Rice',1,'Cereals',NULL,NULL),('Wheat','Whole Grain',2,'Cereals',NULL,NULL),('Barley','Nutritious',3,'Cereals',NULL,NULL),('Oat','Morning Breakfast',4,'Cereals',NULL,NULL),('Millet','Pearl Millet',5,'Cereals',NULL,NULL),('Jawar','Sorghum',6,'Cereals',NULL,NULL),('Bajra','Staple',7,'Cereals',NULL,NULL),('Maize','Sweet Corn',8,'Cereals',NULL,NULL),('Moong','Green Moong Dal',11,'Lentils',NULL,NULL),('Moong','Yellow Moong Dal',12,'Lenntilss',NULL,NULL),('Urad','Unpolished',13,'Lentils',NULL,NULL),('Channa','Large to Small',14,'Lentils',NULL,NULL),('Rajma','Red Kidney Beans',15,'Cereals',NULL,NULL);
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -270,19 +229,7 @@ CREATE TABLE `Users` (
 
 LOCK TABLES `Users` WRITE;
 /*!40000 ALTER TABLE `Users` DISABLE KEYS */;
-INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer','Nirmal','Khedkar',568916,24,'Civil Lines','Nashik','Maharashtra','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (2,'manoj','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','manoj@agribazaar.com','farmer','Manoj','Singh',156995,45,'Civil Lines','Jaipur','Rajasthan','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (3,'bhupesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','bhupesh@agribazaar.com','farmer','Bhupesh','Sahu',486182,59,'Civil Lines','Raipur','Chhattisgarh','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (4,'kiran','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','kiran@agribazaar.com','farmer','Kiran','Ghosh',648156,69,'Civil Lines','Kolkata','West Bengal','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (5,'surya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','surya@agribazaar.com','farmer','Surya','Rao',464935,98,'Civil Lines','Guntur','Andhra Pradesh','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (6,'geet','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','geet@agribazaar.com','farmer','Geet','Patel',481682,96,'Civil Lines','Surat','Gujarat','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (7,'soumya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','soumya@agribazaar.com','farmer','Soumya','Patil',234649,23,'Civil Lines','Belgavi','Karnataka','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (8,'vishesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','visheshl@agribazaar.com','farmer','Vishessh','Kumar',568465,65,'Civil Lines','Gaya','Bihar','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (11,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper','Mukesh','Siyak',456813,51,'Civil Lines','Ambala','Haryana','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (12,'prateek','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','prateek@agribazaar.com','shopper','Prateek','Sinha',654565,16,'Civil Lines','Ujjain','Madhya Pradesh','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (13,'jayesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','jayesh@agribazaar.com','shopper','Jayesh','Rawat',125242,91,'Civil Lines','Nainital','Uttrakhand','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (14,'biswa','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','biswa@agribazaar.com','shopper','Biswa','Sharma',754625,64,'Civil Lines','Dispur','Assam','India','2020-06-08 22:16:30');
-INSERT INTO `Users` VALUES (15,'karthik','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','karthik@agribazaar.com','shopper','Karthik','Ramakant',146427,50,'Civil Lines','Madurai','Tamil Nadu','India','2020-06-08 22:16:30');
+INSERT INTO `Users` VALUES (1,'nirmal','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','nirmal@agribazaar.com','farmer','Nirmal','Khedkar',568916,24,'Civil Lines','Nashik','Maharashtra','India','2020-06-08 22:16:30'),(2,'manoj','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','manoj@agribazaar.com','farmer','Manoj','Singh',156995,45,'Civil Lines','Jaipur','Rajasthan','India','2020-06-08 22:16:30'),(3,'bhupesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','bhupesh@agribazaar.com','farmer','Bhupesh','Sahu',486182,59,'Civil Lines','Raipur','Chhattisgarh','India','2020-06-08 22:16:30'),(4,'kiran','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','kiran@agribazaar.com','farmer','Kiran','Ghosh',648156,69,'Civil Lines','Kolkata','West Bengal','India','2020-06-08 22:16:30'),(5,'surya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','surya@agribazaar.com','farmer','Surya','Rao',464935,98,'Civil Lines','Guntur','Andhra Pradesh','India','2020-06-08 22:16:30'),(6,'geet','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','geet@agribazaar.com','farmer','Geet','Patel',481682,96,'Civil Lines','Surat','Gujarat','India','2020-06-08 22:16:30'),(7,'soumya','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','soumya@agribazaar.com','farmer','Soumya','Patil',234649,23,'Civil Lines','Belgavi','Karnataka','India','2020-06-08 22:16:30'),(8,'vishesh','8017d27151912033277faad0effc8662e0686b3602989ca7c382e77d0f7a8095','visheshl@agribazaar.com','farmer','Vishessh','Kumar',568465,65,'Civil Lines','Gaya','Bihar','India','2020-06-08 22:16:30'),(11,'mukesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','mukesh@agribazaar.com','shopper','Mukesh','Siyak',456813,51,'Civil Lines','Ambala','Haryana','India','2020-06-08 22:16:30'),(12,'prateek','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','prateek@agribazaar.com','shopper','Prateek','Sinha',654565,16,'Civil Lines','Ujjain','Madhya Pradesh','India','2020-06-08 22:16:30'),(13,'jayesh','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','jayesh@agribazaar.com','shopper','Jayesh','Rawat',125242,91,'Civil Lines','Nainital','Uttrakhand','India','2020-06-08 22:16:30'),(14,'biswa','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','biswa@agribazaar.com','shopper','Biswa','Sharma',754625,64,'Civil Lines','Dispur','Assam','India','2020-06-08 22:16:30'),(15,'karthik','648461bf64b0639d7944cd41b49df473405921f3d69f79ffcb4d5066794996e4','karthik@agribazaar.com','shopper','Karthik','Ramakant',146427,50,'Civil Lines','Madurai','Tamil Nadu','India','2020-06-08 22:16:30');
 /*!40000 ALTER TABLE `Users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!50003 SET @saved_cs_client      = @@character_set_client */ ;
@@ -339,6 +286,25 @@ DELIMITER ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `cart_AddItems`(in user_userid int,in item_itemno int,in item_quantity int,in item_price int,in item_itemSellerId int)
 begin insert into Cart(userid,itemno,quantity,itemStatus,price,itemSellerId) values(user_userid,item_itemno,item_quantity,"buying",item_price,item_itemSellerId); end ;;
+DELIMITER ;
+/*!50003 SET sql_mode              = @saved_sql_mode */ ;
+/*!50003 SET character_set_client  = @saved_cs_client */ ;
+/*!50003 SET character_set_results = @saved_cs_results */ ;
+/*!50003 SET collation_connection  = @saved_col_connection */ ;
+/*!50003 DROP PROCEDURE IF EXISTS `cart_BuyItems` */;
+/*!50003 SET @saved_cs_client      = @@character_set_client */ ;
+/*!50003 SET @saved_cs_results     = @@character_set_results */ ;
+/*!50003 SET @saved_col_connection = @@collation_connection */ ;
+/*!50003 SET character_set_client  = utf8mb4 */ ;
+/*!50003 SET character_set_results = utf8mb4 */ ;
+/*!50003 SET collation_connection  = utf8mb4_0900_ai_ci */ ;
+/*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
+/*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
+DELIMITER ;;
+CREATE DEFINER=`root`@`localhost` PROCEDURE `cart_BuyItems`(in user_id int)
+begin
+UPDATE Cart SET itemStatus="bought" WHERE userid=user_id;
+end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -429,7 +395,7 @@ DELIMITER ;
 /*!50003 SET sql_mode              = 'ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
 CREATE DEFINER=`root`@`localhost` PROCEDURE `Item_getComments`(in item_id int)
-begin select review,rating,Buyer.username as "buyerusername",CONCAT(Seller.first_name," ",Seller.last_name) as "sellerfullname",itemid from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id JOIN Users as Buyer ON ItemComments.userid=Buyer.id JOIN Users as Seller ON ItemSeller.sellerid=Seller.id WHERE itemid=item_id ORDER BY rating DESC; end ;;
+begin select review,rating,Buyer.username as "buyerusername",timestampUpdated,CONCAT(Seller.first_name," ",Seller.last_name) as "sellerfullname",itemid from ItemComments JOIN ItemSeller ON itemsellerid=ItemSeller.id JOIN Users as Buyer ON ItemComments.userid=Buyer.id JOIN Users as Seller ON ItemSeller.sellerid=Seller.id WHERE itemid=item_id ORDER BY rating DESC; end ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
 /*!50003 SET character_set_client  = @saved_cs_client */ ;
@@ -655,7 +621,7 @@ DELIMITER ;
 /*!50001 SET collation_connection      = utf8mb4_0900_ai_ci */;
 /*!50001 CREATE ALGORITHM=UNDEFINED */
 /*!50013 DEFINER=`root`@`localhost` SQL SECURITY DEFINER */
-/*!50001 VIEW `CartView` AS select `Cart`.`id` AS `id`,`Shopper`.`username` AS `username`,`Items`.`name` AS `name`,`Items`.`description` AS `description`,`Items`.`category` AS `category`,`Cart`.`quantity` AS `quantity`,`Cart`.`itemStatus` AS `itemStatus`,`ItemSeller`.`pricePerItem` AS `pricePerItem`,`ItemSeller`.`unit` AS `unit`,concat(`Seller`.`first_name`,' ',`Seller`.`last_name`) AS `fullname` from ((((`Cart` join `Users` `Shopper` on((`Shopper`.`id` = `Cart`.`userid`))) join `Users` `Seller` on((`Seller`.`id` = `Cart`.`itemSellerId`))) join `Items` on((`Cart`.`itemno` = `Items`.`id`))) join `ItemSeller` on(((`ItemSeller`.`sellerId` = `Cart`.`itemSellerId`) and (`ItemSeller`.`itemId` = `Cart`.`itemno`)))) order by `Cart`.`id` */;
+/*!50001 VIEW `CartView` AS select `Cart`.`id` AS `id`,`Items`.`id` AS `itemid`,`Shopper`.`username` AS `username`,`Items`.`name` AS `name`,`Items`.`description` AS `description`,`Items`.`category` AS `category`,`Cart`.`quantity` AS `BuyerQty`,`ItemSeller`.`quantity` AS `SellerQty`,`ItemSeller`.`itemImage` AS `itemImage`,`Cart`.`itemStatus` AS `itemStatus`,`ItemSeller`.`pricePerItem` AS `pricePerItem`,`ItemSeller`.`unit` AS `unit`,concat(`Seller`.`first_name`,' ',`Seller`.`last_name`) AS `fullname` from ((((`Cart` join `Users` `Shopper` on((`Shopper`.`id` = `Cart`.`userid`))) join `Users` `Seller` on((`Seller`.`id` = `Cart`.`itemSellerId`))) join `Items` on((`Cart`.`itemno` = `Items`.`id`))) join `ItemSeller` on(((`ItemSeller`.`sellerId` = `Cart`.`itemSellerId`) and (`ItemSeller`.`itemId` = `Cart`.`itemno`)))) order by `Cart`.`id` */;
 /*!50001 SET character_set_client      = @saved_cs_client */;
 /*!50001 SET character_set_results     = @saved_cs_results */;
 /*!50001 SET collation_connection      = @saved_col_connection */;
@@ -705,4 +671,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-06-10 13:12:17
+-- Dump completed on 2020-06-11  2:09:36

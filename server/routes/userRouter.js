@@ -40,7 +40,7 @@ router.route('/:userid')
     })
 })
 .delete((req,res,next)=>{
-    var sql="CALL Users_deleteUsers("+req.params.user_name+");";
+    var sql="DELETE FROM Users WHERE Users.id="+req.params.userid+";";
     console.log("QUERY",sql);
     db.query(sql,(err,ans)=>{
         if(err){

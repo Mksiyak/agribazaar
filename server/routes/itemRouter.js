@@ -35,7 +35,7 @@ router.route('/')
     })
 });
 
-const DIR = '../uploads';
+const DIR = '../client/public/assets/uploads';
 
 const storage = multer.diskStorage({
     destination: (req, file, cb) => {
@@ -122,5 +122,16 @@ router.route('/:itemid')
 })
 .delete((req,res,next)=>{
     console.log("Delete Item!");
+})
+
+router.route('/comments')
+.post((req,res,next)=>{
+    if(req.body.role=="shopper")
+    {
+        
+    }
+    else{
+        res.json({"message":"ERROR"});
+    }
 })
 module.exports = router

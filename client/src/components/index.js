@@ -6,7 +6,6 @@ import slides from '../shared/data/slider-images'
 import offerdata  from '../shared/data/offer-data'
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
-import { createNotification } from "../App";
 
 const Offers = () => {
     return (
@@ -50,7 +49,7 @@ class Index extends Component{
     render(){
         return (
             <div>
-                <div className='slider'><Slider images = {slides.images}/></div>
+                <div claaltssName='slider'><Slider images = {slides.images}/></div>
                 <div className="offer"><Offers/></div>
                 <div className="containers-fluid">
                     <div className='products'>
