@@ -35,7 +35,7 @@ export default class HostedItems extends Component{
                                     {this.state.hosted.map((item,index)=>
                                         <div class="row" key={index} style={{marginLeft:"5px"}}>
                                             <div class="col-lg-2 col-md-2 col-sm-0" style={{textAlign:"right"}}>
-                                                <img className = "img-thumbnail img-fluid" src="/assets/images/rice.jpg" alt = {item.itemImage ? `/assets/uploads/${item.itemImage}`: "/assets/images/rice.jpg"}></img>
+                                                <img className = "img-thumbnail img-fluid" src={item.itemImage ? `/assets/uploads/${item.itemImage}`: "/assets/images/Rice.jpg"}></img>
                                             </div>
                                             <div class="col-lg-6 col-md-4 col-sm-12">
                                                 <b>{item.itemName}</b>

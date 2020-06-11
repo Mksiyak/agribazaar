@@ -16,7 +16,7 @@ export const getCartItemImage = (imgx) => {
     return <img src={imgx} className="img-fluid img-thumbnail" alt=""/>
   }
   else{
-    return <img src="/assets/images/rice.jpg" className="img-fluid img-thumbnail" alt=""/>
+    return <img src="/assets/images/Rice.jpg" className="img-fluid img-thumbnail" alt=""/>
   }
 }
 

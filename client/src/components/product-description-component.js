@@ -74,7 +74,7 @@ class ProductDetails extends Component
                         </div>
                         <div className="col-lg-3 col-md-3 col-sm-12">
                             <div className="input-group mb-3">
-                                {getDropdown(seller.quantity,index)}
+                                {getDropdown(seller.quantity,index,()=>{},0)}
                                 <div className="input-group-append">
                                     <button className="btn btn-success btn-sm" type="button">Add to Cart</button>
                                 </div>
@@ -119,7 +119,7 @@ class ProductDetails extends Component
            else{
                return(
                 <div className="card">
-                    <img className = "card-img-top" src="/assets/images/rice.jpg" alt = {this.state.product.name}></img>
+                    <img className = "card-img-top" src="/assets/images/Rice.jpg" alt = {this.state.product.name}></img>
                 </div>
                );
            }
