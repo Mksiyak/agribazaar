@@ -196,11 +196,11 @@ INSERT INTO `Items` VALUES ('Millet','Pearl Millet',5,'Cereals',NULL);
 INSERT INTO `Items` VALUES ('Jawar','Sorghum',6,'Cereals',NULL);
 INSERT INTO `Items` VALUES ('Bajra','Staple',7,'Cereals',NULL);
 INSERT INTO `Items` VALUES ('Maize','Sweet Corn',8,'Cereals',NULL);
-INSERT INTO `Items` VALUES ('Moong','Green Moong Dal',11,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Moong','Yellow Moong Dal',12,'Lenntilss',NULL);
+INSERT INTO `Items` VALUES ('Moong','Green & Yellow',11,'Lentils',NULL);
+INSERT INTO `Items` VALUES ('Masoor','High Nutrition',12,'Lentils',NULL);
 INSERT INTO `Items` VALUES ('Urad','Unpolished',13,'Lentils',NULL);
 INSERT INTO `Items` VALUES ('Channa','Large to Small',14,'Lentils',NULL);
-INSERT INTO `Items` VALUES ('Rajma','Red Kidney Beans',15,'Cereals',NULL);
+INSERT INTO `Items` VALUES ('Rajma','Red Kidney Beans',15,'Lentils',NULL);
 /*!40000 ALTER TABLE `Items` ENABLE KEYS */;
 UNLOCK TABLES;
 
