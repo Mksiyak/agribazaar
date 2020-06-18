@@ -56,6 +56,12 @@ class Navbar extends Component{
         {
             document.getElementById("searchBar").value=this.props.location.search.split('=').slice(1).join('=')
         }
+        let mainNav = document.getElementById('navbar-nav');
+        let navBarToggle = document.getElementById('navbar-toggler');
+
+        navBarToggle.addEventListener('click', function () {
+            mainNav.classList.toggle('hide');
+        });
     }
     render(){
         const navbarHandler = (userdetails) =>{
@@ -145,11 +151,11 @@ class Navbar extends Component{
                 <Link className="navbar-brand" to="/"> 
                 <b>Agri</b>Bazaar
                 </Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                <button className="navbar-toggler" id="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="collapse navbar-collapse hide" id="navbar-nav">
 
                     {navbarHandler(this.props.user)}
                 </div>
