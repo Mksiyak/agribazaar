@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 
 import "../shared/stylesheets/navbar-style.css"
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
+import { serverUrl } from '../shared/baseUrl';
 // import OrderHistory from './order-history-component';
 class Navbar extends Component{
     constructor(props){
@@ -29,15 +31,15 @@ class Navbar extends Component{
     }
 
     renderSuggestions () {
-        const { suggestions } = this.state;
-        if (suggestions.length === 0) {
-            return null;
-        }
-        return(
-            <ul>
-                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
-            </ul>
-        );
+        Axios.get(`${serverUrl}search?squery=${this.state.search_query}`)
+        .then(res=>{
+            this.setState({
+                suggestions: res.data
+            })
+        })
+        .catch(err=>{
+            console.log("ERR",err);
+        })
     } 
 
     handleChangeField(key, event) {
@@ -92,9 +94,9 @@ class Navbar extends Component{
                                 <div className="dropdown-menu dropdown-menu-right hide" id="dropdownDetails" aria-labelledby="navbarDropdown">
 
                                 </div>
-                                <div class="agb-dropdown">
-                                <button class="agb-dropbtn dropdown-menu-right dropdown-toggle">{userdetails.username}</button>
-                                    <div class="agb-dropdown-content">
+                                <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-menu-right dropdown-toggle">{userdetails.username}</button>
+                                    <div className="agb-dropdown-content">
                                     <Link to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link to="/prev">Previous Orders</Link>
                                     <Link to="/order-history">Previous Reviews</Link>
@@ -113,9 +115,9 @@ class Navbar extends Component{
                             <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
                             <li className="nav-item dropdown">
-                                <div class="agb-dropdown">
-                                <button class="agb-dropbtn dropdown-toggle">{userdetails.username}</button>
-                                    <div class="agb-dropdown-content">
+                                <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-toggle">{userdetails.username}</button>
+                                    <div className="agb-dropdown-content">
                                         <Link to={"/profiles/"+userdetails.id}>Profile</Link>
                                         <Link onClick={()=>this.props.handleAccount()}>Logout</Link>
                                     </div>
@@ -127,9 +129,9 @@ class Navbar extends Component{
                 else{
                     return(
                         <li className="nav-item dropdown">
-                            <div class="agb-dropdown">
-                                <button class="agb-dropbtn dropdown-toggle">Login/Sign Up</button>
-                                <div class="agb-dropdown-content">
+                            <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-toggle">Login/Sign Up</button>
+                                <div className="agb-dropdown-content">
                                 <Link to="/sign-in">Login</Link>
                                 <Link to="/sign-up">Sign Up</Link>
                                 </div>
