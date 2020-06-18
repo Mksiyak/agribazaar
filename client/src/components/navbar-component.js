@@ -89,15 +89,18 @@ class Navbar extends Component{
                         <>
                             <li className="nav-item"><Link className="nav-link" to="/cart">Cart</Link></li>
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {userdetails.username}
-                                </Link>
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" to="/prev">Previous Orders</Link>
-                                    <Link className="dropdown-item" to="/order-history">Previous Reviews</Link>
-                                    <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount(undefined,undefined,undefined,undefined,undefined,this.props.history)}>Logout</Link>
+                                <div className="dropdown-menu dropdown-menu-right hide" id="dropdownDetails" aria-labelledby="navbarDropdown">
+
                                 </div>
+                                <div class="agb-dropdown">
+                                <button class="agb-dropbtn dropdown-menu-right dropdown-toggle">{userdetails.username}</button>
+                                    <div class="agb-dropdown-content">
+                                    <Link to={"/profiles/"+userdetails.id}>Profile</Link>
+                                    <Link to="/prev">Previous Orders</Link>
+                                    <Link to="/order-history">Previous Reviews</Link>
+                                    <Link to="/" onClick={()=>this.props.handleAccount(undefined,undefined,undefined,undefined,undefined,this.props.history)}>Logout</Link>
+                                    </div>
+                                </div> 
                             </li>
                         </>
                     )
@@ -110,13 +113,13 @@ class Navbar extends Component{
                             <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {userdetails.username}
-                                </Link>
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
-                                </div>
+                                <div class="agb-dropdown">
+                                <button class="agb-dropbtn dropdown-toggle">{userdetails.username}</button>
+                                    <div class="agb-dropdown-content">
+                                        <Link to={"/profiles/"+userdetails.id}>Profile</Link>
+                                        <Link onClick={()=>this.props.handleAccount()}>Logout</Link>
+                                    </div>
+                                </div> 
                             </li>
                         </>
                     )
@@ -124,13 +127,13 @@ class Navbar extends Component{
                 else{
                     return(
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Login/Signup
-                            </Link>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to="/sign-in">Login</Link>
-                                <Link className="dropdown-item" to="/sign-up">Sign Up</Link>
-                            </div>
+                            <div class="agb-dropdown">
+                                <button class="agb-dropbtn dropdown-toggle">Login/Sign Up</button>
+                                <div class="agb-dropdown-content">
+                                <Link to="/sign-in">Login</Link>
+                                <Link to="/sign-up">Sign Up</Link>
+                                </div>
+                            </div> 
                         </li>
                     )
                 }
