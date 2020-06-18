@@ -33,15 +33,15 @@ export default class OpenOrders extends Component{
                                 <h6 className="card-subtitle mb-2 text-muted">Your Quick Review</h6>
                                 <p className="card-text" style={{paddingTop:"1em"}}>
                                     {this.state.orders.map((item,index)=>
-                                        <div class="row" key={index} style={{marginLeft:"5px"}}>
-                                            <div class="col-lg-9 col-md-6 col-sm-12">
+                                        <div className="row" key={index} style={{marginLeft:"5px"}}>
+                                            <div className="col-lg-9 col-md-6 col-sm-12">
                                                 <b>{item.name} for {item.username}</b>
                                                 <br/>
                                                 <small>{item.category} Department</small>
                                                 <br/>
                                                 Address: {item.address}
                                             </div>
-                                            <div class="col-lg-3 col-md-6 col-sm-12" style={{textAlign:"right"}}>
+                                            <div className="col-lg-3 col-md-6 col-sm-12" style={{textAlign:"right"}}>
                                                 <h6>{item.pricePerItem*item.BuyerQty} Rs</h6>
                                             </div>
                                         </div>

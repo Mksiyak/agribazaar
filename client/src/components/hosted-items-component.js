@@ -33,18 +33,18 @@ export default class HostedItems extends Component{
                                 <h6 className="card-subtitle mb-2 text-muted">These are the items you've uploaded for sale at AgriBazaar</h6>
                                 <p className="card-text" style={{paddingTop:"1em"}}>
                                     {this.state.hosted.map((item,index)=>
-                                        <div class="row" key={index} style={{marginLeft:"5px"}}>
-                                            <div class="col-lg-2 col-md-2 col-sm-0" style={{textAlign:"right"}}>
+                                        <div className="row" key={index} style={{marginLeft:"5px"}}>
+                                            <div className="col-lg-2 col-md-2 col-sm-0" style={{textAlign:"right"}}>
                                                 <img className = "img-thumbnail img-fluid" src={item.itemImage ? `/assets/uploads/${item.itemImage}`: "/assets/images/Rice.jpg"}></img>
                                             </div>
-                                            <div class="col-lg-6 col-md-4 col-sm-12">
+                                            <div className="col-lg-6 col-md-4 col-sm-12">
                                                 <b>{item.itemName}</b>
                                                 <br/>
                                                 <small>{item.category} Department</small>
                                                 <br/>
                                                 {item.itemDescription}
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12" style={{textAlign:"right"}}>
+                                            <div className="col-lg-4 col-md-6 col-sm-12" style={{textAlign:"right"}}>
                                                 <h6>{item.pricePerItem} {item.unit}</h6>
                                                 Quantity: {item.quantity}
                                             </div>

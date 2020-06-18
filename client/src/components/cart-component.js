@@ -103,13 +103,13 @@ class Cart extends Component{
               <h5 className="card-title">Recommended Products</h5>
               <p className="card-text">
                 {this.state.suggestions.map((item,index)=>
-                <div class="row" style={{paddingTop:"1em"}} key={index}>
-                  <div class="col-lg-9 col-md-6 col-sm-12">
+                <div className="row" style={{paddingTop:"1em"}} key={index}>
+                  <div className="col-lg-9 col-md-6 col-sm-12">
                     <h6><Link to={`/product/${item.itemId}`}>{item.name}</Link></h6>
                     <small>{item.category} sold by {item.fullname}</small>
 
                   </div>
-                  <div class="col-lg-3 col-md-6 col-sm-12">
+                  <div className="col-lg-3 col-md-6 col-sm-12">
                     {item.pricePerItem}&nbsp;{item.unit === "Rupees/Kg" ? "Rs/Kg": ""}
                   </div>
                 </div>

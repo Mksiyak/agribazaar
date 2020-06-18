@@ -69,13 +69,13 @@ export default class Analytics extends Component{
                                 <h5 className="card-title">Your Item Reviews</h5>
                                 <p className="card-text">
                                     {this.state.reviews.map((item,index)=>
-                                        <div class="row" key="index" style={{marginLeft:"0px",marginRight:"0px"}}>
-                                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <div className="row" key="index" style={{marginLeft:"0px",marginRight:"0px"}}>
+                                            <div className="col-lg-8 col-md-6 col-sm-12">
                                                 <small>{item.username} ({item.email}) on {item.name}</small>
                                                 <br/>
                                                 <p>{item.review}</p>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="col-lg-4 col-md-6 col-sm-12">
                                                 <small>{item.timestampUpdated}</small>
                                             </div>
                                         </div>

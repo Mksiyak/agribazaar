@@ -23,24 +23,24 @@ export default class OrderHistory extends Component{
     render(){
         return(
             <>
-            <div class="container-fluid" style={{paddingTop:"2em",paddingBottom:"2em"}}>
+            <div className="container-fluid" style={{paddingTop:"2em",paddingBottom:"2em"}}>
                 <div className="card w-100">
                     <div className="card-body">
                         <h3 className="card-title">Your Previous Orders</h3>
                         <p className="card-text" style={{paddingTop:"1em"}}>
                             {this.state.prev.map((item,index)=>
-                            <div class="row" key={index}>
+                            <div className="row" key={index}>
                                 <div className="col-lg-1 col-md-0 col-sm-0">
                                 {getCartItemImage(this.state.prev.image)}
                                 </div>
-                                <div class="col-lg-9 col-md-9 col-sm-12">
+                                <div className="col-lg-9 col-md-9 col-sm-12">
                                     {item.category}
                                     <h4><Link to={item.itemid}>{item.name}</Link></h4>
                                     {item.description}
                                 </div>
-                                <div class="col-lg-2 col-md-3 col-sm-12" style={{textAlign:"right"}}>
+                                <div className="col-lg-2 col-md-3 col-sm-12" style={{textAlign:"right"}}>
                                     <small>{item.unit === "Rupees/Kg" ? "Rs/Kg":""}</small>
-                                    <h6 class="text-success">{item.pricePerItem*item.BuyerQty}/-</h6>
+                                    <h6 className="text-success">{item.pricePerItem*item.BuyerQty}/-</h6>
                                     Quantity- {item.BuyerQty}
                                     <br/>
                                     Sold by {item.fullname}
