@@ -1,5 +1,5 @@
 import React , {Component} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "../shared/stylesheets/slider-style.css"
 import slides from '../shared/data/slider-images'
 class Slider extends Component

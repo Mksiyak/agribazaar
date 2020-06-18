@@ -1,5 +1,6 @@
 import React,{Component} from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './agribazaar.css'
+// import 'bootstrap/dist/css/bootstrap.min.css'
 import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import  Index from "./components/index"

@@ -1,17 +1,11 @@
 import React, { Component } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "../shared/stylesheets/navbar-style.css"
 import { Link } from 'react-router-dom';
 // import OrderHistory from './order-history-component';
 class Navbar extends Component{
     constructor(props){
         super(props);
-        this.items = [
-            'David',
-            'Danien',
-            'Sara',
-            'Jane'
-        ];
         this.state = {
             suggestions: [],
             text: '',

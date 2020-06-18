@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import '../App.css';
 import Axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import { serverUrl } from "../shared/baseUrl";
 
 export default class HostedItems extends Component{

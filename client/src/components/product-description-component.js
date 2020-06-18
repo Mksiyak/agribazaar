@@ -1,5 +1,4 @@
 import React , {Component} from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
 import '../shared/stylesheets/product-description-style.css'
 import StarRatings from 'react-star-ratings';
 import Axios from 'axios';
