@@ -53,12 +53,10 @@ class Login extends Component {
                 <h3>Sign In</h3>
 
                 <div className="form-group">
-                    <label>Username</label>
                     <input required onChange={(ev) => this.handleChangeField('user_email', ev)} value={user_email} type="text" className="form-control" placeholder="email / username" />
                 </div>
 
                 <div className="form-group">
-                    <label>Password</label>
                     <input required onChange={(ev) => this.handleChangeField('user_password', ev)} type="password" value={user_password} className="form-control" placeholder="Enter password" />
                 </div>
 
