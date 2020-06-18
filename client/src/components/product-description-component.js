@@ -178,18 +178,6 @@ class ProductDetails extends Component
                     <div className="card">
                         <img className = "card-img-top" src = {`/assets/uploads/select.png`} alt = "image not provided by seller"></img>
                     </div>
-<<<<<<< HEAD
-=======
-                );
-           }
-           else{
-               return(
-                <div className="card">
-                    <img className = "card-img-top" src="/assets/images/Rice.jpg" alt = {this.state.product.name}></img>
-                </div>
-               );
-           }
->>>>>>> bd16548ec22bef6d55cb9a5d7c34c5392d11e829
         }
         
         const RenderComments = () =>{
