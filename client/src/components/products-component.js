@@ -1,5 +1,5 @@
 import React from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import '../shared/stylesheets/products-style.css'
 import { Link } from 'react-router-dom';
 const setImage = (product) =>{

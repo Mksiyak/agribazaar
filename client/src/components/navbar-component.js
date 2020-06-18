@@ -1,17 +1,13 @@
 import React, { Component } from 'react'
-import 'bootstrap/dist/css/bootstrap.min.css';
+
 import "../shared/stylesheets/navbar-style.css"
 import { Link } from 'react-router-dom';
+import Axios from 'axios';
+import { serverUrl } from '../shared/baseUrl';
 // import OrderHistory from './order-history-component';
 class Navbar extends Component{
     constructor(props){
         super(props);
-        this.items = [
-            'David',
-            'Danien',
-            'Sara',
-            'Jane'
-        ];
         this.state = {
             suggestions: [],
             text: '',
@@ -35,15 +31,15 @@ class Navbar extends Component{
     }
 
     renderSuggestions () {
-        const { suggestions } = this.state;
-        if (suggestions.length === 0) {
-            return null;
-        }
-        return(
-            <ul>
-                {suggestions.map((item) => <li onClick={() => this.suggestionSelected(item)}>{item}</li>)}
-            </ul>
-        );
+        Axios.get(`${serverUrl}search?squery=${this.state.search_query}`)
+        .then(res=>{
+            this.setState({
+                suggestions: res.data
+            })
+        })
+        .catch(err=>{
+            console.log("ERR",err);
+        })
     } 
 
     handleChangeField(key, event) {
@@ -62,6 +58,12 @@ class Navbar extends Component{
         {
             document.getElementById("searchBar").value=this.props.location.search.split('=').slice(1).join('=')
         }
+        let mainNav = document.getElementById('navbar-nav');
+        let navBarToggle = document.getElementById('navbar-toggler');
+
+        navBarToggle.addEventListener('click', function () {
+            mainNav.classList.toggle('hide');
+        });
     }
     render(){
         const navbarHandler = (userdetails) =>{
@@ -89,15 +91,18 @@ class Navbar extends Component{
                         <>
                             <li className="nav-item"><Link className="nav-link" to="/cart">Cart</Link></li>
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {userdetails.username}
-                                </Link>
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" to="/prev">Previous Orders</Link>
-                                    <Link className="dropdown-item" to="/order-history">Previous Reviews</Link>
-                                    <Link className="dropdown-item" to="/" onClick={()=>this.props.handleAccount()}>Logout</Link>
+                                <div className="dropdown-menu dropdown-menu-right hide" id="dropdownDetails" aria-labelledby="navbarDropdown">
+
                                 </div>
+                                <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-menu-right dropdown-toggle">{userdetails.username}</button>
+                                    <div className="agb-dropdown-content">
+                                    <Link to={"/profiles/"+userdetails.id}>Profile</Link>
+                                    <Link to="/prev">Previous Orders</Link>
+                                    <Link to="/order-history">Previous Reviews</Link>
+                                    <Link to="/" onClick={()=>this.props.handleAccount(undefined,undefined,undefined,undefined,undefined,this.props.history)}>Logout</Link>
+                                    </div>
+                                </div> 
                             </li>
                         </>
                     )
@@ -106,16 +111,17 @@ class Navbar extends Component{
                     return(
                         <>
                             <li className="nav-item"><Link className="nav-link" to="/add-item">Add Items</Link></li>
+                            <li className="nav-item"><Link className="nav-link" to="/all">Hosted Items</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/open-orders">Open Orders</Link></li>
                             <li className="nav-item"><Link className="nav-link" to="/analytics">Analytics</Link></li>
                             <li className="nav-item dropdown">
-                                <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                    {userdetails.username}
-                                </Link>
-                                <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <Link className="dropdown-item" to={"/profiles/"+userdetails.id}>Profile</Link>
-                                    <Link className="dropdown-item" onClick={()=>this.props.handleAccount()}>Logout</Link>
-                                </div>
+                                <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-toggle">{userdetails.username}</button>
+                                    <div className="agb-dropdown-content">
+                                        <Link to={"/profiles/"+userdetails.id}>Profile</Link>
+                                        <Link onClick={()=>this.props.handleAccount()}>Logout</Link>
+                                    </div>
+                                </div> 
                             </li>
                         </>
                     )
@@ -123,13 +129,13 @@ class Navbar extends Component{
                 else{
                     return(
                         <li className="nav-item dropdown">
-                            <Link className="nav-link dropdown-toggle" to="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Login/Signup
-                            </Link>
-                            <div className="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                <Link className="dropdown-item" to="/sign-in">Login</Link>
-                                <Link className="dropdown-item" to="/sign-up">Sign Up</Link>
-                            </div>
+                            <div className="agb-dropdown">
+                                <button className="agb-dropbtn dropdown-toggle">Login/Sign Up</button>
+                                <div className="agb-dropdown-content">
+                                <Link to="/sign-in">Login</Link>
+                                <Link to="/sign-up">Sign Up</Link>
+                                </div>
+                            </div> 
                         </li>
                     )
                 }
@@ -150,11 +156,11 @@ class Navbar extends Component{
                 <Link className="navbar-brand" to="/"> 
                 <b>Agri</b>Bazaar
                 </Link>
-                <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                <button className="navbar-toggler" id="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
                 aria-label="Toggle navigation">
                     <span className="navbar-toggler-icon"></span>
                 </button>
-                <div className="collapse navbar-collapse" id="navbarSupportedContent">
+                <div className="collapse navbar-collapse hide" id="navbar-nav">
 
                     {navbarHandler(this.props.user)}
                 </div>

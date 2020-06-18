@@ -1,5 +1,5 @@
 import React,{Component} from 'react';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import './agribazaar.css'     
 import './App.css';
 import { Switch, Route, BrowserRouter, Redirect } from "react-router-dom";
 import  Index from "./components/index"
@@ -19,6 +19,7 @@ import OrderHistory from './components/order-history-component';
 import Analytics from './components/analytics-component';
 import OpenOrders from './components/orders-component';
 // import OrderHistory from './components/order-history-component';
+import HostedItems from './components/hosted-items-component';
 
 export const createNotification = (type,title,body,delay) => {
   console.log("NOTIF",type,body,title)
@@ -58,7 +59,7 @@ export default class App extends Component {
     }
     this.handleAccount=this.handleAccount.bind(this);
   }
-  handleAccount = (user_id,user_email,user_name,user_role,user_remember) =>{
+  handleAccount = (user_id,user_email,user_name,user_role,user_remember,his) =>{
     if(!user_email && user_email!==this.state.email)
     {
       createNotification(`success`,`Successful Logout!`,`Sorry to see you go!`);
@@ -84,12 +85,15 @@ export default class App extends Component {
       Cookies.remove('user_username');
       return <Redirect to="/"/>
     }
-    
+    if(!user_id)
+    {
+      his.push("/");
+    }
   }
   render(){
-      const DefaultContainer = ({location}) =>(
+      const DefaultContainer = ({location,history}) =>(
         <>
-          <Navbar location={location} user={this.state} handleAccount={this.handleAccount}/>
+          <Navbar history={history} location={location} user={this.state} handleAccount={this.handleAccount}/>
             <div id="content-wrap" style={{marginTop:"40px"}}>
               <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
               <Route exact path="/product/:id" component={Product}/>
@@ -97,8 +101,9 @@ export default class App extends Component {
               <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
               <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
               <Route path="/add-item" component = {Addproduct}/>
-              <Route path="/prev" component={()=><OrderHistory user={this.state}/>}/>
-              <Route path="/analytics" component={()=><Analytics user={this.state}/>}/>
+              <Route path="/prev" component={()=><OrderHistory history={history} user={this.state}/>}/>
+              <Route path="/all" component={()=><HostedItems user={this.state}/>}/>
+              <Route path="/analytics" component={()=><Analytics history={history} user={this.state}/>}/>
               <Route path="/open-orders" component={()=><OpenOrders user={this.state}/>}/>
             </div>
           <Footer/>

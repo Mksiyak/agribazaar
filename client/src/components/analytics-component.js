@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import '../App.css';
 import Axios from "axios";
-import 'bootstrap/dist/css/bootstrap.min.css';
 import { serverUrl } from "../shared/baseUrl";
 
 export default class Analytics extends Component{
@@ -19,22 +18,28 @@ export default class Analytics extends Component{
         }
     }
     componentDidMount(){
-        Axios.get(`${serverUrl}farmers/analytics?userid=${this.props.user.id}`)
-        .then(res=>{
-            console.log("RESULT",res,res.data[0],res.data[2])
-            this.setState({
-                reviews: res.data[0],
-                hosted_ct: res.data[4][0]["hosted_ct"],
-                sold_ct: res.data[2][0]["bought_ct"],
-                sold_amt: res.data[2][0]["bought_amt"],
-                cart_ct: res.data[1][0]["buy_ct"],
-                cart_amt: res.data[1][0]["buy_amt"],
-                avg_rt: res.data[3][0]["avgr"]
+        if(this.props.user.id)
+        {
+            Axios.get(`${serverUrl}farmers/analytics?userid=${this.props.user.id}`)
+            .then(res=>{
+                console.log("RESULT",res,res.data[0],res.data[2])
+                this.setState({
+                    reviews: res.data[0],
+                    hosted_ct: res.data[4][0]["hosted_ct"],
+                    sold_ct: res.data[2][0]["bought_ct"],
+                    sold_amt: res.data[2][0]["bought_amt"],
+                    cart_ct: res.data[1][0]["buy_ct"],
+                    cart_amt: res.data[1][0]["buy_amt"],
+                    avg_rt: res.data[3][0]["avgr"]
+                })
             })
-        })
-        .catch(err=>{
-            console.log(err);
-        })
+            .catch(err=>{
+                console.log(err);
+            })
+        }
+        else{
+       //     this.props.history.push("/")
+        }
     }
     render(){
         return(
@@ -63,13 +68,13 @@ export default class Analytics extends Component{
                                 <h5 className="card-title">Your Item Reviews</h5>
                                 <p className="card-text">
                                     {this.state.reviews.map((item,index)=>
-                                        <div class="row" key="index" style={{marginLeft:"0px",marginRight:"0px"}}>
-                                            <div class="col-lg-8 col-md-6 col-sm-12">
+                                        <div className="row" key="index" style={{marginLeft:"0px",marginRight:"0px"}}>
+                                            <div className="col-lg-8 col-md-6 col-sm-12">
                                                 <small>{item.username} ({item.email}) on {item.name}</small>
                                                 <br/>
                                                 <p>{item.review}</p>
                                             </div>
-                                            <div class="col-lg-4 col-md-6 col-sm-12">
+                                            <div className="col-lg-4 col-md-6 col-sm-12">
                                                 <small>{item.timestampUpdated}</small>
                                             </div>
                                         </div>

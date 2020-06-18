@@ -47,5 +47,19 @@ router.route('/open')
         res.end(JSON.stringify(results));
     });
 
+});
+
+router.route('/all')
+.get((req,res,next)=>{
+    var sql="select Items.name as itemName,Items.description as itemDescription,Items.category,Items.id,pricePerItem,quantity,unit,itemImage from ItemSeller JOIN Items ON itemId=Items.id WHERE sellerId="+req.query.userid+";";
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err)
+        {
+            console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(ans));
+        res.end(JSON.stringify(ans));
+    })
 })
 module.exports = router
