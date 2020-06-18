@@ -20,6 +20,11 @@ class Login extends Component {
           [key]: event.target.value,
         });
     }
+    getCookie = (name)=>{
+        const value = `; ${document.cookie}`;
+       const parts = value.split(`; ${name}=`);
+       if (parts.length === 2) return parts.pop().split(';').shift();
+    }
     handleSubmit(event){
         event.preventDefault();
         const { user_email,user_password } = this.state;
@@ -32,7 +37,8 @@ class Login extends Component {
             createNotification("success",`Welcome ${res.data[0]["username"]}`);  
         })        
         .then(()=>{
-            if(this.props.user.role=="shopper")
+            console.log(this.getCookie('user_role'));
+            if(this.getCookie('user_role')==="shopper")
                 this.props.history.push('/');
             else{
                 this.props.history.push('/analytics');

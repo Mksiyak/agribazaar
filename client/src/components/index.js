@@ -38,6 +38,7 @@ class Index extends Component{
     componentDidMount(){
         Axios.get(serverUrl+`item?count=4`)
         .then(res=>{
+            console.log(res.data);
             this.setState({
                 items: res.data
             })

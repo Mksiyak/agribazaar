@@ -10,15 +10,22 @@ import { withRouter } from 'react-router-dom';
 
 TimeAgo.addLocale(en);
 const timeAgo = new TimeAgo('en-US');
-
-export const getDropdown = (num,index,fun,id) => {
+const getItems = (num) =>{
+    let items = [];
+    items.push(<option key={0} value="0">--</option>)      
+    for (let i = 1; i <= num; i++) {             
+        items.push(<option key={i} value={i}>{i}</option>);   
+    }
+    return items;
+}
+export const getDropdown = (num,index,fun,id,val) => {
     let items = [];
     items.push(<option key={0} value="0">--</option>)      
     for (let i = 1; i <= num; i++) {             
         items.push(<option key={i} value={i}>{i}</option>);   
     }
     return(
-        <select className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange = {(ev) => {fun && fun(ev.target.value,id)}}>
+        <select value={val} className="form-control form-control-sm fsx" id={"exampleSelect"+index} onChange = {(ev) => {fun && fun(ev.target.value,id)}}>
             {items}
         </select>
     );
@@ -124,12 +131,12 @@ class ProductDetails extends Component
             return(
                 <>
                 <h6>Sellers</h6>
-                <select style={{width:'100%'}} onChange = {(ev) => {sellerChangeHandler(ev)}}> 
+                <select value={this.state.sellerId} style={{width:'100%'}} onChange = {(ev) => {sellerChangeHandler(ev)}}> 
                     <option value = {null}>
                         -------
                     </option>
                 {this.state.sellers.map((seller,index)=>
-                    <option key = {seller.sellerName} value = {seller.sellerId}>
+                    <option value = {seller.sellerId}>
                             {seller.sellerName}
                             {` `+seller.pricePerItem} {seller.unit}
                     </option>
@@ -137,7 +144,9 @@ class ProductDetails extends Component
                 </select>
                         <div className="">
                             <div className="input-group mb-3" >
-                                {getDropdown(this.state.ItemHaving,0,onChangeQuantity)}
+                            <select value={this.state.noOfItems} style={{width:'100%'}} onChange = {(ev) => {onChangeQuantity(ev.target.value)}}> 
+                                {getItems(this.state.ItemHaving)}
+                            </select>
                                 <div className="input-group-append">
                                     <button onClick = {this.submitHandler.bind(this)} className="btn btn-success btn-sm" type="button">Add to Cart</button>
                                 </div>
