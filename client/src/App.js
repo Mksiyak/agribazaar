@@ -20,6 +20,7 @@ import Analytics from './components/analytics-component';
 import OpenOrders from './components/orders-component';
 // import OrderHistory from './components/order-history-component';
 import HostedItems from './components/hosted-items-component';
+import UserReviews from './components/review-component';
 
 export const createNotification = (type,title,body,delay) => {
   console.log("NOTIF",type,body,title)
@@ -103,6 +104,7 @@ export default class App extends Component {
               <Route path="/add-item" component = {Addproduct}/>
               <Route path="/prev" component={()=><OrderHistory history={history} user={this.state}/>}/>
               <Route path="/all" component={()=><HostedItems user={this.state}/>}/>
+              <Route path="/comments" component={()=><UserReviews user={this.state}/>}/>
               <Route path="/analytics" component={()=><Analytics history={history} user={this.state}/>}/>
               <Route path="/open-orders" component={()=><OpenOrders user={this.state}/>}/>
             </div>

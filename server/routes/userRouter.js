@@ -54,4 +54,20 @@ router.route('/:userid')
     })
 });
 
+
+router.route('/user/comments')
+.get((req,res,nest)=>{
+    console.log(req.params,req.query,req.body);
+    var SQL="select userid,review,rating,timestampUpdated,CONCAT(Seller.first_name,' ',Seller.last_name) as sellerDetails,Items.name as itemName,Items.description,Items.category from ItemComments JOIN ItemSeller on itemsellerid=ItemSeller.id JOIN Items ON ItemSeller.itemId=Items.id JOIN Users as Seller ON sellerId=Seller.id where userid="+req.query.userid+";";
+    db.query(SQL,(err,ans)=>{
+        if(err){
+            console.log("ERR",err);
+            res.json({message:err})
+        }
+        else{
+            console.log("RESULT",JSON.stringify(ans));
+            res.end(JSON.stringify(ans));
+        }
+    })
+})
 module.exports = router;

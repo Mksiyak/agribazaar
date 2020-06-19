@@ -65,19 +65,18 @@ class Navbar extends Component{
                 else{
                     return(
                         <>
-                        <form class="input-group w-100 d-inline" method="GET" action="/search" id = "search-form">
+                        <form className="input-group w-100 d-inline" method="GET" action="/search" id = "search-form">
                                 <AsyncSelect
                                     placeholder="Search on India's Biggest Farmer to Consumer Platform ..."
                                     onInputChange={this.handleInputChange}
                                     id="searchBar"
+                                    components={{ DropdownIndicator:() => null, IndicatorSeparator:() => null }}
                                     handleChange={(selectedOption)=>{{alert(selectedOption)}}}
                                     loadOptions={(inputValue,callback)=>{
                                         callback(renderSuggestions(inputValue));
                                     }}
                                     name="search"
                                     styles={{
-                                        indicatorSeparator: () => {},
-                                        dropdownIndicator: () => {},
                                         control: styles => ({ ...styles, backgroundColor: 'white' }),
                                         option: (styles, { data, isDisabled, isFocused, isSelected }) => {
                                             return {
@@ -88,7 +87,6 @@ class Navbar extends Component{
                                     }}
                                     formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
                                 />
-                                <div type="submit" className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                         </form>
                         </>
                     );
@@ -108,7 +106,7 @@ class Navbar extends Component{
                                     <div className="agb-dropdown-content">
                                     <Link to={"/profiles/"+userdetails.id}>Profile</Link>
                                     <Link to="/prev">Previous Orders</Link>
-                                    <Link to="/order-history">Previous Reviews</Link>
+                                    <Link to="/comments">Previous Reviews</Link>
                                     <Link to="/" onClick={()=>this.props.handleAccount(undefined,undefined,undefined,undefined,undefined,this.props.history)}>Logout</Link>
                                     </div>
                                 </div> 

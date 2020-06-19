@@ -5,6 +5,7 @@ import { useState } from "react";
 import Axios from "axios";
 import { serverUrl } from "../shared/baseUrl";
 import { createNotification } from "../App";
+import { withRouter } from "react-router-dom";
 
 const Addproduct = ()=> {
     const productlist = useSelector(state => state.productList).products;
@@ -116,4 +117,4 @@ const Addproduct = ()=> {
             </div>
         )
 }
-export default Addproduct;
+export default withRouter(Addproduct);
