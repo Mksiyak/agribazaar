@@ -3,38 +3,33 @@ import React, { Component } from 'react'
 import "../shared/stylesheets/navbar-style.css"
 import { Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
+import AsyncSelect from 'react-select/async';
 import { serverUrl } from '../shared/baseUrl';
 // import OrderHistory from './order-history-component';
+
+const options = [
+    { value: 'chocolate', label: 'Chocolate' },
+    { value: 'strawberry', label: 'Strawberry' },
+    { value: 'vanilla', label: 'Vanilla' }
+  ]
+
 class Navbar extends Component{
     constructor(props){
         super(props);
         this.state = {
             suggestions: [],
-            text: '',
-        };
-    }
-    onTextChanged = (e) => {
-        const value = e.target.value;
-        let suggestions = [];
-        if (value.length > 0) {
-            const regex = new RegExp(`^${value}`, 'i');
-            suggestions = this.items.sort().filter(v => regex.test(v));
         }
-        this.setState(() => ({ suggestions, text: value }));
-    }
-
-    suggestionSelected (value) {
-        this.setState(() => ({
-            text: value,
-            suggestions: [],
-        }))
     }
 
     renderSuggestions () {
         Axios.get(`${serverUrl}search?squery=${this.state.search_query}`)
         .then(res=>{
+            var reformatted = []
+            res.data.map(objx=>{
+                reformatted.push({value: objx.name, label:objx.name })
+            })
             this.setState({
-                suggestions: res.data
+                suggestions: reformatted
             })
         })
         .catch(err=>{
@@ -42,9 +37,9 @@ class Navbar extends Component{
         })
     } 
 
-    handleChangeField(key, event) {
+    handleChangeField (event){
         this.setState({
-            [key]: event.target.value
+            search_query: event.target.value
         }, () => {
             if (this.state.search_query && this.state.search_query.length > 1) {
                 if (this.state.search_query.length % 2 === 0) {
@@ -65,7 +60,20 @@ class Navbar extends Component{
             mainNav.classList.toggle('hide');
         });
     }
+    handleInputChange = (newValue) => {
+        this.setState({ search_query: newValue }, () => {
+            if (this.state.search_query && this.state.search_query.length > 1) {
+                if (this.state.search_query.length % 2 === 0) {
+                    this.renderSuggestions()
+                }
+            } 
+        });
+        return newValue;
+    };
     render(){
+        const renderSuggestions = () => {
+            return this.state.suggestions;
+        };
         const navbarHandler = (userdetails) =>{
             let searchBar = (userdetails) =>{
                 if(userdetails.role === "farmer"){
@@ -76,10 +84,32 @@ class Navbar extends Component{
                         <>
                         <form method="GET" action="/search" id = "search-form">
                             <div className="input-group">
-                                <input onChange={(ev) => this.handleChangeField('search_query', ev)}
+                                {/* <input onChange={(ev) => this.handleChangeField('search_query', ev)}
                                 onClick="this.setSelectionRange(0, this.value.length)"
                                 className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here" 
-                                aria-label="Recipient's username" aria-describedby="button-addon2" />
+                                aria-label="Recipient's username" aria-describedby="button-addon2" /> */}
+                                <AsyncSelect className="form-control"
+                                placeholder="Search on India's Biggest Farmer to Consumer Platform ..."
+                                // onInputChange={(ev) => this.handleChangeField(ev)}
+                                onInputChange={this.handleInputChange}
+                                id="searchBar"
+                                loadOptions={(inputValue,callback)=>{
+                                    callback(renderSuggestions(inputValue));
+                                }}
+                                name="search"
+                                styles={{
+                                    indicatorSeparator: () => {},
+                                    dropdownIndicator: () => {},
+                                    control: styles => ({ ...styles, backgroundColor: 'white' }),
+                                    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+                                        return {
+                                            ...styles,
+                                            color: isSelected ? 'white':'black'
+                                        }
+                                    }
+                                  }}
+                                  formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
+                                />
                                 <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
                         </form>
