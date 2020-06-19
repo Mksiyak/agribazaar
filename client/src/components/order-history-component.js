@@ -18,6 +18,7 @@ export default class OrderHistory extends Component{
             this.setState({
                 prev: ans.data[0].filter((d)=>{return d.itemStatus === "bought"})
             })
+            console.log(this.state.prev);
         })
     }
     render(){
@@ -31,7 +32,7 @@ export default class OrderHistory extends Component{
                             {this.state.prev.map((item,index)=>
                             <div className="row" key={index}>
                                 <div className="col-lg-1 col-md-0 col-sm-0">
-                                {getCartItemImage(this.state.prev.image)}
+                                {getCartItemImage(item.itemImage)}
                                 </div>
                                 <div className="col-lg-9 col-md-9 col-sm-12">
                                     {item.category}
