@@ -3,10 +3,10 @@ import React from 'react'
 import '../shared/stylesheets/products-style.css'
 import { Link } from 'react-router-dom';
 const setImage = (product) =>{
-    if(product.images)
+    if(product.image)
     {
         return(
-            <img className="card-img-top" src={product.images[0]} onError={(e)=>{e.target.onerror=null}} alt=""/>                                    
+            <img className="card-img-top" src={`/assets/uploads/${product.image}`} onError={(e)=>{e.target.onerror=null}} alt={product.name}/>                                    
         );
     }
     else{

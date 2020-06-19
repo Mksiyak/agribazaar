@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import "../shared/stylesheets/navbar-style.css"
-import { Link } from 'react-router-dom';
+import { Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import { serverUrl } from '../shared/baseUrl';
 // import OrderHistory from './order-history-component';
@@ -172,4 +172,4 @@ class Navbar extends Component{
         );
     }
 }
-export default Navbar;
+export default withRouter(Navbar);

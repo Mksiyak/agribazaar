@@ -145,7 +145,7 @@ class Cart extends Component{
                               <hr/>
                               <small>{item.pricePerItem} {item.unit === "Rupees/Kg" ? "Rs/Kg": ""}</small>
                               <h5>{item.pricePerItem*item.BuyerQty} Rs</h5>
-                              {getDropdown(item.SellerQty,item.id,this.handleChangeinQuantity,item.id)}
+                              {getDropdown(item.SellerQty,item.id,this.handleChangeinQuantity,item.id,item.BuyerQty)}
                             </div>
                           </div>
                         </div>

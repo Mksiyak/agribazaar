@@ -43,7 +43,17 @@ router.route('/')
 
 router.route('/:itemid')
 .post((req,res,next)=>{
-    console.log('Add item to Cart');
+    console.log('Add item to Cart'.help);
+    var post = req.body;
+    var sql = `call cart_AddItems(${post.userId},${req.params.itemid},${post.quantity},${post.sellerId});`;
+    console.log("QUERY".query,sql);
+    db.query(sql,(err,ans)=>{
+        if(err){
+            throw console.error("ERROR".error,err);
+        }
+        console.log("RESULT".success,JSON.stringify(ans));
+        res.end(JSON.stringify(ans[0]));
+    })
 })
 .delete((req,res,next)=>{
     console.log('Delete item from cart',req.params.itemid);
