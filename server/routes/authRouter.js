@@ -43,7 +43,7 @@ router.route('/signup')
     var user_city=post.user_city;
     var user_state=post.user_state;
     var user_country=post.user_country;
-    var sql = "call Users_register('"+user_username+"',sha('"+user_pass+"'),'"+user_mail+"','"+user_role+"','"+user_first_name+"','"+user_last_name+"','"+user_pin_code+"','"+user_house_no+"','"+user_city+"','"+user_street+"','"+user_state+"','"+user_country+"');call Users_getDetailsByUsername('"+user_username+"');";
+    var sql = "call Users_register('"+user_username+"',sha2('"+user_pass+"',256),'"+user_mail+"','"+user_role+"','"+user_first_name+"','"+user_last_name+"','"+user_pin_code+"','"+user_house_no+"','"+user_city+"','"+user_street+"','"+user_state+"','"+user_country+"');call Users_getDetailsByUsername('"+user_username+"');";
     console.log("QUERY".query,sql)
     var query = db.query(sql, function(err, result) {
         if (err) {
