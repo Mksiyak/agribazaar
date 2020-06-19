@@ -65,9 +65,8 @@ class Navbar extends Component{
                 else{
                     return(
                         <>
-                        <form method="GET" action="/search" id = "search-form">
-                            <div className="input-group">
-                                <AsyncSelect className="form-control"
+                        <form class="input-group w-100 d-inline" method="GET" action="/search" id = "search-form">
+                                <AsyncSelect
                                     placeholder="Search on India's Biggest Farmer to Consumer Platform ..."
                                     onInputChange={this.handleInputChange}
                                     id="searchBar"
@@ -90,7 +89,6 @@ class Navbar extends Component{
                                     formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
                                 />
                                 <div type="submit" className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
-                            </div>
                         </form>
                         </>
                     );
