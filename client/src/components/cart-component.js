@@ -13,7 +13,8 @@ const socket = SIOC(websocketUrl);
 export const getCartItemImage = (imgx) => {
   if(imgx)
   {
-    return <img src={imgx} className="img-fluid img-thumbnail" alt=""/>
+    console.log(`/assets/uploads/${imgx}`);
+    return <img src={`/assets/uploads/${imgx}`} className="img-fluid img-thumbnail" alt=""/>
   }
   else{
     return <img src="/assets/images/Rice.jpg" className="img-fluid img-thumbnail" alt=""/>
@@ -61,6 +62,8 @@ class Cart extends Component{
         userid
       }).then(res=>{
         createNotification('warning',`You have bought ${this.state.buying_count} items!`);
+        socket.emit('send userid', { username: this.props.user.username });
+        socket.on('get cart',this.ajaxGoBrr);
       })
       .catch((err)=>{
         createNotification(`error`,err);
