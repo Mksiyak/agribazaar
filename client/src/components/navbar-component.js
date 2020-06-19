@@ -5,13 +5,6 @@ import { Link, withRouter } from 'react-router-dom';
 import Axios from 'axios';
 import AsyncSelect from 'react-select/async';
 import { serverUrl } from '../shared/baseUrl';
-// import OrderHistory from './order-history-component';
-
-const options = [
-    { value: 'chocolate', label: 'Chocolate' },
-    { value: 'strawberry', label: 'Strawberry' },
-    { value: 'vanilla', label: 'Vanilla' }
-  ]
 
 class Navbar extends Component{
     constructor(props){
@@ -27,7 +20,7 @@ class Navbar extends Component{
             console.log("AUTO",res);
             var reformatted = []
             res.data.map(objx=>{
-                reformatted.push({value: objx.name, label:objx.name })
+                reformatted.push({value: objx.name, label:objx.name, description:objx.description })
             })
             this.setState({
                 suggestions: reformatted
@@ -38,17 +31,6 @@ class Navbar extends Component{
         })
     } 
 
-    handleChangeField (event){
-        this.setState({
-            search_query: event.target.value
-        }, () => {
-            if (this.state.search_query && this.state.search_query.length > 1) {
-                if (this.state.search_query.length % 2 === 0) {
-                    this.renderSuggestions()
-                }
-            } 
-        })
-    }
     componentDidMount(){
         if(document.getElementById("searchBar"))
         {
@@ -85,31 +67,27 @@ class Navbar extends Component{
                         <>
                         <form method="GET" action="/search" id = "search-form">
                             <div className="input-group">
-                                {/* <input onChange={(ev) => this.handleChangeField('search_query', ev)}
-                                onClick="this.setSelectionRange(0, this.value.length)"
-                                className="form-control" type="text" name="search" id="searchBar" placeholder="Search Here" 
-                                aria-label="Recipient's username" aria-describedby="button-addon2" /> */}
                                 <AsyncSelect className="form-control"
-                                placeholder="Search on India's Biggest Farmer to Consumer Platform ..."
-                                // onInputChange={(ev) => this.handleChangeField(ev)}
-                                onInputChange={this.handleInputChange}
-                                id="searchBar"
-                                loadOptions={(inputValue,callback)=>{
-                                    callback(renderSuggestions(inputValue));
-                                }}
-                                name="search"
-                                styles={{
-                                    indicatorSeparator: () => {},
-                                    dropdownIndicator: () => {},
-                                    control: styles => ({ ...styles, backgroundColor: 'white' }),
-                                    option: (styles, { data, isDisabled, isFocused, isSelected }) => {
-                                        return {
-                                            ...styles,
-                                            color: isSelected ? 'white':'black'
+                                    placeholder="Search on India's Biggest Farmer to Consumer Platform ..."
+                                    onInputChange={this.handleInputChange}
+                                    id="searchBar"
+                                    handleChange={(selectedOption)=>{{alert(selectedOption)}}}
+                                    loadOptions={(inputValue,callback)=>{
+                                        callback(renderSuggestions(inputValue));
+                                    }}
+                                    name="search"
+                                    styles={{
+                                        indicatorSeparator: () => {},
+                                        dropdownIndicator: () => {},
+                                        control: styles => ({ ...styles, backgroundColor: 'white' }),
+                                        option: (styles, { data, isDisabled, isFocused, isSelected }) => {
+                                            return {
+                                                ...styles,
+                                                color: isSelected ? 'white':'black'
+                                            }
                                         }
-                                    }
-                                  }}
-                                  formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
+                                    }}
+                                    formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
                                 />
                                 <div type="submit" className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
