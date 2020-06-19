@@ -24,6 +24,7 @@ class Navbar extends Component{
     renderSuggestions () {
         Axios.get(`${serverUrl}search?squery=${this.state.search_query}`)
         .then(res=>{
+            console.log("AUTO",res);
             var reformatted = []
             res.data.map(objx=>{
                 reformatted.push({value: objx.name, label:objx.name })
@@ -110,7 +111,7 @@ class Navbar extends Component{
                                   }}
                                   formatCreateLabel={(value)=>{return "Searching '"+value+"'"}}
                                 />
-                                <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
+                                <div type="submit" className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
                         </form>
                         </>
