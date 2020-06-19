@@ -103,12 +103,12 @@ class SignUp extends Component {
                 
                 <div className="form-group">
                     <label>Pin code</label>
-                    <input required onChange={(ev) => this.handleChangeField('user_pin_code', ev)} value={user_pin_code} type="text" className="form-control" placeholder="123456" />
+                    <input required onChange={(ev) => this.handleChangeField('user_pin_code', ev)} value={user_pin_code} type="number" className="form-control" placeholder="123456" />
                 </div>
 
                 <div className="form-group">
                     <label>Flat, House no., Building, Company, Apartment</label>
-                    <input required onChange={(ev) => this.handleChangeField('user_house_no', ev)} value={user_house_no}  type="text" className="form-control" placeholder="" />
+                    <input required onChange={(ev) => this.handleChangeField('user_house_no', ev)} value={user_house_no}  type="number" className="form-control" placeholder="" />
                 </div>
                 
                 <div className="form-group">

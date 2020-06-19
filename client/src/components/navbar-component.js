@@ -73,6 +73,7 @@ class Navbar extends Component{
                 }
                 else{
                     return(
+                        <>
                         <form method="GET" action="/search" id = "search-form">
                             <div className="input-group">
                                 <input onChange={(ev) => this.handleChangeField('search_query', ev)}
@@ -82,6 +83,7 @@ class Navbar extends Component{
                                 <div className="input-group-append"><button className="btn btn-warning" type="button" id="button-addon2"><i className="fa fa-search"></i></button></div>
                             </div>
                         </form>
+                        </>
                     );
                 }
             }
