@@ -18,6 +18,31 @@ router.route('/all')
         }
     })
 });
+router.route('/comments')
+.post((req,res,next)=>{
+    console.log(JSON.stringify(req.body));
+    if(req.body.role=="shopper")
+    {
+        var post = req.body;
+        var sql = `insert into ItemComments (review,userid,itemsellerid,rating) values('${post.review}',${post.userid},${post.itemsellerid},${post.rating});`;
+        console.log(sql);
+        db.query(sql,(err,ans)=>{
+            if(err){
+                res.statusCode = 500;
+                console.log("ERROR".error,err);
+                res.send("error occured");
+            }
+            else
+            {
+                console.log("RESULT".success,JSON.stringify(ans));
+                res.end(JSON.stringify(ans));
+            }
+        })
+    }
+    else{
+        res.json({"message":"ERROR"});
+    }
+});
 router.route('/')
 .get((req,res,next)=>{
     var sql = "call Items_getRandomN("+req.query.count+");";
@@ -122,16 +147,5 @@ router.route('/:itemid')
 })
 .delete((req,res,next)=>{
     console.log("Delete Item!");
-})
-
-router.route('/comments')
-.post((req,res,next)=>{
-    if(req.body.role=="shopper")
-    {
-        
-    }
-    else{
-        res.json({"message":"ERROR"});
-    }
 })
 module.exports = router

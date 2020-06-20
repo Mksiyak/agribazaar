@@ -44,14 +44,53 @@ class ProductDetails extends Component
             seller:null,
             noOfItems: 0,
             ItemHaving:0,
+            comment : "",
+            ratingGiven : null,
         };
         this.changeRating = this.changeRating.bind(this);
+        this.handleChangeField = this.handleChangeField.bind(this);
         // this.submitHandler = this.submitHandler.bind(this);
+        
+    }
+    handleChangeField(key, event) {
+        console.log(key,event.target.value);
+        this.setState({
+          [key]: event.target.value,
+        });
     }
     changeRating( newRating ) {
+        console.log('rating',newRating);
         this.setState({
             rating: newRating
         });
+    }
+    commentHandler = () =>{
+        console.log('commenthandler');
+        if(this.state.sellerId == null)
+        {
+            createNotification('warning','select seller to write review');
+        }
+        else{
+            const user_id = this.getCookie('user_id');
+            const role = this.getCookie('user_role');
+            console.log(`${serverUrl}item/comments`);
+            Axios.post(`${serverUrl}item/comments`,{
+                rating : this.state.rating,
+                review : this.state.comment,
+                itemsellerid : this.state.sellerId,
+                userid : user_id,
+                role : role,
+            })
+            .then(res=>{
+                console.log('result',res);
+                createNotification('success','comment Posted');
+                this.setState({rating : 0});
+                this.setState({comment : ""});
+            })
+            .catch(err=>{
+                console.log('error',err);
+            })
+        }
     }
     componentDidMount(){
         Axios.get(`${serverUrl}item/`+this.props.match.params.id)
@@ -79,6 +118,7 @@ class ProductDetails extends Component
     }
 
     submitHandler = ()=>{
+        console.log('submit handler');
         if(!this.state.seller){
             createNotification('warning',"please select seller");
         }
@@ -194,7 +234,7 @@ class ProductDetails extends Component
                 <div className="card w-100 snippets">
                     <div className="card-body">
                         <h5 className="card-title">Product Comments</h5>
-                        <textarea className="form-control" placeholder="Write a comment!" rows="3"></textarea>
+                        <textarea value = {this.state.comment} onChange = {(ev)=> {this.handleChangeField('comment',ev);}} className="form-control" placeholder="Write a comment!" rows="3"></textarea>
                         <br/>
                         <StarRatings
                             rating={this.state.rating}
@@ -206,7 +246,7 @@ class ProductDetails extends Component
                             name='rating'
                             />
                         <div class="pull-right">
-                            <button className={ this.props.user.id ? "btn btn-info btn-sm":"btn btn-info pull-right btn-sm disabled"} type="button">{this.props.user.id ? `Add to Cart` : `Log In to Add to Cart`}</button>
+                            <button onClick = {this.commentHandler.bind(this)} className={ this.props.user.id ? "btn btn-info btn-sm":"btn btn-info pull-right btn-sm disabled"} type="button">{this.props.user.id ? `submit` : `Log In to Add to Cart`}</button>
                         </div>
                         
                         <br/><br/>
