@@ -148,7 +148,7 @@ class ProductDetails extends Component
                                 {getItems(this.state.ItemHaving)}
                             </select>
                                 <div className="input-group-append">
-                                    <button onClick = {this.submitHandler.bind(this)} className="btn btn-success btn-sm" type="button">Add to Cart</button>
+                                    <button onClick = {this.submitHandler.bind(this)} className={ this.props.user.id ? "btn btn-success btn-sm":"btn btn-secondary btn-sm disabled"} type="button">{this.props.user.id ? `Add to Cart` : `Log In to Add to Cart`}</button>
                                 </div>
                             </div>
                     </div>
@@ -205,7 +205,10 @@ class ProductDetails extends Component
                             starDimension="30px"
                             name='rating'
                             />
-                        <button type="button"  className="btn btn-info pull-right">Post</button>
+                        <div class="pull-right">
+                            <button className={ this.props.user.id ? "btn btn-info btn-sm":"btn btn-info pull-right btn-sm disabled"} type="button">{this.props.user.id ? `Add to Cart` : `Log In to Add to Cart`}</button>
+                        </div>
+                        
                         <br/><br/>
                         <hr/>
                         {

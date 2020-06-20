@@ -97,7 +97,7 @@ export default class App extends Component {
           <Navbar history={history} location={location} user={this.state} handleAccount={this.handleAccount}/>
             <div id="content-wrap" style={{marginTop:"40px"}}>
               <Route exact path="/cart" component={()=><Cart user={this.state}/>} />
-              <Route exact path="/product/:id" component={Product}/>
+              <Route exact path="/product/:id" component={()=><Product user={this.state}/>}/>
               <Route path="/search" component={Search}/>
               <Route exact path='/' component={() => <Index user={this.state} handleAccount={this.handleAccount} />} />
               <Route path="/profiles/:id" component={()=><Profile user={this.state}/>}/>
